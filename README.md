@@ -35,7 +35,7 @@ To start installing this randomizer, run RandomizerInstaller.py with python (3.9
   3. Complete the Zen Garden tutorial.
   4. You will be able to access Adventure Mode's 5-5 without crashing.
 * The range of Sea-shroom and Puff-shroom are bugged.
-* In the pool levels, when a zombie switches lanes on the grass after eating a Garlic, it sometimes flies off into a different lane, it is unknown if this happens in the original version of PlantsvsZombies.NET or in the windows phone version.
+* Very rarely, when a zombie switches lanes on the grass after eating a Garlic, it sometimes flies off into a different lane, it is unknown if this happens in the original version of PlantsvsZombies.NET or in the windows phone version.
 
 
 ## Credits:
