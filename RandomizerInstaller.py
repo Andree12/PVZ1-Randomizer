@@ -1,5 +1,5 @@
 print("PlantsVsZombies.net Randomizer")
-print("Make sure you get the files from the Windows Phone version of Plants vs. Zombies and put the Content folder into the same folder as the installer and don't replace any of the files that are already in the Content folder")
+print("Make sure you get the files from the Windows Phone version of Plants vs. Zombies and put it's Content folder into the same folder as the installer and don't replace any of the files that are already in the Content folder")
 print("Put also the lawnstrings files into the content folder")
 print("Please note that there may be bugs and issues with this randomizer.")
 print("")
