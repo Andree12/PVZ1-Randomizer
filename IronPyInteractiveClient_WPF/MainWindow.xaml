@@ -1,0 +1,56 @@
+﻿<Window x:Class="IronPyInteractiveClient_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IronPyInteractiveClient_WPF"
+        mc:Ignorable="d"
+        Title="DebugWindow" Height="405" Width="800" MinHeight="180" MinWidth="240">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="wsAddrInput" Text="ws://localhost:8080/Py" TextWrapping="Wrap" Grid.Column="0" Margin="0,0,0,0"/>
+            <Button x:Name="wsConnBtn" Content="Connect" Click="WsConnBtn_Click" Grid.Column="1" Margin="3,3,3,3"/>
+        </Grid>
+        <ScrollViewer Grid.Row="1" Name="scrollText">
+            <TextBox x:Name="pyOutput" Text="" TextWrapping="Wrap"  IsReadOnly="True" VerticalContentAlignment="Bottom"/>
+        </ScrollViewer>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="pyCommandInput" Height="40" Text="import Lawn,Sexy; " TextWrapping="Wrap" Grid.Column="1" TextChanged="PyCommandInput_TextChanged" KeyDown="PyCommandInput_KeyDown" KeyUp="PyCommandInput_KeyUp" AcceptsReturn="True" AcceptsTab="True"/>
+            <Button x:Name="pyCommandSendBtn" Content="Send(Ctrl+Enter)" Click="Button_Click" Grid.Column="2" Margin="3,3,3,3" IsDefault="False" IsEnabled="False"/>
+            <Grid  Grid.Column="0" Width="30">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock x:Name="pyPromptSign" HorizontalAlignment="Left" TextWrapping="Wrap" Text="   "  Margin="3,0,0,0"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Button x:Name="Btn_clearScreen" Content="🧹" HorizontalAlignment="Stretch" Margin="3,3,3,3" VerticalAlignment="Stretch" Click="Btn_clearScreen_Click" />
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Height="16" Name="pyCaption" VerticalAlignment="Center" Text="Not Connected" Background="WhiteSmoke"/>
+        </Grid>
+
+    </Grid>
+</Window>
