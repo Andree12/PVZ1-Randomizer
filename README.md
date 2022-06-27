@@ -43,4 +43,4 @@ To start installing this randomizer, run RandomizerInstaller.py with python (3.9
 Programmer/Creator: Andree
 
 Special Thanks:
-Everyone who contributed to the orignal version of PlantsvsZombies.NET
+Mewnojs and everyone who contributed to the orignal version of [PlantsvsZombies.NET](https://github.com/Mewnojs/PlantsVsZombies.NET)
