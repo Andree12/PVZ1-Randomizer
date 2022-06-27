@@ -1,6 +1,8 @@
 ![logo](images/Logo.png)
 
-To start installing this randomizer, run RandomizerInstaller.py with python (3.9 and above is recommended)
+To start installing this randomizer, run RandomizerInstaller.py with python (3.9 and above is recommended).
+
+Instructions are in RandomizerInstaller.py.
 
 ## What can you currently do in this randomizer:
 * Randomize the plants obtained in adventure mode.
