@@ -234,6 +234,13 @@ replace_suncost7 = word.replace('CobcannonSuncost', CobcannonSuncost)
 a_file.write(replace_suncost7)
 a_file.close()
 
+a_file = open("Lawn_Shared/Lawn/Board/Board.cs", "r", encoding="utf8")
+word = a_file.read()
+a_file = open("Lawn_Shared/Lawn/Board/Board.cs", "w", encoding="utf-8")
+replace_Cobname = word.replace('CobcannonDowngradePlant', Cobcannondowngradeplant)
+a_file.write(replace_Cobname)
+a_file.close()
+
 #SeedChooserScreen.cs
 filenum = 0
 while filenum != 2:

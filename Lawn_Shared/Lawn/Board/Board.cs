@@ -7862,7 +7862,7 @@ namespace Lawn
             for (int i = 0; i < count; i++)
             {
                 Plant plant = mPlants[i];
-                if (!plant.mDead && plant.mSeedType == SeedType.Kernelpult && IsValidCobCannonSpot(plant.mPlantCol, plant.mRow))
+                if (!plant.mDead && plant.mSeedType == SeedType.CobcannonDowngradePlant && IsValidCobCannonSpot(plant.mPlantCol, plant.mRow))
                 {
                     return true;
                 }
@@ -7891,9 +7891,9 @@ namespace Lawn
             }
             if (!mApp.mEasyPlantingCheat)
             {
-                return plantsOnLawn.mNormalPlant != null && plantsOnLawn.mNormalPlant.mSeedType == SeedType.Kernelpult;
+                return plantsOnLawn.mNormalPlant != null && plantsOnLawn.mNormalPlant.mSeedType == SeedType.CobcannonDowngradePlant;
             }
-            return (plantsOnLawn.mNormalPlant != null && plantsOnLawn.mNormalPlant.mSeedType == SeedType.Kernelpult) || CanPlantAt(theGridX, theGridY, SeedType.Kernelpult) == PlantingReason.Ok;
+            return (plantsOnLawn.mNormalPlant != null && plantsOnLawn.mNormalPlant.mSeedType == SeedType.CobcannonDowngradePlant) || CanPlantAt(theGridX, theGridY, SeedType.CobcannonDowngradePlant) == PlantingReason.Ok;
         }
 
         public void MouseDownCobcannonFire(int x, int y, int theClickCount)
