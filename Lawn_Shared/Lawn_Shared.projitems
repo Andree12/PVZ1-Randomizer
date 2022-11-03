@@ -85,7 +85,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\SeedPacket\SeedType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\Strings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\AdviceType.cs" />
-	<Compile Include="$(MSBuildThisFileDirectory)Lawn\System\CutScene.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\CutScene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\DamageFlags.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\DamageRangeFlags.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Lawn\System\DebugTextMode.cs" />
@@ -391,5 +391,4 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Microsoft.Xna.Framework.RuntimeProfile" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Microsoft.Xna.Framework.XlastConfiguration" />
   </ItemGroup>
-  
 </Project>

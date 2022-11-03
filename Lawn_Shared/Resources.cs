@@ -41,7 +41,13 @@ public/*internal*/ static class Resources
             "DelayLoad_ZombieNote3" => ExtractDelayLoad_ZombieNote3Resources(theManager), 
             "DelayLoad_ZombieNote4" => ExtractDelayLoad_ZombieNote4Resources(theManager), 
             "DelayLoad_ZombieFinalNote" => ExtractDelayLoad_ZombieFinalNoteResources(theManager), 
-            "DelayLoad_ZombieNoteHelp" => ExtractDelayLoad_ZombieNoteHelpResources(theManager), 
+            "DelayLoad_ZombieNoteHelp" => ExtractDelayLoad_ZombieNoteHelpResources(theManager),
+            "DelayLoad_GWE_Background1" => ExtractDelayLoad_GWE_Background1Resources(theManager),
+            "DelayLoad_JTTW_Background2" => ExtractDelayLoad_JTTW_Background2Resources(theManager),
+            "DelayLoad_Custom_BackgroundFlood" => ExtractDelayLoad_Custom_BackgroundFloodResources(theManager),
+            "DelayLoad_Custom_BackgroundWaterFallNight" => ExtractDelayLoad_Custom_BackgroundWaterFallNightResources(theManager),
+            "DelayLoad_Custom_BackgroundEveningRoof" => ExtractDelayLoad_Custom_BackgroundEveningRoofResources(theManager),
+            "DelayLoad_Custom_BackgroundMars" => ExtractDelayLoad_Custom_BackgroundMarsResources(theManager),
             _ => false, 
         };
     }
@@ -83,6 +89,12 @@ public/*internal*/ static class Resources
         ExtractDelayLoad_ZombieNote4Resources(theManager);
         ExtractDelayLoad_ZombieFinalNoteResources(theManager);
         ExtractDelayLoad_ZombieNoteHelpResources(theManager);
+        ExtractDelayLoad_GWE_Background1Resources(theManager);
+        ExtractDelayLoad_JTTW_Background2Resources(theManager);
+        ExtractDelayLoad_Custom_BackgroundFloodResources(theManager);
+        ExtractDelayLoad_Custom_BackgroundWaterFallNightResources(theManager);
+        ExtractDelayLoad_Custom_BackgroundEveningRoofResources(theManager);
+        ExtractDelayLoad_Custom_BackgroundMarsResources(theManager);
         theRes.ExtractResources();
     }
 
@@ -658,6 +670,95 @@ public/*internal*/ static class Resources
         }
         return true;
     }
+    public static bool ExtractDelayLoad_GWE_Background1Resources(ResourceManager theManager)
+    {
+        gNeedRecalcVariableToIdMap = true;
+        try
+        {
+            IMAGE_GWE_BACKGROUND1 = theManager.GetImageThrow("IMAGE_GWE_BACKGROUND1");
+            IMAGE_GWE_BACKGROUND1_GAMEOVER_MASK = theManager.GetImageThrow("IMAGE_GWE_BACKGROUND1_GAMEOVER_MASK");
+        }
+        catch
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static bool ExtractDelayLoad_JTTW_Background2Resources(ResourceManager theManager)
+    {
+        gNeedRecalcVariableToIdMap = true;
+        try
+        {
+            IMAGE_JTTW_BACKGROUND2 = theManager.GetImageThrow("IMAGE_JTTW_BACKGROUND2");
+            IMAGE_JTTW_BACKGROUND2_GAMEOVER_MASK = theManager.GetImageThrow("IMAGE_JTTW_BACKGROUND2_GAMEOVER_MASK");
+        }
+        catch
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static bool ExtractDelayLoad_Custom_BackgroundFloodResources(ResourceManager theManager)
+    {
+        gNeedRecalcVariableToIdMap = true;
+        try
+        {
+            IMAGE_CUSTOM_BACKGROUNDFLOOD = theManager.GetImageThrow("IMAGE_CUSTOM_BACKGROUNDFLOOD");
+            IMAGE_CUSTOM_BACKGROUNDFLOOD_GAMEOVER_MASK = theManager.GetImageThrow("IMAGE_CUSTOM_BACKGROUNDFLOOD_GAMEOVER_MASK");
+        }
+        catch
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static bool ExtractDelayLoad_Custom_BackgroundWaterFallNightResources(ResourceManager theManager)
+    {
+        gNeedRecalcVariableToIdMap = true;
+        try
+        {
+            IMAGE_CUSTOM_BACKGROUNDWATERFALLNIGHT = theManager.GetImageThrow("IMAGE_CUSTOM_BACKGROUNDWATERFALLNIGHT");
+            IMAGE_CUSTOM_BACKGROUNDWATERFALLNIGHT_GAMEOVER_MASK = theManager.GetImageThrow("IMAGE_CUSTOM_BACKGROUNDWATERFALLNIGHT_GAMEOVER_MASK");
+        }
+        catch
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static bool ExtractDelayLoad_Custom_BackgroundEveningRoofResources(ResourceManager theManager)
+    {
+        gNeedRecalcVariableToIdMap = true;
+        try
+        {
+            IMAGE_CUSTOM_BACKGROUNDEVENINGROOF = theManager.GetImageThrow("IMAGE_CUSTOM_BACKGROUNDEVENINGROOF");
+            IMAGE_CUSTOM_BACKGROUNDEVENINGROOF_GAMEOVER_MASK = theManager.GetImageThrow("IMAGE_CUSTOM_BACKGROUNDEVENINGROOF_GAMEOVER_MASK");
+        }
+        catch
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static bool ExtractDelayLoad_Custom_BackgroundMarsResources(ResourceManager theManager)
+    {
+        gNeedRecalcVariableToIdMap = true;
+        try
+        {
+            IMAGE_CUSTOM_BACKGROUNDMARS = theManager.GetImageThrow("IMAGE_CUSTOM_BACKGROUNDMARS");
+            IMAGE_CUSTOM_BACKGROUNDMARS_GAMEOVER_MASK = theManager.GetImageThrow("IMAGE_CUSTOM_BACKGROUNDMARS_GAMEOVER_MASK");
+        }
+        catch
+        {
+            return false;
+        }
+        return true;
+    }
 
     public static bool ExtractDelayLoad_AlmanacResources(ResourceManager theManager)
     {
@@ -840,7 +941,7 @@ public/*internal*/ static class Resources
 
     public static void LinkUpResArray()
     {
-        gResources = new object[250]
+        gResources = new object[262]
         {
             IMAGE_POPCAP_LOGO, IMAGE_POPCAP_LOGO_REGISTERED, IMAGE_TITLESCREEN, IMAGE_LOADING, IMAGE_PVZ_LOGO, FONT_BRIANNETOD16, SOUND_BUTTONCLICK, SOUND_LOADINGBAR_FLOWER, SOUND_LOADINGBAR_ZOMBIE, FONT_HOUSEOFTERROR16,
             FONT_CONTINUUMBOLD14, FONT_CONTINUUMBOLD14OUTLINE, FONT_DWARVENTODCRAFT12, FONT_DWARVENTODCRAFT15, FONT_DWARVENTODCRAFT18, FONT_PICO129, FONT_BRIANNETOD12, IMAGE_CHARREDZOMBIES, IMAGE_ALMANACUI, IMAGE_SEEDATLAS,
@@ -866,7 +967,12 @@ public/*internal*/ static class Resources
             IMAGE_STARS_1, IMAGE_STARS_2, IMAGE_STARS_3, IMAGE_STARS_4, IMAGE_BACKGROUND_GREENHOUSE, IMAGE_AQUARIUM1, IMAGE_BACKGROUND_MUSHROOMGARDEN, IMAGE_BACKGROUND1, IMAGE_BACKGROUND1_GAMEOVER_INTERIOR_OVERLAY, IMAGE_BACKGROUND1_GAMEOVER_MASK,
             IMAGE_BACKGROUND1UNSODDED, IMAGE_BACKGROUND2, IMAGE_BACKGROUND2_GAMEOVER_INTERIOR_OVERLAY, IMAGE_BACKGROUND2_GAMEOVER_MASK, IMAGE_BACKGROUND3, IMAGE_BACKGROUND3_GAMEOVER_INTERIOR_OVERLAY, IMAGE_BACKGROUND3_GAMEOVER_MASK, IMAGE_BACKGROUND4, IMAGE_BACKGROUND4_GAMEOVER_INTERIOR_OVERLAY, IMAGE_BACKGROUND4_GAMEOVER_MASK,
             IMAGE_FOG, IMAGE_BACKGROUND5, IMAGE_BACKGROUND5_GAMEOVER_MASK, IMAGE_BACKGROUND6BOSS, IMAGE_BACKGROUND6_GAMEOVER_MASK, IMAGE_STORE_BACKGROUND, IMAGE_STORE_BACKGROUNDNIGHT, IMAGE_STORE_CAR, IMAGE_STORE_CAR_NIGHT, IMAGE_STORE_CARCLOSED,
-            IMAGE_STORE_CARCLOSED_NIGHT, IMAGE_STORE_HATCHBACKOPEN, IMAGE_ZOMBIE_NOTE, IMAGE_ZOMBIE_NOTE1, IMAGE_ZOMBIE_NOTE2, IMAGE_ZOMBIE_NOTE3, IMAGE_ZOMBIE_NOTE4, IMAGE_ZOMBIE_FINAL_NOTE, IMAGE_ZOMBIE_NOTE_HELP, null
+            IMAGE_STORE_CARCLOSED_NIGHT, IMAGE_STORE_HATCHBACKOPEN, IMAGE_ZOMBIE_NOTE, IMAGE_ZOMBIE_NOTE1, IMAGE_ZOMBIE_NOTE2, IMAGE_ZOMBIE_NOTE3, IMAGE_ZOMBIE_NOTE4, IMAGE_ZOMBIE_FINAL_NOTE, IMAGE_ZOMBIE_NOTE_HELP, IMAGE_GWE_BACKGROUND1, IMAGE_GWE_BACKGROUND1_GAMEOVER_MASK,
+IMAGE_JTTW_BACKGROUND2, IMAGE_JTTW_BACKGROUND2_GAMEOVER_MASK,
+IMAGE_CUSTOM_BACKGROUNDFLOOD, IMAGE_CUSTOM_BACKGROUNDFLOOD_GAMEOVER_MASK,
+IMAGE_CUSTOM_BACKGROUNDWATERFALLNIGHT, IMAGE_CUSTOM_BACKGROUNDWATERFALLNIGHT_GAMEOVER_MASK,
+IMAGE_CUSTOM_BACKGROUNDEVENINGROOF, IMAGE_CUSTOM_BACKGROUNDEVENINGROOF_GAMEOVER_MASK,
+IMAGE_CUSTOM_BACKGROUNDMARS, IMAGE_CUSTOM_BACKGROUNDMARS_GAMEOVER_MASK, null
         };
     }
 
@@ -1122,7 +1228,19 @@ public/*internal*/ static class Resources
             245 => "IMAGE_ZOMBIE_NOTE3", 
             246 => "IMAGE_ZOMBIE_NOTE4", 
             247 => "IMAGE_ZOMBIE_FINAL_NOTE", 
-            248 => "IMAGE_ZOMBIE_NOTE_HELP", 
+            248 => "IMAGE_ZOMBIE_NOTE_HELP",
+            249 => "IMAGE_GWE_BACKGROUND1",
+            250 => "IMAGE_GWE_BACKGROUND1_GAMEOVER_MASK",
+            251 => "IMAGE_JTTW_BACKGROUND2",
+            252 => "IMAGE_JTTW_BACKGROUND2_GAMEOVER_MASK",
+            253 => "IMAGE_CUSTOM_BACKGROUNDFLOOD",
+            254 => "IMAGE_CUSTOM_BACKGROUNDFLOOD_GAMEOVER_MASK",
+            255 => "IMAGE_CUSTOM_BACKGROUNDWATERFALLNIGHT",
+            256 => "IMAGE_CUSTOM_BACKGROUNDWATERFALLNIGHT_GAMEOVER_MASK",
+            257 => "IMAGE_CUSTOM_BACKGROUNDEVENINGROOF",
+            258 => "IMAGE_CUSTOM_BACKGROUNDEVENINGROOF_GAMEOVER_MASK",
+            259 => "IMAGE_CUSTOM_BACKGROUNDMARS",
+            260 => "IMAGE_CUSTOM_BACKGROUNDMARS_GAMEOVER_MASK",
             _ => "", 
         };
     }
@@ -1377,6 +1495,18 @@ public/*internal*/ static class Resources
         IMAGE_ZOMBIE_NOTE4_ID,
         IMAGE_ZOMBIE_FINAL_NOTE_ID,
         IMAGE_ZOMBIE_NOTE_HELP_ID,
+        IMAGE_GWE_BACKGROUND1_ID,
+        IMAGE_GWE_BACKGROUND1_GAMEOVER_MASK_ID,
+        IMAGE_JTTW_BACKGROUND2_ID,
+        IMAGE_JTTW_BACKGROUND2_GAMEOVER_MASK_ID,
+        IMAGE_CUSTOM_BACKGROUNDFLOOD_ID,
+        IMAGE_CUSTOM_BACKGROUNDFLOOD_GAMEOVER_MASK_ID,
+        IMAGE_CUSTOM_BACKGROUNDWATERFALLNIGHT_ID,
+        IMAGE_CUSTOM_BACKGROUNDWATERFALLNIGHT_GAMEOVER_MASK_ID,
+        IMAGE_CUSTOM_BACKGROUNDEVENINGROOF_ID,
+        IMAGE_CUSTOM_BACKGROUNDEVENINGROOF_GAMEOVER_MASK_ID,
+        IMAGE_CUSTOM_BACKGROUNDMARS_ID,
+        IMAGE_CUSTOM_BACKGROUNDMARS_GAMEOVER_MASK_ID,
         RESOURCE_ID_MAX
     }
 
@@ -1879,6 +2009,30 @@ public/*internal*/ static class Resources
     public static Image IMAGE_ZOMBIE_FINAL_NOTE;
 
     public static Image IMAGE_ZOMBIE_NOTE_HELP;
+
+    public static Image IMAGE_GWE_BACKGROUND1;
+
+    public static Image IMAGE_GWE_BACKGROUND1_GAMEOVER_MASK;
+
+    public static Image IMAGE_JTTW_BACKGROUND2;
+
+    public static Image IMAGE_JTTW_BACKGROUND2_GAMEOVER_MASK;
+
+    public static Image IMAGE_CUSTOM_BACKGROUNDFLOOD;
+
+    public static Image IMAGE_CUSTOM_BACKGROUNDFLOOD_GAMEOVER_MASK;
+
+    public static Image IMAGE_CUSTOM_BACKGROUNDWATERFALLNIGHT;
+
+    public static Image IMAGE_CUSTOM_BACKGROUNDWATERFALLNIGHT_GAMEOVER_MASK;
+
+    public static Image IMAGE_CUSTOM_BACKGROUNDEVENINGROOF;
+
+    public static Image IMAGE_CUSTOM_BACKGROUNDEVENINGROOF_GAMEOVER_MASK;
+
+    public static Image IMAGE_CUSTOM_BACKGROUNDMARS;
+
+    public static Image IMAGE_CUSTOM_BACKGROUNDMARS_GAMEOVER_MASK;
 
     public static bool gNeedRecalcVariableToIdMap = false;
 

@@ -27,6 +27,7 @@ namespace Lawn
             mVibrateCheckbox = LawnCommon.MakeNewCheckbox(8, this, mApp.mPlayerInfo.mDoVibration);
             mRunWhileLocked = LawnCommon.MakeNewCheckbox(11, this, mApp.mPlayerInfo.mRunWhileLocked);
             mEnableCheat = LawnCommon.MakeNewCheckbox(12, this, mApp.mDebugKeysEnabled);
+            mEnableAutoCollect = LawnCommon.MakeNewCheckbox(13, this, mApp.mAutoCollect);
             mLinkCredits = new HyperlinkWidget(10, this);
             mLinkCredits.SetFont(Resources.FONT_BRIANNETOD12);
             mLinkCredits.mColor = new SexyColor(255, 255, 136);
@@ -92,6 +93,7 @@ namespace Lawn
             AddWidget(mVibrateCheckbox);
             //AddWidget(mRunWhileLocked);
             AddWidget(mEnableCheat);
+            AddWidget(mEnableAutoCollect);
             AddWidget(mBackToGameButton);
             AddWidget(mLinkCredits);
             if (mFromGameSelector)
@@ -110,6 +112,7 @@ namespace Lawn
             RemoveWidget(mVibrateCheckbox);
             //RemoveWidget(mRunWhileLocked);
             RemoveWidget(mEnableCheat);
+            RemoveWidget(mEnableAutoCollect);
             RemoveWidget(mBackToMainButton);
             RemoveWidget(mBackToGameButton);
             RemoveWidget(mRestartButton);
@@ -131,6 +134,7 @@ namespace Lawn
             mVibrateCheckbox.Resize(theX2, (int)Constants.InvertAndScale(125f), (int)Constants.InvertAndScale(46f), (int)Constants.InvertAndScale(45f));
             //mRunWhileLocked.Resize(theX2, (int)Constants.InvertAndScale(195f), (int)Constants.InvertAndScale(46f), (int)Constants.InvertAndScale(45f));
             mEnableCheat.Resize(theX2, (int)Constants.InvertAndScale(195f), (int)Constants.InvertAndScale(46f), (int)Constants.InvertAndScale(45f));
+            mEnableAutoCollect.Resize(theX2, (int)Constants.InvertAndScale(245f), (int)Constants.InvertAndScale(46f), (int)Constants.InvertAndScale(45f));
             mMusicVolumeSlider.mY += (int)Constants.InvertAndScale(5f);
             mSfxVolumeSlider.mY += (int)Constants.InvertAndScale(15f);
             mVibrateCheckbox.mY += (int)Constants.InvertAndScale(25f);
@@ -186,6 +190,7 @@ namespace Lawn
             TodCommon.TodDrawString(g, "[OPTIONS_VABRATION]", Constants.NewOptionsDialog_VibrationLabel_X, Constants.NewOptionsDialog_VibrationLabel_Y + newOptionsDialog_FullScreenOffset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.Right);
             //TodCommon.TodDrawString(g, "[OPTIONS_RUN_LOCKED]", Constants.NewOptionsDialog_VibrationLabel_X, Constants.NewOptionsDialog_LockedLabel_Y + newOptionsDialog_FullScreenOffset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.Right);
             TodCommon.TodDrawString(g, "[OPTIONS_ENABLE_CHEAT]", Constants.NewOptionsDialog_VibrationLabel_X, Constants.NewOptionsDialog_LockedLabel_Y + newOptionsDialog_FullScreenOffset, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.Right);
+            TodCommon.TodDrawString(g, "Auto Collect", Constants.NewOptionsDialog_VibrationLabel_X, Constants.NewOptionsDialog_LockedLabel_Y + newOptionsDialog_FullScreenOffset * 2, Resources.FONT_DWARVENTODCRAFT18, theColor, Constants.NewOptionsDialog_VibrationLabel_MaxWidth, DrawStringJustification.Right);
             TodCommon.TodDrawString(g, LawnApp.AppVersionNumber, mWidth / 2, mVersionY, Resources.FONT_PICO129, theColor, DrawStringJustification.Center);
         }
 
@@ -240,6 +245,9 @@ namespace Lawn
             }
             case 12:
                 mApp.mDebugKeysEnabled = check;
+                return;
+            case 13:
+                mApp.mAutoCollect = check;
                 return;
             default:
                 return;
@@ -397,6 +405,8 @@ namespace Lawn
         public Checkbox mRunWhileLocked;
 
         public Checkbox mEnableCheat;
+
+        public Checkbox mEnableAutoCollect;
 
         public string mVersion = string.Empty;
 

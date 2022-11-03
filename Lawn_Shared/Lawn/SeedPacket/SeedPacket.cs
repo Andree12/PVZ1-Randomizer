@@ -211,6 +211,7 @@ namespace Lawn
         public static void DrawSmallSeedPacket(Graphics g, float x, float y, SeedType theSeedType, SeedType theImitaterType, float thePercentDark, int theGrayness, bool theDrawCost, bool theUseCurrentCost, bool theDrawBackground, bool theDrawCostBackground)
         {
             SeedType seedType = theSeedType;
+            SeedTypeOG seedTypeOG = (SeedTypeOG)theSeedType;
             if (theSeedType == SeedType.Imitater && theImitaterType != SeedType.None)
             {
                 seedType = theImitaterType;
@@ -219,6 +220,162 @@ namespace Lawn
             {
                 seedType = SeedType.Sprout;
             }
+            if (XmlReader.DontChangeSeedpacketIconOrder == "False")
+            {
+                if (seedType == SeedType.Cherrybomb)
+                {
+                    seedTypeOG = (SeedTypeOG)2;
+                }
+                if (seedType == SeedType.Wallnut)
+                {
+                    seedTypeOG = (SeedTypeOG)3;
+                }
+                if (seedType == SeedType.Potatomine)
+                {
+                    seedTypeOG = (SeedTypeOG)4;
+                }
+                if (seedType == SeedType.Snowpea)
+                {
+                    seedTypeOG = (SeedTypeOG)5;
+                }
+                if (seedType == SeedType.Chomper)
+                {
+                    seedTypeOG = (SeedTypeOG)6;
+                }
+
+                if (seedType == SeedType.Repeater)
+                {
+                    seedTypeOG = (SeedTypeOG)7;
+                }
+                if (seedType == SeedType.Puffshroom)
+                {
+                    seedTypeOG = (SeedTypeOG)8;
+                }
+                if (seedType == SeedType.Sunshroom)
+                {
+                    seedTypeOG = (SeedTypeOG)9;
+                }
+                if (seedType == SeedType.Fumeshroom)
+                {
+                    seedTypeOG = (SeedTypeOG)10;
+                }
+                if (seedType == SeedType.Gravebuster)
+                {
+                    seedTypeOG = (SeedTypeOG)11;
+                }
+                if (seedType == SeedType.Hypnoshroom)
+                {
+                    seedTypeOG = (SeedTypeOG)12;
+                }
+                if (seedType == SeedType.Scaredyshroom)
+                {
+                    seedTypeOG = (SeedTypeOG)13;
+                }
+                if (seedType == SeedType.Iceshroom)
+                {
+                    seedTypeOG = (SeedTypeOG)14;
+                }
+                if (seedType == SeedType.Doomshroom)
+                {
+                    seedTypeOG = (SeedTypeOG)15;
+                }
+                if (seedType == SeedType.Squash)
+                {
+                    seedTypeOG = (SeedTypeOG)17;
+                }
+                if (seedType == SeedType.Threepeater)
+                {
+                    seedTypeOG = (SeedTypeOG)18;
+                }
+                if (seedType == SeedType.Tanglekelp)
+                {
+                    seedTypeOG = (SeedTypeOG)19;
+                }
+                if (seedType == SeedType.Jalapeno)
+                {
+                    seedTypeOG = (SeedTypeOG)20;
+                }
+                if (seedType == SeedType.Spikeweed)
+                {
+                    seedTypeOG = (SeedTypeOG)21;
+                }
+                if (seedType == SeedType.Torchwood)
+                {
+                    seedTypeOG = (SeedTypeOG)22;
+                }
+                if (seedType == SeedType.Tallnut)
+                {
+                    seedTypeOG = (SeedTypeOG)23;
+                }
+                if (seedType == SeedType.Seashroom)
+                {
+                    seedTypeOG = (SeedTypeOG)24;
+                }
+                if (seedType == SeedType.Plantern)
+                {
+                    seedTypeOG = (SeedTypeOG)25;
+                }
+                if (seedType == SeedType.Cactus)
+                {
+                    seedTypeOG = (SeedTypeOG)26;
+                }
+                if (seedType == SeedType.Blover)
+                {
+                    seedTypeOG = (SeedTypeOG)27;
+                }
+                if (seedType == SeedType.Splitpea)
+                {
+                    seedTypeOG = (SeedTypeOG)28;
+                }
+                if (seedType == SeedType.Starfruit)
+                {
+                    seedTypeOG = (SeedTypeOG)29;
+                }
+                if (seedType == SeedType.Pumpkinshell)
+                {
+                    seedTypeOG = (SeedTypeOG)30;
+                }
+                if (seedType == SeedType.Magnetshroom)
+                {
+                    seedTypeOG = (SeedTypeOG)31;
+                }
+                if (seedType == SeedType.Cabbagepult)
+                {
+                    seedTypeOG = (SeedTypeOG)32;
+                }
+                if (seedType == SeedType.Flowerpot)
+                {
+                    seedTypeOG = (SeedTypeOG)33;
+                }
+                if (seedType == SeedType.Kernelpult)
+                {
+                    seedTypeOG = (SeedTypeOG)34;
+                }
+
+                if (seedType == SeedType.InstantCoffee)
+                {
+                    seedTypeOG = (SeedTypeOG)35;
+                }
+
+                if (seedType == SeedType.Garlic)
+                {
+                    seedTypeOG = (SeedTypeOG)36;
+                }
+                if (seedType == SeedType.Umbrella)
+                {
+                    seedTypeOG = (SeedTypeOG)37;
+                }
+                if (seedType == SeedType.Marigold)
+                {
+                    seedTypeOG = (SeedTypeOG)38;
+                }
+                if (seedType == SeedType.Melonpult)
+                {
+                    seedTypeOG = (SeedTypeOG)39;
+                }
+            }
+
+
             g.SetDrawMode(Graphics.DrawMode.DRAWMODE_NORMAL);
             g.SetColor(new SexyColor(255, 255, 255, 255));
             if (theGrayness != 255)
@@ -263,7 +420,11 @@ namespace Lawn
                 }
                 else
                 {
-                    g.DrawImageCel(AtlasResources.IMAGE_SEEDPACKETS, (int)x, (int)y, (int)seedType);
+                    if (XmlReader.DontChangeSeedpacketIconOrder == "True")
+                    {
+                        seedTypeOG = (SeedTypeOG)theSeedType;
+                    }
+                    g.DrawImageCel(AtlasResources.IMAGE_SEEDPACKETS, (int)x, (int)y, (int)seedTypeOG);
                     if (theSeedType == SeedType.Imitater)
                     {
                         g.SetColor(new SexyColor(0, 255, 0, 128));
@@ -274,6 +435,7 @@ namespace Lawn
             if (theDrawCostBackground)
             {
                 Image theImage;
+
                 if (theSeedType == SeedType.Imitater)
                 {
                     theImage = AtlasResources.IMAGE_SEEDPACKETS_GRAY_TAB;
@@ -286,6 +448,7 @@ namespace Lawn
                 {
                     theImage = AtlasResources.IMAGE_SEEDPACKETS_PURPLE_TAB;
                 }
+
                 int x2;
                 int y2;
                 if (GlobalStaticVars.gLawnApp.IsIZombieLevel())

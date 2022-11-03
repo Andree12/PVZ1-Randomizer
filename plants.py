@@ -1,14 +1,28 @@
 import random
+from xml.etree import ElementTree as et
+datafile = "RandomizerSettings.xml";
+tree = et.parse(datafile)
 
-Randomize = None
+try:
+    Randomize
+except NameError:
+    Randomize = None
 
 while Randomize != 'n' and Randomize != 'y':
     print("Do you want to randomize the plants? (y/n)>")
     Randomize = input()
 
 if Randomize == 'y':
+    World1 = tree.find(".//Background1").text
+    World2 = tree.find(".//Background2").text
+    World3 = tree.find(".//Background3").text
+    World4 = tree.find(".//Background4").text
+    World5 = tree.find(".//Background5").text
+    try:
+        SeedNum
+    except NameError:
+        SeedNum = input("Seed num >")
     random.seed(SeedNum)
-
     randomizedplantlist = [
         "Peashooter",
             "Sunflower",
@@ -137,13 +151,16 @@ if Randomize == 'y':
     randomizedplantlist[Seashroomidnum] = "Seashroom"
 
     #Flowerpot
-    FlowerpotidNumList = DayWorldplantidlist + NightWorldplantidlist + PoolWorldplantidlist + FogWorldplantidlist + RoofWorldplantidlist
-
-    rooflevelnum = 32
-    while rooflevelnum != 39:
-     if  rooflevelnum in RoofWorldplantidlist:
-      FlowerpotidNumList.remove(rooflevelnum)
-     rooflevelnum = rooflevelnum + 1
+    
+    if World2 == "Num9JTTW2" or World1 == "Num7GreatWall":
+        FlowerpotidNumList = DayWorldplantidlist
+    else:
+        FlowerpotidNumList = DayWorldplantidlist + NightWorldplantidlist + PoolWorldplantidlist + FogWorldplantidlist + RoofWorldplantidlist
+        rooflevelnum = 32
+        while rooflevelnum != 39:
+         if  rooflevelnum in RoofWorldplantidlist:
+          FlowerpotidNumList.remove(rooflevelnum)
+         rooflevelnum = rooflevelnum + 1
 
     Flowerpotidnum = random.choice(FlowerpotidNumList)
 
@@ -163,18 +180,29 @@ if Randomize == 'y':
     nocturnalPlantlist = ["Puffshroom", "Sunshroom", "Fumeshroom", "Hypnoshroom", "Scaredyshroom", "Iceshroom", "Doomshroom", "Magnetshroom"]
     NocturnalPlantidNumList = DayWorldplantidlist + NightWorldplantidlist + PoolWorldplantidlist + FogWorldplantidlist + RoofWorldplantidlist
 
-    PuffinNight1 = None
+    try:
+        PuffinNight1
+    except NameError:
+        PuffinNight1 = None
 
     while PuffinNight1 != 'n' and PuffinNight1 != 'y':
         print("Do you want to have Puff-shroom to be obtained in 1-10? (y/n)>")
         PuffinNight1 = input()
 
     if PuffinNight1 == 'y':
-        NocturnalPlantidName = "Puffshroom"
         NocturnalPlantidNum = 8
+        NocturnalPlantidName = "Puffshroom"
+        CoffeeBeanidNumList = PoolWorldplantidlist + RoofWorldplantidlist
+        CoffeebeanidNum = random.choice(CoffeeBeanidNumList)
     else:
+        CoffeeBeanidNumList = DayWorldplantidlist + PoolWorldplantidlist + RoofWorldplantidlist
+        CoffeebeanidNum = random.choice(CoffeeBeanidNumList)
         NocturnalPlantidName = random.choice(nocturnalPlantlist)
-        NocturnalPlantidNum = random.choice(NocturnalPlantidNumList)
+        if CoffeebeanidNum <= 3:
+            CoffeebeanidNum = 4
+            NocturnalPlantidNum = 3
+        else:
+            NocturnalPlantidNum = random.randrange(3, (CoffeebeanidNum - 1))
 
     plantlist.remove(NocturnalPlantidName)
     randomizedplantlist[NocturnalPlantidNum] = NocturnalPlantidName
@@ -189,24 +217,6 @@ if Randomize == 'y':
      FogWorldplantidlist.remove(NocturnalPlantidNum)
     elif NocturnalPlantidNum in RoofWorldplantidlist:
      RoofWorldplantidlist.remove(NocturnalPlantidNum)
-
-    CoffeeBeanidNumList = DayWorldplantidlist + PoolWorldplantidlist + RoofWorldplantidlist
-    CoffeebeanidMinNum = 0
-
-    while CoffeebeanidMinNum != NocturnalPlantidNum:
-     CoffeebeanidMinNum = CoffeebeanidMinNum + 1
-     if CoffeebeanidMinNum in CoffeeBeanidNumList:
-        CoffeeBeanidNumList.remove(CoffeebeanidMinNum)
-
-     if NocturnalPlantidNum in CoffeeBeanidNumList:
-      CoffeeBeanidNumList.remove(NocturnalPlantidNum)
-
-    if len(CoffeeBeanidNumList) != 0:
-     CoffeebeanidNum = random.choice(CoffeeBeanidNumList)
-    elif NocturnalPlantidNum == 39:
-     CoffeebeanidNum = NocturnalPlantidNum - 1
-    else:
-     CoffeebeanidNum = NocturnalPlantidNum + 1
 
     if CoffeebeanidNum in DayWorldplantidlist:
      DayWorldplantidlist.remove(CoffeebeanidNum)
@@ -229,174 +239,181 @@ if Randomize == 'y':
      plantname = random.choice(plantlist)
      randomizedplantlist[Plantidnum] = plantname 
      plantlist.remove(plantname)
-
     plantname = None
     plantnum = 0
-    plantcodenum = 6
-    filename = "Lawn_Shared/Lawn/SeedPacket/SeedType.cs"
     print("Shuffling plants")
-    while plantnum != 40:
-     plantname = randomizedplantlist[plantnum]
-     a_file = open(filename, "r")
-     list_of_lines = a_file.readlines()
-     list_of_lines[plantcodenum] = (plantname + ",\n")
+    i = 0
+    while i < len(randomizedplantlist):
+        if "Cherrybomb" == randomizedplantlist[i]:
+            tree.find(".//Cherrybomb").text = str(i)
+        if "Wallnut" == randomizedplantlist[i]:
+            tree.find(".//Wallnut").text = str(i)
+        if "Potatomine" == randomizedplantlist[i]:
+            tree.find(".//Potatomine").text = str(i)
+        if "Snowpea" == randomizedplantlist[i]:
+            tree.find(".//Snowpea").text = str(i)
+        if "Chomper" == randomizedplantlist[i]:
+            tree.find(".//Chomper").text = str(i)
+        if "Repeater" == randomizedplantlist[i]:
+            tree.find(".//Repeater").text = str(i)
+            
+        if "Puffshroom" == randomizedplantlist[i]:
+            tree.find(".//Puffshroom").text = str(i)
+        if "Sunshroom" == randomizedplantlist[i]:
+            tree.find(".//Sunshroom").text = str(i)
+        if "Fumeshroom" == randomizedplantlist[i]:
+            tree.find(".//Fumeshroom").text = str(i)
+        if "Gravebuster" == randomizedplantlist[i]:
+            tree.find(".//Gravebuster").text = str(i)
+        if "Hypnoshroom" == randomizedplantlist[i]:
+            tree.find(".//Hypnoshroom").text = str(i)
+        if "Scaredyshroom" == randomizedplantlist[i]:
+            tree.find(".//Scaredyshroom").text = str(i)
+        if "Iceshroom" == randomizedplantlist[i]:
+            tree.find(".//Iceshroom").text = str(i)
+        if "Doomshroom" == randomizedplantlist[i]:
+            tree.find(".//Doomshroom").text = str(i)
+            
+        if "Squash" == randomizedplantlist[i]:
+            tree.find(".//Squash").text = str(i)
+        if "Threepeater" == randomizedplantlist[i]:
+            tree.find(".//Threepeater").text = str(i)
+        if "Tanglekelp" == randomizedplantlist[i]:
+            tree.find(".//Tanglekelp").text = str(i)
+        if "Jalapeno" == randomizedplantlist[i]:
+            tree.find(".//Jalapeno").text = str(i)
+        if "Spikeweed" == randomizedplantlist[i]:
+            tree.find(".//Spikeweed").text = str(i)
+        if "Torchwood" == randomizedplantlist[i]:
+            tree.find(".//Torchwood").text = str(i)
+        if "Tallnut" == randomizedplantlist[i]:
+            tree.find(".//Tallnut").text = str(i)
 
-     a_file = open(filename, "w")
-     a_file.writelines(list_of_lines)
-     a_file.close()
-     plantnum = plantnum + 1
-     plantcodenum = plantcodenum + 1
+        if "Seashroom" == randomizedplantlist[i]:
+            tree.find(".//Seashroom").text = str(i)
+        if "Plantern" == randomizedplantlist[i]:
+            tree.find(".//Plantern").text = str(i)
+        if "Cactus" == randomizedplantlist[i]:
+            tree.find(".//Cactus").text = str(i)
+        if "Blover" == randomizedplantlist[i]:
+            tree.find(".//Blover").text = str(i)
+        if "Splitpea" == randomizedplantlist[i]:
+            tree.find(".//Splitpea").text = str(i)
+        if "Starfruit" == randomizedplantlist[i]:
+            tree.find(".//Starfruit").text = str(i)
+        if "Pumpkinshell" == randomizedplantlist[i]:
+            tree.find(".//Pumpkinshell").text = str(i)
+        if "Magnetshroom" == randomizedplantlist[i]:
+            tree.find(".//Magnetshroom").text = str(i)
 
-    randomizedGameConstantsPlantlist = randomizedplantlist
-    for i in range(len(randomizedGameConstantsPlantlist)):
-        if randomizedGameConstantsPlantlist[i] == "Peashooter":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Peashooter,    null, ReanimationType.Peashooter,   0,  100,750, PlantSubClass.Shooter, 150, \"PEASHOOTER\"),"
-        if randomizedGameConstantsPlantlist[i] == "Sunflower":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Sunflower,     null, ReanimationType.Sunflower,    1,  50, 750, PlantSubClass.Normal,  2500, \"SUNFLOWER\"),"
-        if randomizedGameConstantsPlantlist[i] == "Lilypad":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Lilypad,       null, ReanimationType.Lilypad,      19, 25, 750, PlantSubClass.Normal,  0, \"LILY_PAD\"),"
-        if randomizedGameConstantsPlantlist[i] == "Cherrybomb":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Cherrybomb,    null, ReanimationType.Cherrybomb,   3,  150,5000,PlantSubClass.Normal,  0, \"CHERRY_BOMB\"),"
-        if randomizedGameConstantsPlantlist[i] == "Wallnut":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Wallnut,       null, ReanimationType.Wallnut,      2,  50, 3000,PlantSubClass.Normal,  0, \"WALL_NUT\"),"
-        if randomizedGameConstantsPlantlist[i] == "Potatomine":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Potatomine,    null, ReanimationType.Potatomine,   37, 25, 3000,PlantSubClass.Normal,  0, \"POTATO_MINE\"),"
-        if randomizedGameConstantsPlantlist[i] == "Snowpea":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Snowpea,       null, ReanimationType.Snowpea,      4,  175,750, PlantSubClass.Shooter, 150, \"SNOW_PEA\"),"
-        if randomizedGameConstantsPlantlist[i] == "Chomper":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Chomper,       null, ReanimationType.Chomper,      31, 150,750, PlantSubClass.Normal,  0, \"CHOMPER\"),"
-        if randomizedGameConstantsPlantlist[i] == "Repeater":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Repeater,      null, ReanimationType.Repeater,     5,  200,750, PlantSubClass.Shooter, 150, \"REPEATER\"),"
-        if randomizedGameConstantsPlantlist[i] == "Puffshroom":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Puffshroom,    null, ReanimationType.Puffshroom,   6,  0,  750, PlantSubClass.Shooter, 150, \"PUFF_SHROOM\"),"
-        if randomizedGameConstantsPlantlist[i] == "Sunshroom":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Sunshroom,     null, ReanimationType.Sunshroom,    7,  25, 750, PlantSubClass.Normal,  2500, \"SUN_SHROOM\"),"
-        if randomizedGameConstantsPlantlist[i] == "Fumeshroom":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Fumeshroom,    null, ReanimationType.Fumeshroom,   9,  75, 750, PlantSubClass.Shooter, 150, \"FUME_SHROOM\"),"
-        if randomizedGameConstantsPlantlist[i] == "Hypnoshroom":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Hypnoshroom,   null, ReanimationType.Hypnoshroom,  10, 75, 3000,PlantSubClass.Normal,  0, \"HYPNO_SHROOM\"),"
-        if randomizedGameConstantsPlantlist[i] == "Scaredyshroom":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Scaredyshroom, null, ReanimationType.Scrareyshroom,33, 25, 750, PlantSubClass.Shooter, 150, \"SCAREDY_SHROOM\"),"
-        if randomizedGameConstantsPlantlist[i] == "Iceshroom":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Iceshroom,     null, ReanimationType.Iceshroom,    36, 75, 5000,PlantSubClass.Normal,  0, \"ICE_SHROOM\"),"
-        if randomizedGameConstantsPlantlist[i] == "Doomshroom":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Doomshroom,    null, ReanimationType.Doomshroom,   20, 125,5000,PlantSubClass.Normal,  0, \"DOOM_SHROOM\"),"
-        if randomizedGameConstantsPlantlist[i] == "Squash":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Squash,        null, ReanimationType.Squash,       21, 50, 3000,PlantSubClass.Normal,  0, \"SQUASH\"),"
-        if randomizedGameConstantsPlantlist[i] == "Threepeater":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Threepeater,   null, ReanimationType.Threepeater,  12, 325,750, PlantSubClass.Shooter, 150, \"THREEPEATER\"),"
-        if randomizedGameConstantsPlantlist[i] == "Jalapeno":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Jalapeno,      null, ReanimationType.Jalapeno,     11, 125,5000,PlantSubClass.Normal,  0, \"JALAPENO\"),"
-        if randomizedGameConstantsPlantlist[i] == "Torchwood":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Torchwood,     null, ReanimationType.Torchwood,    29, 175,750, PlantSubClass.Normal,  0, \"TORCHWOOD\"),"
-        if randomizedGameConstantsPlantlist[i] == "Tallnut":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Tallnut,       null, ReanimationType.Tallnut,      28, 125,3000,PlantSubClass.Normal,  0, \"TALL_NUT\"),"
-        if randomizedGameConstantsPlantlist[i] == "Plantern":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Plantern,      null, ReanimationType.Plantern,     38, 25, 3000,PlantSubClass.Normal,  2500, \"PLANTERN\"),"
-        if randomizedGameConstantsPlantlist[i] == "Cactus":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Cactus,        null, ReanimationType.Cactus,       15, 125,750, PlantSubClass.Shooter, 150, \"CACTUS\"),"
-        if randomizedGameConstantsPlantlist[i] == "Blover":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Blover,        null, ReanimationType.Blover,       18, 100,750, PlantSubClass.Normal,  0, \"BLOVER\"),"
-        if randomizedGameConstantsPlantlist[i] == "Splitpea":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Splitpea,      null, ReanimationType.Splitpea,     32, 125,750, PlantSubClass.Shooter, 150, \"SPLIT_PEA\"),"
-        if randomizedGameConstantsPlantlist[i] == "Starfruit":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Starfruit,     null, ReanimationType.Starfruit,    30, 125,750, PlantSubClass.Shooter, 150, \"STARFRUIT\"),"
-        if randomizedGameConstantsPlantlist[i] == "Pumpkinshell":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Pumpkinshell,  null, ReanimationType.Pumpkin,      25, 125,3000,PlantSubClass.Normal,  0, \"PUMPKIN\"),"
-        if randomizedGameConstantsPlantlist[i] == "Magnetshroom":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Magnetshroom,  null, ReanimationType.Magnetshroom, 35, 100,750, PlantSubClass.Normal,  0, \"MAGNET_SHROOM\"),"
-        if randomizedGameConstantsPlantlist[i] == "Cabbagepult":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Cabbagepult,   null, ReanimationType.Cabbagepult,  13, 100,750, PlantSubClass.Shooter, 300, \"CABBAGE_PULT\"),"
-        if randomizedGameConstantsPlantlist[i] == "Kernelpult":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Kernelpult,    null, ReanimationType.Kernelpult,   13, 100,750, PlantSubClass.Shooter, 300, \"KERNEL_PULT\"),"
-        if randomizedGameConstantsPlantlist[i] == "Garlic":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Garlic,        null, ReanimationType.Garlic,       8,  50, 750, PlantSubClass.Normal,  0, \"GARLIC\"),"
-        if randomizedGameConstantsPlantlist[i] == "Umbrella":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Umbrella,      null, ReanimationType.Umbrellaleaf, 23, 100,750, PlantSubClass.Normal,  0, \"UMBRELLA_LEAF\"),"
-        if randomizedGameConstantsPlantlist[i] == "Marigold":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Marigold,      null, ReanimationType.Marigold,     24, 50, 6000,PlantSubClass.Normal,  2500, \"MARIGOLD\"),"
-        if randomizedGameConstantsPlantlist[i] == "Melonpult":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Melonpult,     null, ReanimationType.Melonpult,    14, 300,750, PlantSubClass.Shooter, 300, \"MELON_PULT\"),"
-        if randomizedGameConstantsPlantlist[i] == "Gravebuster":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Gravebuster,   null, ReanimationType.GraveBuster,  40, 75, 750, PlantSubClass.Normal,  0, \"GRAVE_BUSTER\"),"
-        if randomizedGameConstantsPlantlist[i] == "Tanglekelp":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Tanglekelp,    null, ReanimationType.Tanglekelp,   17, 25, 3000,PlantSubClass.Normal,  0, \"TANGLE_KELP\"),"
-        if randomizedGameConstantsPlantlist[i] == "Spikeweed":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Spikeweed,     null, ReanimationType.Spikeweed,    22, 100,750, PlantSubClass.Normal,  0, \"SPIKEWEED\"),"
-        if randomizedGameConstantsPlantlist[i] == "Seashroom":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Seashroom,     null, ReanimationType.Seashroom,    39, 0,  3000,PlantSubClass.Shooter, 150, \"SEA_SHROOM\"),"
-        if randomizedGameConstantsPlantlist[i] == "Flowerpot":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.Flowerpot,     null, ReanimationType.FlowerPot,    33, 25, 750, PlantSubClass.Normal,  0, \"FLOWER_POT\"),"
-        if randomizedGameConstantsPlantlist[i] == "InstantCoffee":
-         randomizedGameConstantsPlantlist[i] = "new PlantDefinition(SeedType.InstantCoffee, null, ReanimationType.Coffeebean,   33, 75, 750, PlantSubClass.Normal,  0, \"COFFEE_BEAN\"),"
-
-    plantnum = 0
-    plantcodenum = 563
-    filename = "Lawn_Shared/Lawn/System/GameConstants.cs"
-    while plantnum != 40:
-     plantname = randomizedGameConstantsPlantlist[plantnum]
-     a_file = open(filename, "r", encoding="utf-8")
-     list_of_lines = a_file.readlines()
-     list_of_lines[plantcodenum] = (plantname + "\n")
-
-     a_file = open(filename, "w", encoding="utf-8")
-     a_file.writelines(list_of_lines)
-     a_file.close()
-     plantnum = plantnum + 1
-     plantcodenum = plantcodenum + 1
-
-
-    print("Plant shuffling complete")
+        if "Cabbagepult" == randomizedplantlist[i]:
+            tree.find(".//Cabbagepult").text = str(i)
+        if "Flowerpot" == randomizedplantlist[i]:
+            tree.find(".//Flowerpot").text = str(i)
+        if "Kernelpult" == randomizedplantlist[i]:
+            tree.find(".//Kernelpult").text = str(i)
+        if "InstantCoffee" == randomizedplantlist[i]:
+            tree.find(".//InstantCoffee").text = str(i)
+        if "Garlic" == randomizedplantlist[i]:
+            tree.find(".//Garlic").text = str(i)
+        if "Umbrella" == randomizedplantlist[i]:
+            tree.find(".//Umbrella").text = str(i)
+        if "Marigold" == randomizedplantlist[i]:
+            tree.find(".//Marigold").text = str(i)
+        if "Melonpult" == randomizedplantlist[i]:
+            tree.find(".//Melonpult").text = str(i)
+        i+= 1
+else:
+    tree.find(".//Cherrybomb").text = "2"
+    tree.find(".//Wallnut").text = "3"
+    tree.find(".//Potatomine").text = "4"
+    tree.find(".//Snowpea").text = "5"
+    tree.find(".//Chomper").text = "6"
+    tree.find(".//Repeater").text = "7"
+    tree.find(".//Puffshroom").text = "8"
+    tree.find(".//Sunshroom").text = "9"
+    tree.find(".//Fumeshroom").text = "10"
+    tree.find(".//Gravebuster").text = "11"
+    tree.find(".//Hypnoshroom").text = "12"
+    tree.find(".//Scaredyshroom").text = "13"
+    tree.find(".//Iceshroom").text = "14"
+    tree.find(".//Doomshroom").text = "15"
+    tree.find(".//Squash").text = "17"
+    tree.find(".//Threepeater").text = "18"
+    tree.find(".//Tanglekelp").text = "19"
+    tree.find(".//Jalapeno").text = "20"
+    tree.find(".//Spikeweed").text = "21"
+    tree.find(".//Torchwood").text = "22"
+    tree.find(".//Tallnut").text = "23"
+    tree.find(".//Seashroom").text = "24"
+    tree.find(".//Plantern").text = "25"
+    tree.find(".//Cactus").text = "26"
+    tree.find(".//Blover").text = "27"
+    tree.find(".//Splitpea").text = "28"
+    tree.find(".//Starfruit").text = "29"
+    tree.find(".//Pumpkinshell").text = "30"
+    tree.find(".//Magnetshroom").text = "31"
+    tree.find(".//Cabbagepult").text = "32"
+    tree.find(".//Flowerpot").text = "33"
+    tree.find(".//Kernelpult").text = "34"
+    tree.find(".//InstantCoffee").text = "35"
+    tree.find(".//Garlic").text = "36"
+    tree.find(".//Umbrella").text = "37"
+    tree.find(".//Marigold").text = "38"
+    tree.find(".//Melonpult").text = "39"
+    
+tree.write(datafile)
+print("Plant shuffling complete")
 
 
 
-    plantlistoriginal = [
-            "Peashooter",
-            "Sunflower",
-            "Cherrybomb",
-            "Wallnut",
-            "Potatomine",
-            "Snowpea",
-            "Chomper",
-            "Repeater",
-            "Puffshroom",
-            "Sunshroom",
-            "Fumeshroom",
-            "Gravebuster",
-            "Hypnoshroom",
-            "Scaredyshroom",
-            "Iceshroom",
-            "Doomshroom",
-            "Lilypad",
-            "Squash",
-            "Threepeater",
-            "Tanglekelp",
-            "Jalapeno",
-            "Spikeweed",
-            "Torchwood",
-            "Tallnut",
-            "Seashroom",
-            "Plantern",
-            "Cactus",
-            "Blover",
-            "Splitpea",
-            "Starfruit",
-            "Pumpkinshell",
-            "Magnetshroom",
-            "Cabbagepult",
-            "Flowerpot",
-            "Kernelpult",
-            "InstantCoffee",
-            "Garlic",
-            "Umbrella",
-            "Marigold",
-            "Melonpult",
-            "Gatlingpea",
-            "Twinsunflower",
-            "Gloomshroom",
-            "Cattail",
-            "Wintermelon",
-            "GoldMagnet",
-            "Spikerock",
-            "Cobcannon",
-            "Imitater"]
+plantlistoriginal = [
+        "Peashooter",
+        "Sunflower",
+        "Cherrybomb",
+        "Wallnut",
+        "Potatomine",
+        "Snowpea",
+        "Chomper",
+        "Repeater",
+        "Puffshroom",
+        "Sunshroom",
+        "Fumeshroom",
+        "Gravebuster",
+        "Hypnoshroom",
+        "Scaredyshroom",
+        "Iceshroom",
+        "Doomshroom",
+        "Lilypad",
+        "Squash",
+        "Threepeater",
+        "Tanglekelp",
+        "Jalapeno",
+        "Spikeweed",
+        "Torchwood",
+        "Tallnut",
+        "Seashroom",
+        "Plantern",
+        "Cactus",
+        "Blover",
+        "Splitpea",
+        "Starfruit",
+        "Pumpkinshell",
+        "Magnetshroom",
+        "Cabbagepult",
+        "Flowerpot",
+        "Kernelpult",
+        "InstantCoffee",
+        "Garlic",
+        "Umbrella",
+        "Marigold",
+        "Melonpult",
+        "Gatlingpea",
+        "Twinsunflower",
+        "Gloomshroom",
+        "Cattail",
+        "Wintermelon",
+        "GoldMagnet",
+        "Spikerock",
+        "Cobcannon",
+        "Imitater"]

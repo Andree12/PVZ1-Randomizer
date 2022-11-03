@@ -26,7 +26,11 @@ namespace Lawn
             mDisappearCounter = 0;
             mIsBeingCollected = false;
             mFadeCount = 0;
-            mCoinMotion = theCoinMotion;
+			mCoinMotion = theCoinMotion;
+			if (theCoinType >= CoinType.Silver && theCoinType <= CoinType.Largesun && mApp.mAutoCollect)
+			{
+				mIsBeingCollected = true;
+			}
             mCoinAge = 0;
             mAttachmentID = null;
             mCollectionDistance = 0f;
@@ -803,11 +807,11 @@ namespace Lawn
                 {
                     FanOutCoins(CoinType.Diamond, 3);
                 }
-                else if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel == 4)
+                else if (mApp.IsFirstTimeAdventureMode() && mType == CoinType.Shovel)
                 {
                     mApp.PlaySample(Resources.SOUND_SHOVEL);
                 }
-                else if (mApp.IsFirstTimeAdventureMode() && (mBoard.mLevel == 24 || mBoard.mLevel == 34 || mBoard.mLevel == 44))
+                else if (mApp.IsFirstTimeAdventureMode() && (mBoard.mLevel == 4 || mBoard.mLevel == 24 || mBoard.mLevel == 34 || mBoard.mLevel == 44))
                 {
                     mApp.PlaySample(Resources.SOUND_TAP2);
                 }
@@ -893,17 +897,27 @@ namespace Lawn
 
         public int GetSunValue()
         {
+			int num = 1;
+            if (XmlReader.Sunmeta == "True")
+			{
+				num = 2;
+			}
             if (mType == CoinType.Sun)
             {
-                return 25;
+                return 25 * num;
             }
             if (mType == CoinType.Smallsun)
             {
-                return 15;
+				if (XmlReader.Sunmeta == "True")
+				{
+					return 25;
+				}
+				
+				return 15;
             }
             if (mType == CoinType.Largesun)
             {
-                return 50;
+                return 50 * num;
             }
             return 0;
         }
@@ -1426,7 +1440,14 @@ namespace Lawn
 
         public void DroppedUsableSeed()
         {
-            mIsBeingCollected = false;
+            if(mApp.mAutoCollect)
+            { 
+            mIsBeingCollected = true;
+            }
+            else
+            {
+                mIsBeingCollected = false;
+            }
             if (mTimesDropped == 0)
             {
                 mDisappearCounter = Math.Min(mDisappearCounter, 1200);

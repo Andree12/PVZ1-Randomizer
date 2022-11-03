@@ -474,19 +474,19 @@ namespace Lawn
                 }
                 if (theSpotIndex == 4)
                 {
-                    return StoreItem.STORE_ITEM_PLANT_GATLINGPEA;
+                    return (StoreItem)Enum.Parse(typeof(StoreItem), XmlReader.StorePlantSlot1);
                 }
                 if (theSpotIndex == 5)
                 {
-                    return StoreItem.STORE_ITEM_PLANT_TWINSUNFLOWER;
+                    return (StoreItem)Enum.Parse(typeof(StoreItem), XmlReader.StorePlantSlot2);
                 }
                 if (theSpotIndex == 6)
                 {
-                    return StoreItem.STORE_ITEM_PLANT_GLOOMSHROOM;
+                    return (StoreItem)Enum.Parse(typeof(StoreItem), XmlReader.StorePlantSlot4);
                 }
                 if (theSpotIndex == 7)
                 {
-                    return StoreItem.STORE_ITEM_PLANT_CATTAIL;
+                    return (StoreItem)Enum.Parse(typeof(StoreItem), XmlReader.StorePlantSlot5);
                 }
                 return StoreItem.STORE_ITEM_INVALID;
             }
@@ -494,19 +494,19 @@ namespace Lawn
             {
                 if (theSpotIndex == 0)
                 {
-                    return StoreItem.STORE_ITEM_PLANT_SPIKEROCK;
+                    return (StoreItem)Enum.Parse(typeof(StoreItem), XmlReader.StorePlantSlot3);
                 }
                 if (theSpotIndex == 1)
                 {
-                    return StoreItem.STORE_ITEM_PLANT_GOLD_MAGNET;
+                    return (StoreItem)Enum.Parse(typeof(StoreItem), XmlReader.StorePlantSlot6);
                 }
                 if (theSpotIndex == 2)
                 {
-                    return StoreItem.STORE_ITEM_PLANT_WINTERMELON;
+                    return (StoreItem)Enum.Parse(typeof(StoreItem), XmlReader.StorePlantSlot8);
                 }
                 if (theSpotIndex == 3)
                 {
-                    return StoreItem.STORE_ITEM_PLANT_COBCANNON;
+                    return (StoreItem)Enum.Parse(typeof(StoreItem), XmlReader.StorePlantSlot7);
                 }
                 if (theSpotIndex == 4)
                 {
@@ -520,38 +520,38 @@ namespace Lawn
             }
             else if (mPage == StorePage.Zen1)
             {
-                if (theSpotIndex == 0)
-                {
-                    return StoreItem.STORE_ITEM_POTTED_MARIGOLD_1;
-                }
-                if (theSpotIndex == 1)
-                {
-                    return StoreItem.STORE_ITEM_POTTED_MARIGOLD_2;
-                }
-                if (theSpotIndex == 2)
-                {
-                    return StoreItem.STORE_ITEM_POTTED_MARIGOLD_3;
-                }
-                if (theSpotIndex == 3)
-                {
-                    return StoreItem.STORE_ITEM_GOLD_WATERINGCAN;
-                }
-                if (theSpotIndex == 4)
-                {
-                    return StoreItem.STORE_ITEM_FERTILIZER;
-                }
-                if (theSpotIndex == 5)
-                {
-                    return StoreItem.STORE_ITEM_BUG_SPRAY;
-                }
-                if (theSpotIndex == 6)
-                {
-                    return StoreItem.STORE_ITEM_PHONOGRAPH;
-                }
-                if (theSpotIndex == 7)
-                {
-                    return StoreItem.STORE_ITEM_GARDENING_GLOVE;
-                }
+                //if (theSpotIndex == 0)
+                //{
+                //    return StoreItem.STORE_ITEM_POTTED_MARIGOLD_1;
+                //}
+                //if (theSpotIndex == 1)
+                //{
+                //    return StoreItem.STORE_ITEM_POTTED_MARIGOLD_2;
+                //}
+                //if (theSpotIndex == 2)
+                //{
+                //    return StoreItem.STORE_ITEM_POTTED_MARIGOLD_3;
+                //}
+                //if (theSpotIndex == 3)
+                //{
+                //    return StoreItem.STORE_ITEM_GOLD_WATERINGCAN;
+                //}
+                //if (theSpotIndex == 4)
+                //{
+                //    return StoreItem.STORE_ITEM_FERTILIZER;
+                //}
+                //if (theSpotIndex == 5)
+                //{
+                //    return StoreItem.STORE_ITEM_BUG_SPRAY;
+                //}
+                //if (theSpotIndex == 6)
+                //{
+                //    return StoreItem.STORE_ITEM_PHONOGRAPH;
+                //}
+                //if (theSpotIndex == 7)
+                //{
+                //    return StoreItem.STORE_ITEM_GARDENING_GLOVE;
+                //}
                 return StoreItem.STORE_ITEM_INVALID;
             }
             else
@@ -561,22 +561,22 @@ namespace Lawn
                     Debug.ASSERT(false);
                     return StoreItem.STORE_ITEM_INVALID;
                 }
-                if (theSpotIndex == 0)
-                {
-                    return StoreItem.STORE_ITEM_MUSHROOM_GARDEN;
-                }
-                if (theSpotIndex == 1)
-                {
-                    return StoreItem.STORE_ITEM_AQUARIUM_GARDEN;
-                }
-                if (theSpotIndex == 2)
-                {
-                    return StoreItem.STORE_ITEM_WHEEL_BARROW;
-                }
-                if (theSpotIndex == 3)
-                {
-                    return StoreItem.STORE_ITEM_STINKY_THE_SNAIL;
-                }
+                //if (theSpotIndex == 0)
+                //{
+                //    return StoreItem.STORE_ITEM_MUSHROOM_GARDEN;
+                //}
+                //if (theSpotIndex == 1)
+                //{
+                //    return StoreItem.STORE_ITEM_AQUARIUM_GARDEN;
+                //}
+                //if (theSpotIndex == 2)
+                //{
+                //    return StoreItem.STORE_ITEM_WHEEL_BARROW;
+                //}
+                //if (theSpotIndex == 3)
+                //{
+                //    return StoreItem.STORE_ITEM_STINKY_THE_SNAIL;
+                //}
                 return StoreItem.STORE_ITEM_INVALID;
             }
         }
@@ -602,7 +602,7 @@ namespace Lawn
                     return true;
                 }
             }
-            if (theStoreItem == StoreItem.STORE_ITEM_PLANT_GLOOMSHROOM)
+            if (theStoreItem == (StoreItem)Enum.Parse(typeof(StoreItem), XmlReader.StorePlantSlot4))
             {
                 if (mApp.IsTrialStageLocked())
                 {
@@ -613,7 +613,7 @@ namespace Lawn
                     return true;
                 }
             }
-            if (theStoreItem == StoreItem.STORE_ITEM_PLANT_CATTAIL)
+            if (theStoreItem == (StoreItem)Enum.Parse(typeof(StoreItem), XmlReader.StorePlantSlot5))
             {
                 if (mApp.IsTrialStageLocked())
                 {
@@ -624,7 +624,7 @@ namespace Lawn
                     return true;
                 }
             }
-            return (theStoreItem == StoreItem.STORE_ITEM_PLANT_SPIKEROCK && !mApp.HasFinishedAdventure() && mApp.mPlayerInfo.mLevel < 41) || (theStoreItem == StoreItem.STORE_ITEM_PLANT_GOLD_MAGNET && !mApp.HasFinishedAdventure() && mApp.mPlayerInfo.mLevel < 41) || (theStoreItem == StoreItem.STORE_ITEM_PLANT_WINTERMELON && !mApp.HasFinishedAdventure() && mApp.mPlayerInfo.mLevel < 41) || (theStoreItem == StoreItem.STORE_ITEM_PLANT_COBCANNON && !mApp.HasFinishedAdventure() && mApp.mPlayerInfo.mLevel < 41) || ((theStoreItem == StoreItem.STORE_ITEM_PLANT_IMITATER || theStoreItem == StoreItem.STORE_ITEM_FIRSTAID) && !mApp.HasFinishedAdventure());
+            return (theStoreItem == (StoreItem)Enum.Parse(typeof(StoreItem), XmlReader.StorePlantSlot3) && !mApp.HasFinishedAdventure() && mApp.mPlayerInfo.mLevel < 41) || (theStoreItem == (StoreItem)Enum.Parse(typeof(StoreItem), XmlReader.StorePlantSlot6) && !mApp.HasFinishedAdventure() && mApp.mPlayerInfo.mLevel < 41) || (theStoreItem == (StoreItem)Enum.Parse(typeof(StoreItem), XmlReader.StorePlantSlot8) && !mApp.HasFinishedAdventure() && mApp.mPlayerInfo.mLevel < 41) || (theStoreItem == (StoreItem)Enum.Parse(typeof(StoreItem), XmlReader.StorePlantSlot7) && !mApp.HasFinishedAdventure() && mApp.mPlayerInfo.mLevel < 41) || ((theStoreItem == StoreItem.STORE_ITEM_PLANT_IMITATER || theStoreItem == StoreItem.STORE_ITEM_FIRSTAID) && !mApp.HasFinishedAdventure());
         }
 
         public bool IsItemSoldOut(StoreItem theStoreItem)

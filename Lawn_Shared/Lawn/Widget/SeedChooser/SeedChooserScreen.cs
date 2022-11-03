@@ -760,7 +760,7 @@ namespace Lawn
             {
                 return;
             }
-            if (!CheckSeedUpgrade(10, SeedType.Gatlingpea, SeedType.GatlingpeaDowngradePlant) || !CheckSeedUpgrade(11, SeedType.Wintermelon, SeedType.WintermelonDowngradePlant) || !CheckSeedUpgrade(12, SeedType.Twinsunflower, SeedType.TwinsunflowerDowngradePlant) || !CheckSeedUpgrade(13, SeedType.Spikerock, SeedType.SpikerockDowngradePlant) || !CheckSeedUpgrade(14, SeedType.Cobcannon, SeedType.CobcannonDowngradePlant) || !CheckSeedUpgrade(15, SeedType.GoldMagnet, SeedType.GoldMagnetDowngradePlant) || !CheckSeedUpgrade(16, SeedType.Gloomshroom, SeedType.GloomshroomDowngradePlant) || !CheckSeedUpgrade(17, SeedType.Cattail, SeedType.Lilypad))
+            if (!CheckSeedUpgrade(10, SeedType.Gatlingpea, (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Gatlingpeadowngradeplant)) || !CheckSeedUpgrade(11, SeedType.Wintermelon, (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Wintermelondowngradeplant)) || !CheckSeedUpgrade(12, SeedType.Twinsunflower, (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Twinsunflowerdowngradeplant)) || !CheckSeedUpgrade(13, SeedType.Spikerock, (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Spikerockdowngradeplant)) || !CheckSeedUpgrade(14, SeedType.Cobcannon, (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Cobcannondowngradeplant)) || !CheckSeedUpgrade(15, SeedType.GoldMagnet, (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Goldmagnetdowngradeplant)) || !CheckSeedUpgrade(16, SeedType.Gloomshroom, (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Gloomshroomdowngradeplant)) || !CheckSeedUpgrade(17, SeedType.Cattail, SeedType.Lilypad))
             {
                 return;
             }
@@ -986,7 +986,8 @@ namespace Lawn
             }
             int levelRandSeed = mBoard.GetLevelRandSeed();
             RandomNumbers.Seed(levelRandSeed);
-            for (int k = 0; k < 3; k++)
+            int SeedPacketnum = (mApp.mPlayerInfo.mPurchases[21] + 6) - 2;
+            for (int k = 0; k < SeedPacketnum; k++)
             {
                 SeedType seedType2 = (SeedType)PickFromWeightedArrayUsingSpecialRandSeed(SeedChooserScreen.aSeedArray, (int)SeedType.SeedsInChooserCount);
                 SeedChooserScreen.aSeedArray[(int)seedType2].mWeight = 0;

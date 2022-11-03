@@ -2614,7 +2614,7 @@ namespace Lawn
 
         public void CheckForPool()//3update
         {
-            if (!Zombie.ZombieTypeCanGoInPool(mZombieType))
+            if ((!Zombie.ZombieTypeCanGoInPool(mZombieType) && mBoard.mBackground == BackgroundType.Num3Pool) || (!Zombie.ZombieTypeCanGoInPool(mZombieType) && mBoard.mBackground == BackgroundType.Num4Fog))
             {
                 return;
             }
@@ -3153,7 +3153,7 @@ namespace Lawn
                 }
                 else if (mBoard.mLevel == 44)
                 {
-                    coinType = CoinType.WateringCan;
+                    coinType = CoinType.Bacon;
                 }
                 else
                 {
@@ -3297,11 +3297,11 @@ namespace Lawn
                     int aPosY = mY + mHeight / 2;
                     if (mMindControlled)
                     {
-                        mBoard.KillAllZombiesInRadius(mRow, aPosX, aPosY, Constants.JackInTheBoxZombieRadius, 1, true, 0x7F);
+                        mBoard.KillAllZombiesInRadius(mRow, aPosX, aPosY, Constants.JackInTheBoxZombieRadius, 1, true, 0x7F, 1800);
                     }
                     else
                     {
-                        mBoard.KillAllZombiesInRadius(mRow, aPosX, aPosY, Constants.JackInTheBoxZombieRadius, 1, true, 0xFF);
+                        mBoard.KillAllZombiesInRadius(mRow, aPosX, aPosY, Constants.JackInTheBoxZombieRadius, 1, true, 0xFF, 1800);
                         mBoard.KillAllPlantsInRadius(aPosX, aPosY, Constants.JackInTheBoxPlantRadius);
                     }
                     mApp.AddTodParticle(aPosX, aPosY, 400000, ParticleEffect.Jackexplode);
@@ -4263,6 +4263,22 @@ namespace Lawn
                             theRow = mRow;
                             thePosX = (int)mPosX + 100;
                             break;
+                        case 4:
+                            theRow = mRow - 1;
+                            thePosX = (int)mPosX - 100;
+                            break;
+                        case 5:
+                            theRow = mRow - 1;
+                            thePosX = (int)mPosX + 100;
+                            break;
+                        case 6:
+                            theRow = mRow + 1;
+                            thePosX = (int)mPosX - 100;
+                            break;
+                        case 7:
+                            theRow = mRow + 1;
+                            thePosX = (int)mPosX + 100;
+                            break;
                         default:
                             Debug.ASSERT(false);
                             break;
@@ -4501,7 +4517,7 @@ namespace Lawn
             {
                 mBoard.RemoveParticleByType(ParticleEffect.ZombieBossFireball);
             }
-            TakeDamage(20, 1U);
+            TakeDamage(XmlReader.IceShroomDamage, 1U);
             UpdateAnimSpeed();
             return true;
         }
@@ -7359,7 +7375,7 @@ namespace Lawn
             {
                 return;
             }
-            mButteredCounter = 400;
+            mButteredCounter = XmlReader.KernelpultButterStuntime;
             Zombie zombie = mBoard.ZombieTryToGet(mRelatedZombieID);
             if (zombie != null)
             {
@@ -8079,14 +8095,20 @@ namespace Lawn
             {
                 case BackgroundType.Num1Day:
                 case BackgroundType.Num2Night:
+                case BackgroundType.Num7GreatWall:
+                case BackgroundType.Num9JTTW2:
+                case BackgroundType.Num18CustomMars:
                     g.ClipRect((int)((-123 - mX) * Constants.S) + Constants.Zombie_GameOver_ClipOffset_1, (int)(-mY * Constants.S), 800, 600);
                     break;
                 case BackgroundType.Num3Pool:
                 case BackgroundType.Num4Fog:
-                    g.ClipRect((int)((-172 - mX) * Constants.S) + Constants.Zombie_GameOver_ClipOffset_2, (int)(-mY * Constants.S), 800, 600);
+                case BackgroundType.Num15CustomFlood:
+                case BackgroundType.Num16CustomWaterFallNight:
+                g.ClipRect((int)((-172 - mX) * Constants.S) + Constants.Zombie_GameOver_ClipOffset_2, (int)(-mY * Constants.S), 800, 600);
                     break;
                 case BackgroundType.Num5Roof:
                 case BackgroundType.Num6Boss:
+                case BackgroundType.Num17CustomEveningRoof:
                     g.ClipRect((int)((-95 - mX) * Constants.S) + Constants.Zombie_GameOver_ClipOffset_3, (int)(-mY * Constants.S), 800, 600);
                     break;
             }
@@ -8103,7 +8125,7 @@ namespace Lawn
                 mZombiePhase = ZombiePhase.PolevaulterPostVault;
                 StartWalkAnim(0);
             }
-            if (mBoard.mBackground == BackgroundType.Num1Day || mBoard.mBackground == BackgroundType.Num2Night || mBoard.mBackground == BackgroundType.Num3Pool || mBoard.mBackground == BackgroundType.Num4Fog || mBoard.mBackground == BackgroundType.Num5Roof || mBoard.mBackground == BackgroundType.Num6Boss)
+            if (mBoard.mBackground == BackgroundType.Num1Day || mBoard.mBackground == BackgroundType.Num2Night || mBoard.mBackground == BackgroundType.Num3Pool || mBoard.mBackground == BackgroundType.Num4Fog || mBoard.mBackground == BackgroundType.Num5Roof || mBoard.mBackground == BackgroundType.Num6Boss || mBoard.mBackground == BackgroundType.Num15CustomFlood || mBoard.mBackground == BackgroundType.Num16CustomWaterFallNight || mBoard.mBackground == BackgroundType.Num18CustomMars)
             {
                 mRenderOrder = Board.MakeRenderOrder(RenderLayer.Zombie, 2, 100);
                 for (int i = 0; i < mBoard.mLawnMowers.Count; i++)
@@ -8115,7 +8137,7 @@ namespace Lawn
                 {
                     mPosX += 35f;
                 }
-                if (mBoard.mBackground == BackgroundType.Num3Pool || mBoard.mBackground == BackgroundType.Num4Fog)
+                if (mBoard.mBackground == BackgroundType.Num3Pool || mBoard.mBackground == BackgroundType.Num4Fog || mBoard.mBackground == BackgroundType.Num15CustomFlood || mBoard.mBackground == BackgroundType.Num16CustomWaterFallNight)
                 {
                     ZombieType zombieType = mZombieType;
                 }

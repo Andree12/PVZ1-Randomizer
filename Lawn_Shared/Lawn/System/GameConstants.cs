@@ -259,7 +259,7 @@ namespace Lawn
                 new ReanimationParams(ReanimationType.CoinGold, "reanim/Coin_gold", 0),
                 new ReanimationParams(ReanimationType.ZombieFlagpole, "reanim/Zombie_flagpole"),
                 new ReanimationParams(ReanimationType.Woodsign, "reanim/woodsign"),
-                new ReanimationParams(ReanimationType.Astronaut, "reanim/astronaut")
+                new ReanimationParams(ReanimationType.Astronaut, "reanim/astronaut"),
             };
             GameConstants.gLawnTrailArray = new TrailParams[]
             {
@@ -380,240 +380,447 @@ namespace Lawn
                 }),
                 new ZombieAllowedLevels(ZombieType.TrafficCone, new int[NUM_LEVELS]
                 {
-                    0, 0, 1, 1, 1, 1, 1, 1, 1, 1,
-                    0, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                    0, 0, 1, XmlReader.Conehead_Level1_4, XmlReader.Conehead_Level1_5, XmlReader.Conehead_Level1_6, XmlReader.Conehead_Level1_7, XmlReader.Conehead_Level1_8, XmlReader.Conehead_Level1_9, XmlReader.Conehead_Level1_10,
+                    XmlReader.Conehead_Level2_1, XmlReader.Conehead_Level2_2, XmlReader.Conehead_Level2_3, XmlReader.Conehead_Level2_4, XmlReader.Conehead_Level2_5, XmlReader.Conehead_Level2_6, XmlReader.Conehead_Level2_7, XmlReader.Conehead_Level2_8, XmlReader.Conehead_Level2_9, XmlReader.Conehead_Level2_10,
+                    XmlReader.Conehead_Level3_1, XmlReader.Conehead_Level3_2, XmlReader.Conehead_Level3_3, XmlReader.Conehead_Level3_4, XmlReader.Conehead_Level3_5, XmlReader.Conehead_Level3_6, XmlReader.Conehead_Level3_7, XmlReader.Conehead_Level3_8, XmlReader.Conehead_Level3_9, XmlReader.Conehead_Level3_10,
+                    XmlReader.Conehead_Level4_1, XmlReader.Conehead_Level4_2, XmlReader.Conehead_Level4_3, XmlReader.Conehead_Level4_4, 0, XmlReader.Conehead_Level4_6, XmlReader.Conehead_Level4_7, XmlReader.Conehead_Level4_8, XmlReader.Conehead_Level4_9, XmlReader.Conehead_Level4_10,
+                    XmlReader.Conehead_Level5_1, XmlReader.Conehead_Level5_2, XmlReader.Conehead_Level5_3, XmlReader.Conehead_Level5_4, XmlReader.Conehead_Level5_5, XmlReader.Conehead_Level5_6, XmlReader.Conehead_Level5_7, XmlReader.Conehead_Level5_8, XmlReader.Conehead_Level5_9, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.Polevaulter, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 1, 1, 0, 1, 1,
-                    0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
-                    0, 0, 0, 1, 0, 0, 0, 0, 1, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, XmlReader.Polevaulter_Level1_4, XmlReader.Polevaulter_Level1_5, XmlReader.Polevaulter_Level1_6, XmlReader.Polevaulter_Level1_7, XmlReader.Polevaulter_Level1_8, XmlReader.Polevaulter_Level1_9, XmlReader.Polevaulter_Level1_10,
+                    XmlReader.Polevaulter_Level2_1, XmlReader.Polevaulter_Level2_2, XmlReader.Polevaulter_Level2_3, XmlReader.Polevaulter_Level2_4, XmlReader.Polevaulter_Level2_5, XmlReader.Polevaulter_Level2_6, XmlReader.Polevaulter_Level2_7, XmlReader.Polevaulter_Level2_8, XmlReader.Polevaulter_Level2_9, XmlReader.Polevaulter_Level2_10,
+                    XmlReader.Polevaulter_Level3_1, XmlReader.Polevaulter_Level3_2, XmlReader.Polevaulter_Level3_3, XmlReader.Polevaulter_Level3_4, XmlReader.Polevaulter_Level3_5, XmlReader.Polevaulter_Level3_6, XmlReader.Polevaulter_Level3_7, XmlReader.Polevaulter_Level3_8, XmlReader.Polevaulter_Level3_9, XmlReader.Polevaulter_Level3_10,
+                    XmlReader.Polevaulter_Level4_1, XmlReader.Polevaulter_Level4_2, XmlReader.Polevaulter_Level4_3, XmlReader.Polevaulter_Level4_4, 0, XmlReader.Polevaulter_Level4_6, XmlReader.Polevaulter_Level4_7, XmlReader.Polevaulter_Level4_8, XmlReader.Polevaulter_Level4_9, XmlReader.Polevaulter_Level4_10,
+                    XmlReader.Polevaulter_Level5_1, XmlReader.Polevaulter_Level5_2, XmlReader.Polevaulter_Level5_3, XmlReader.Polevaulter_Level5_4, XmlReader.Polevaulter_Level5_5, XmlReader.Polevaulter_Level5_6, XmlReader.Polevaulter_Level5_7, XmlReader.Polevaulter_Level5_8, XmlReader.Polevaulter_Level5_9, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.Pail, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
-                    0, 1, 0, 0, 1, 0, 0, 0, 0, 0,
-                    0, 1, 0, 1, 0, 0, 1, 0, 1, 1,
-                    0, 0, 0, 0, 0, 0, 1, 0, 1, 1,
-                    0, 1, 0, 0, 1, 0, 0, 0, 1, 1,
+                    0, 0, 0, XmlReader.Pail_Level1_4, XmlReader.Pail_Level1_5, XmlReader.Pail_Level1_6, XmlReader.Pail_Level1_7, XmlReader.Pail_Level1_8, XmlReader.Pail_Level1_9, XmlReader.Pail_Level1_10,
+                    XmlReader.Pail_Level2_1, XmlReader.Pail_Level2_2, XmlReader.Pail_Level2_3, XmlReader.Pail_Level2_4, XmlReader.Pail_Level2_5, XmlReader.Pail_Level2_6, XmlReader.Pail_Level2_7, XmlReader.Pail_Level2_8, XmlReader.Pail_Level2_9, XmlReader.Pail_Level2_10,
+                    XmlReader.Pail_Level3_1, XmlReader.Pail_Level3_2, XmlReader.Pail_Level3_3, XmlReader.Pail_Level3_4, XmlReader.Pail_Level3_5, XmlReader.Pail_Level3_6, XmlReader.Pail_Level3_7, XmlReader.Pail_Level3_8, XmlReader.Pail_Level3_9, XmlReader.Pail_Level3_10,
+                    XmlReader.Pail_Level4_1, XmlReader.Pail_Level4_2, XmlReader.Pail_Level4_3, XmlReader.Pail_Level4_4, 0, XmlReader.Pail_Level4_6, XmlReader.Pail_Level4_7, XmlReader.Pail_Level4_8, XmlReader.Pail_Level4_9, XmlReader.Pail_Level4_10,
+                    XmlReader.Pail_Level5_1, XmlReader.Pail_Level5_2, XmlReader.Pail_Level5_3, XmlReader.Pail_Level5_4, XmlReader.Pail_Level5_5, XmlReader.Pail_Level5_6, XmlReader.Pail_Level5_7, XmlReader.Pail_Level5_8, XmlReader.Pail_Level5_9, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.Newspaper, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    1, 1, 0, 0, 1, 0, 0, 0, 0, 0,
-                    0, 1, 0, 1, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, XmlReader.Newspaper_Level1_4, XmlReader.Newspaper_Level1_5, XmlReader.Newspaper_Level1_6, XmlReader.Newspaper_Level1_7, XmlReader.Newspaper_Level1_8, XmlReader.Newspaper_Level1_9, XmlReader.Newspaper_Level1_10,
+                    XmlReader.Newspaper_Level2_1, XmlReader.Newspaper_Level2_2, XmlReader.Newspaper_Level2_3, XmlReader.Newspaper_Level2_4, XmlReader.Newspaper_Level2_5, XmlReader.Newspaper_Level2_6, XmlReader.Newspaper_Level2_7, XmlReader.Newspaper_Level2_8, XmlReader.Newspaper_Level2_9, XmlReader.Newspaper_Level2_10,
+                    XmlReader.Newspaper_Level3_1, XmlReader.Newspaper_Level3_2, XmlReader.Newspaper_Level3_3, XmlReader.Newspaper_Level3_4, XmlReader.Newspaper_Level3_5, XmlReader.Newspaper_Level3_6, XmlReader.Newspaper_Level3_7, XmlReader.Newspaper_Level3_8, XmlReader.Newspaper_Level3_9, XmlReader.Newspaper_Level3_10,
+                    XmlReader.Newspaper_Level4_1, XmlReader.Newspaper_Level4_2, XmlReader.Newspaper_Level4_3, XmlReader.Newspaper_Level4_4, 0, XmlReader.Newspaper_Level4_6, XmlReader.Newspaper_Level4_7, XmlReader.Newspaper_Level4_8, XmlReader.Newspaper_Level4_9, XmlReader.Newspaper_Level4_10,
+                    XmlReader.Newspaper_Level5_1, XmlReader.Newspaper_Level5_2, XmlReader.Newspaper_Level5_3, XmlReader.Newspaper_Level5_4, XmlReader.Newspaper_Level5_5, XmlReader.Newspaper_Level5_6, XmlReader.Newspaper_Level5_7, XmlReader.Newspaper_Level5_8, XmlReader.Newspaper_Level5_9, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.Door, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 1, 1, 0, 0, 1, 0, 1, 1,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, XmlReader.Door_Level1_4, XmlReader.Door_Level1_5, XmlReader.Door_Level1_6, XmlReader.Door_Level1_7, XmlReader.Door_Level1_8, XmlReader.Door_Level1_9, XmlReader.Door_Level1_10,
+                    XmlReader.Door_Level2_1, XmlReader.Door_Level2_2, XmlReader.Door_Level2_3, XmlReader.Door_Level2_4, XmlReader.Door_Level2_5, XmlReader.Door_Level2_6, XmlReader.Door_Level2_7, XmlReader.Door_Level2_8, XmlReader.Door_Level2_9, XmlReader.Door_Level2_10,
+                    XmlReader.Door_Level3_1, XmlReader.Door_Level3_2, XmlReader.Door_Level3_3, XmlReader.Door_Level3_4, XmlReader.Door_Level3_5, XmlReader.Door_Level3_6, XmlReader.Door_Level3_7, XmlReader.Door_Level3_8, XmlReader.Door_Level3_9, XmlReader.Door_Level3_10,
+                    XmlReader.Door_Level4_1, XmlReader.Door_Level4_2, XmlReader.Door_Level4_3, XmlReader.Door_Level4_4, 0, XmlReader.Door_Level4_6, XmlReader.Door_Level4_7, XmlReader.Door_Level4_8, XmlReader.Door_Level4_9, XmlReader.Door_Level4_10,
+                    XmlReader.Door_Level5_1, XmlReader.Door_Level5_2, XmlReader.Door_Level5_3, XmlReader.Door_Level5_4, XmlReader.Door_Level5_5, XmlReader.Door_Level5_6, XmlReader.Door_Level5_7, XmlReader.Door_Level5_8, XmlReader.Door_Level5_9, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.Football, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 1, 1, 0, 0, 1,
-                    0, 1, 0, 0, 1, 0, 0, 0, 0, 0,
-                    0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, XmlReader.Football_Level1_4, XmlReader.Football_Level1_5, XmlReader.Football_Level1_6, XmlReader.Football_Level1_7, XmlReader.Football_Level1_8, XmlReader.Football_Level1_9, XmlReader.Football_Level1_10,
+                    XmlReader.Football_Level2_1, XmlReader.Football_Level2_2, XmlReader.Football_Level2_3, XmlReader.Football_Level2_4, XmlReader.Football_Level2_5, XmlReader.Football_Level2_6, XmlReader.Football_Level2_7, XmlReader.Football_Level2_8, XmlReader.Football_Level2_9, XmlReader.Football_Level2_10,
+                    XmlReader.Football_Level3_1, XmlReader.Football_Level3_2, XmlReader.Football_Level3_3, XmlReader.Football_Level3_4, XmlReader.Football_Level3_5, XmlReader.Football_Level3_6, XmlReader.Football_Level3_7, XmlReader.Football_Level3_8, XmlReader.Football_Level3_9, XmlReader.Football_Level3_10,
+                    XmlReader.Football_Level4_1, XmlReader.Football_Level4_2, XmlReader.Football_Level4_3, XmlReader.Football_Level4_4, 0, XmlReader.Football_Level4_6, XmlReader.Football_Level4_7, XmlReader.Football_Level4_8, XmlReader.Football_Level4_9, XmlReader.Football_Level4_10,
+                    XmlReader.Football_Level5_1, XmlReader.Football_Level5_2, XmlReader.Football_Level5_3, XmlReader.Football_Level5_4, XmlReader.Football_Level5_5, XmlReader.Football_Level5_6, XmlReader.Football_Level5_7, XmlReader.Football_Level5_8, XmlReader.Football_Level5_9, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.Dancer, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, XmlReader.Dancer_Level1_4, XmlReader.Dancer_Level1_5, XmlReader.Dancer_Level1_6, XmlReader.Dancer_Level1_7, XmlReader.Dancer_Level1_8, XmlReader.Dancer_Level1_9, XmlReader.Dancer_Level1_10,
+                    XmlReader.Dancer_Level2_1, XmlReader.Dancer_Level2_2, XmlReader.Dancer_Level2_3, XmlReader.Dancer_Level2_4, XmlReader.Dancer_Level2_5, XmlReader.Dancer_Level2_6, XmlReader.Dancer_Level2_7, XmlReader.Dancer_Level2_8, XmlReader.Dancer_Level2_9, XmlReader.Dancer_Level2_10,
+                    XmlReader.Dancer_Level3_1, XmlReader.Dancer_Level3_2, XmlReader.Dancer_Level3_3, XmlReader.Dancer_Level3_4, XmlReader.Dancer_Level3_5, XmlReader.Dancer_Level3_6, XmlReader.Dancer_Level3_7, XmlReader.Dancer_Level3_8, XmlReader.Dancer_Level3_9, XmlReader.Dancer_Level3_10,
+                    XmlReader.Dancer_Level4_1, XmlReader.Dancer_Level4_2, XmlReader.Dancer_Level4_3, XmlReader.Dancer_Level4_4, 0, XmlReader.Dancer_Level4_6, XmlReader.Dancer_Level4_7, XmlReader.Dancer_Level4_8, XmlReader.Dancer_Level4_9, XmlReader.Dancer_Level4_10,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.BackupDancer, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+                    0, 0, 0, XmlReader.BackupDancer_Level1_4, XmlReader.BackupDancer_Level1_5, XmlReader.BackupDancer_Level1_6, XmlReader.BackupDancer_Level1_7, XmlReader.BackupDancer_Level1_8, XmlReader.BackupDancer_Level1_9, XmlReader.BackupDancer_Level1_10,
+                    XmlReader.BackupDancer_Level2_1, XmlReader.BackupDancer_Level2_2, XmlReader.BackupDancer_Level2_3, XmlReader.BackupDancer_Level2_4, XmlReader.BackupDancer_Level2_5, XmlReader.BackupDancer_Level2_6, XmlReader.BackupDancer_Level2_7, XmlReader.BackupDancer_Level2_8, XmlReader.BackupDancer_Level2_9, XmlReader.BackupDancer_Level2_10,
+                    XmlReader.BackupDancer_Level3_1, XmlReader.BackupDancer_Level3_2, XmlReader.BackupDancer_Level3_3, XmlReader.BackupDancer_Level3_4, XmlReader.BackupDancer_Level3_5, XmlReader.BackupDancer_Level3_6, XmlReader.BackupDancer_Level3_7, XmlReader.BackupDancer_Level3_8, XmlReader.BackupDancer_Level3_9, XmlReader.BackupDancer_Level3_10,
+                    XmlReader.BackupDancer_Level4_1, XmlReader.BackupDancer_Level4_2, XmlReader.BackupDancer_Level4_3, XmlReader.BackupDancer_Level4_4, 0, XmlReader.BackupDancer_Level4_6, XmlReader.BackupDancer_Level4_7, XmlReader.BackupDancer_Level4_8, XmlReader.BackupDancer_Level4_9, XmlReader.BackupDancer_Level4_10,
+                    XmlReader.BackupDancer_Level5_1, XmlReader.BackupDancer_Level5_2, XmlReader.BackupDancer_Level5_3, XmlReader.BackupDancer_Level5_4, XmlReader.BackupDancer_Level5_5, XmlReader.BackupDancer_Level5_6, XmlReader.BackupDancer_Level5_7, XmlReader.BackupDancer_Level5_8, XmlReader.BackupDancer_Level5_9, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.DuckyTube, new int[NUM_LEVELS]),
                 new ZombieAllowedLevels(ZombieType.Snorkel, new int[NUM_LEVELS]
                 {
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 1, 1, 1, 0, 1, 0, 0, 1,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    XmlReader.Snorkel_Level3_1, XmlReader.Snorkel_Level3_2, XmlReader.Snorkel_Level3_3, XmlReader.Snorkel_Level3_4, XmlReader.Snorkel_Level3_5, XmlReader.Snorkel_Level3_6, XmlReader.Snorkel_Level3_7, XmlReader.Snorkel_Level3_8, XmlReader.Snorkel_Level3_9, XmlReader.Snorkel_Level3_10,
+                    XmlReader.Snorkel_Level4_1, XmlReader.Snorkel_Level4_2, XmlReader.Snorkel_Level4_3, XmlReader.Snorkel_Level4_4, 0, XmlReader.Snorkel_Level4_6, XmlReader.Snorkel_Level4_7, XmlReader.Snorkel_Level4_8, XmlReader.Snorkel_Level4_9, XmlReader.Snorkel_Level4_10,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.Zamboni, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 1, 1, 0, 1, 1,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, XmlReader.Zamboni_Level1_4, XmlReader.Zamboni_Level1_5, XmlReader.Zamboni_Level1_6, XmlReader.Zamboni_Level1_7, XmlReader.Zamboni_Level1_8, XmlReader.Zamboni_Level1_9, XmlReader.Zamboni_Level1_10,
+                    XmlReader.Zamboni_Level2_1, XmlReader.Zamboni_Level2_2, XmlReader.Zamboni_Level2_3, XmlReader.Zamboni_Level2_4, XmlReader.Zamboni_Level2_5, XmlReader.Zamboni_Level2_6, XmlReader.Zamboni_Level2_7, XmlReader.Zamboni_Level2_8, XmlReader.Zamboni_Level2_9, XmlReader.Zamboni_Level2_10,
+                    XmlReader.Zamboni_Level3_1, XmlReader.Zamboni_Level3_2, XmlReader.Zamboni_Level3_3, XmlReader.Zamboni_Level3_4, XmlReader.Zamboni_Level3_5, XmlReader.Zamboni_Level3_6, XmlReader.Zamboni_Level3_7, XmlReader.Zamboni_Level3_8, XmlReader.Zamboni_Level3_9, XmlReader.Zamboni_Level3_10,
+                    XmlReader.Zamboni_Level4_1, XmlReader.Zamboni_Level4_2, XmlReader.Zamboni_Level4_3, XmlReader.Zamboni_Level4_4, 0, XmlReader.Zamboni_Level4_6, XmlReader.Zamboni_Level4_7, XmlReader.Zamboni_Level4_8, XmlReader.Zamboni_Level4_9, XmlReader.Zamboni_Level4_10,
+                    XmlReader.Zamboni_Level5_1, XmlReader.Zamboni_Level5_2, XmlReader.Zamboni_Level5_3, XmlReader.Zamboni_Level5_4, 0, XmlReader.Zamboni_Level5_6, XmlReader.Zamboni_Level5_7, XmlReader.Zamboni_Level5_8, XmlReader.Zamboni_Level5_9, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.Bobsled, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 1, 1, 0, 1, 1,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, XmlReader.Zamboni_Level1_4, XmlReader.Zamboni_Level1_5, XmlReader.Zamboni_Level1_6, XmlReader.Zamboni_Level1_7, XmlReader.Zamboni_Level1_8, XmlReader.Zamboni_Level1_9, XmlReader.Zamboni_Level1_10,
+                    XmlReader.Zamboni_Level2_1, XmlReader.Zamboni_Level2_2, XmlReader.Zamboni_Level2_3, XmlReader.Zamboni_Level2_4, XmlReader.Zamboni_Level2_5, XmlReader.Zamboni_Level2_6, XmlReader.Zamboni_Level2_7, XmlReader.Zamboni_Level2_8, XmlReader.Zamboni_Level2_9, XmlReader.Zamboni_Level2_10,
+                    XmlReader.Zamboni_Level3_1, XmlReader.Zamboni_Level3_2, XmlReader.Zamboni_Level3_3, XmlReader.Zamboni_Level3_4, XmlReader.Zamboni_Level3_5, XmlReader.Zamboni_Level3_6, XmlReader.Zamboni_Level3_7, XmlReader.Zamboni_Level3_8, XmlReader.Zamboni_Level3_9, XmlReader.Zamboni_Level3_10,
+                    XmlReader.Zamboni_Level4_1, XmlReader.Zamboni_Level4_2, XmlReader.Zamboni_Level4_3, XmlReader.Zamboni_Level4_4, 0, XmlReader.Zamboni_Level4_6, XmlReader.Zamboni_Level4_7, XmlReader.Zamboni_Level4_8, XmlReader.Zamboni_Level4_9, XmlReader.Zamboni_Level4_10,
+                    XmlReader.Zamboni_Level5_1, XmlReader.Zamboni_Level5_2, XmlReader.Zamboni_Level5_3, XmlReader.Zamboni_Level5_4, 0, XmlReader.Zamboni_Level5_6, XmlReader.Zamboni_Level5_7, XmlReader.Zamboni_Level5_8, XmlReader.Zamboni_Level5_9, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.DolphinRider, new int[NUM_LEVELS]
                 {
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
-                    0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+                    XmlReader.DolphinRider_Level3_1, XmlReader.DolphinRider_Level3_2, XmlReader.DolphinRider_Level3_3, XmlReader.DolphinRider_Level3_4, XmlReader.DolphinRider_Level3_5, XmlReader.DolphinRider_Level3_6, XmlReader.DolphinRider_Level3_7, XmlReader.DolphinRider_Level3_8, XmlReader.DolphinRider_Level3_9, XmlReader.DolphinRider_Level3_10,
+                    XmlReader.DolphinRider_Level4_1, XmlReader.DolphinRider_Level4_2, XmlReader.DolphinRider_Level4_3, XmlReader.DolphinRider_Level4_4, 0, XmlReader.DolphinRider_Level4_6, XmlReader.DolphinRider_Level4_7, XmlReader.DolphinRider_Level4_8, XmlReader.DolphinRider_Level4_9, XmlReader.DolphinRider_Level4_10,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.JackInTheBox, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    1, 1, 0, 0, 0, 0, 1, 0, 0, 1,
-                    0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
+                    0, 0, 0, XmlReader.JackInTheBox_Level1_4, XmlReader.JackInTheBox_Level1_5, XmlReader.JackInTheBox_Level1_6, XmlReader.JackInTheBox_Level1_7, XmlReader.JackInTheBox_Level1_8, XmlReader.JackInTheBox_Level1_9, XmlReader.JackInTheBox_Level1_10,
+                    XmlReader.JackInTheBox_Level2_1, XmlReader.JackInTheBox_Level2_2, XmlReader.JackInTheBox_Level2_3, XmlReader.JackInTheBox_Level2_4, XmlReader.JackInTheBox_Level2_5, XmlReader.JackInTheBox_Level2_6, XmlReader.JackInTheBox_Level2_7, XmlReader.JackInTheBox_Level2_8, XmlReader.JackInTheBox_Level2_9, XmlReader.JackInTheBox_Level2_10,
+                    XmlReader.JackInTheBox_Level3_1, XmlReader.JackInTheBox_Level3_2, XmlReader.JackInTheBox_Level3_3, XmlReader.JackInTheBox_Level3_4, XmlReader.JackInTheBox_Level3_5, XmlReader.JackInTheBox_Level3_6, XmlReader.JackInTheBox_Level3_7, XmlReader.JackInTheBox_Level3_8, XmlReader.JackInTheBox_Level3_9, XmlReader.JackInTheBox_Level3_10,
+                    XmlReader.JackInTheBox_Level4_1, XmlReader.JackInTheBox_Level4_2, XmlReader.JackInTheBox_Level4_3, XmlReader.JackInTheBox_Level4_4, 0, XmlReader.JackInTheBox_Level4_6, XmlReader.JackInTheBox_Level4_7, XmlReader.JackInTheBox_Level4_8, XmlReader.JackInTheBox_Level4_9, XmlReader.JackInTheBox_Level4_10,
+                    XmlReader.JackInTheBox_Level5_1, XmlReader.JackInTheBox_Level5_2, XmlReader.JackInTheBox_Level5_3, XmlReader.JackInTheBox_Level5_4, XmlReader.JackInTheBox_Level5_5, XmlReader.JackInTheBox_Level5_6, XmlReader.JackInTheBox_Level5_7, XmlReader.JackInTheBox_Level5_8, XmlReader.JackInTheBox_Level5_9, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.Balloon, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 1, 1, 0, 0, 0, 0, 1, 1,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, XmlReader.Balloon_Level1_4, XmlReader.Balloon_Level1_5, XmlReader.Balloon_Level1_6, XmlReader.Balloon_Level1_7, XmlReader.Balloon_Level1_8, XmlReader.Balloon_Level1_9, XmlReader.Balloon_Level1_10,
+                    XmlReader.Balloon_Level2_1, XmlReader.Balloon_Level2_2, XmlReader.Balloon_Level2_3, XmlReader.Balloon_Level2_4, XmlReader.Balloon_Level2_5, XmlReader.Balloon_Level2_6, XmlReader.Balloon_Level2_7, XmlReader.Balloon_Level2_8, XmlReader.Balloon_Level2_9, XmlReader.Balloon_Level2_10,
+                    XmlReader.Balloon_Level3_1, XmlReader.Balloon_Level3_2, XmlReader.Balloon_Level3_3, XmlReader.Balloon_Level3_4, XmlReader.Balloon_Level3_5, XmlReader.Balloon_Level3_6, XmlReader.Balloon_Level3_7, XmlReader.Balloon_Level3_8, XmlReader.Balloon_Level3_9, XmlReader.Balloon_Level3_10,
+                    XmlReader.Balloon_Level4_1, XmlReader.Balloon_Level4_2, XmlReader.Balloon_Level4_3, XmlReader.Balloon_Level4_4, 0, XmlReader.Balloon_Level4_6, XmlReader.Balloon_Level4_7, XmlReader.Balloon_Level4_8, XmlReader.Balloon_Level4_9, XmlReader.Balloon_Level4_10,
+                    XmlReader.Balloon_Level5_1, XmlReader.Balloon_Level5_2, XmlReader.Balloon_Level5_3, XmlReader.Balloon_Level5_4, XmlReader.Balloon_Level5_5, XmlReader.Balloon_Level5_6, XmlReader.Balloon_Level5_7, XmlReader.Balloon_Level5_8, XmlReader.Balloon_Level5_9, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.Digger, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 1, 1, 0, 0, 1,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, XmlReader.Digger_Level1_4, XmlReader.Digger_Level1_5, XmlReader.Digger_Level1_6, XmlReader.Digger_Level1_7, XmlReader.Digger_Level1_8, XmlReader.Digger_Level1_9, XmlReader.Digger_Level1_10,
+                    XmlReader.Digger_Level2_1, XmlReader.Digger_Level2_2, XmlReader.Digger_Level2_3, XmlReader.Digger_Level2_4, XmlReader.Digger_Level2_5, XmlReader.Digger_Level2_6, XmlReader.Digger_Level2_7, XmlReader.Digger_Level2_8, XmlReader.Digger_Level2_9, XmlReader.Digger_Level2_10,
+                    XmlReader.Digger_Level3_1, XmlReader.Digger_Level3_2, XmlReader.Digger_Level3_3, XmlReader.Digger_Level3_4, XmlReader.Digger_Level3_5, XmlReader.Digger_Level3_6, XmlReader.Digger_Level3_7, XmlReader.Digger_Level3_8, XmlReader.Digger_Level3_9, XmlReader.Digger_Level3_10,
+                    XmlReader.Digger_Level4_1, XmlReader.Digger_Level4_2, XmlReader.Digger_Level4_3, XmlReader.Digger_Level4_4, 0, XmlReader.Digger_Level4_6, XmlReader.Digger_Level4_7, XmlReader.Digger_Level4_8, XmlReader.Digger_Level4_9, XmlReader.Digger_Level4_10,
+                                       0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+
                 }),
                 new ZombieAllowedLevels(ZombieType.Pogo, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
-                    0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, XmlReader.Pogo_Level1_4, XmlReader.Pogo_Level1_5, XmlReader.Pogo_Level1_6, XmlReader.Pogo_Level1_7, XmlReader.Pogo_Level1_8, XmlReader.Pogo_Level1_9, XmlReader.Pogo_Level1_10,
+                    XmlReader.Pogo_Level2_1, XmlReader.Pogo_Level2_2, XmlReader.Pogo_Level2_3, XmlReader.Pogo_Level2_4, XmlReader.Pogo_Level2_5, XmlReader.Pogo_Level2_6, XmlReader.Pogo_Level2_7, XmlReader.Pogo_Level2_8, XmlReader.Pogo_Level2_9, XmlReader.Pogo_Level2_10,
+                    XmlReader.Pogo_Level3_1, XmlReader.Pogo_Level3_2, XmlReader.Pogo_Level3_3, XmlReader.Pogo_Level3_4, XmlReader.Pogo_Level3_5, XmlReader.Pogo_Level3_6, XmlReader.Pogo_Level3_7, XmlReader.Pogo_Level3_8, XmlReader.Pogo_Level3_9, XmlReader.Pogo_Level3_10,
+                    XmlReader.Pogo_Level4_1, XmlReader.Pogo_Level4_2, XmlReader.Pogo_Level4_3, XmlReader.Pogo_Level4_4, 0, XmlReader.Pogo_Level4_6, XmlReader.Pogo_Level4_7, XmlReader.Pogo_Level4_8, XmlReader.Pogo_Level4_9, XmlReader.Pogo_Level4_10,
+                    XmlReader.Pogo_Level5_1, XmlReader.Pogo_Level5_2, XmlReader.Pogo_Level5_3, XmlReader.Pogo_Level5_4, 0, XmlReader.Pogo_Level5_6, XmlReader.Pogo_Level5_7, XmlReader.Pogo_Level5_8, XmlReader.Pogo_Level5_9, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.Yeti, new int[NUM_LEVELS]),
                 new ZombieAllowedLevels(ZombieType.Bungee, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    1, 1, 0, 0, 0, 0, 1, 0, 1, 1,
-                }),
+                    0, 0, 0, XmlReader.Bungee_Level1_4, XmlReader.Bungee_Level1_5, XmlReader.Bungee_Level1_6, XmlReader.Bungee_Level1_7, XmlReader.Bungee_Level1_8, XmlReader.Bungee_Level1_9, XmlReader.Bungee_Level1_10,
+                    XmlReader.Bungee_Level2_1, XmlReader.Bungee_Level2_2, XmlReader.Bungee_Level2_3, XmlReader.Bungee_Level2_4, XmlReader.Bungee_Level2_5, XmlReader.Bungee_Level2_6, XmlReader.Bungee_Level2_7, XmlReader.Bungee_Level2_8, XmlReader.Bungee_Level2_9, XmlReader.Bungee_Level2_10,
+                    XmlReader.Bungee_Level3_1, XmlReader.Bungee_Level3_2, XmlReader.Bungee_Level3_3, XmlReader.Bungee_Level3_4, XmlReader.Bungee_Level3_5, XmlReader.Bungee_Level3_6, XmlReader.Bungee_Level3_7, XmlReader.Bungee_Level3_8, XmlReader.Bungee_Level3_9, XmlReader.Bungee_Level3_10,
+                    XmlReader.Bungee_Level4_1, XmlReader.Bungee_Level4_2, XmlReader.Bungee_Level4_3, XmlReader.Bungee_Level4_4, 0, XmlReader.Bungee_Level4_6, XmlReader.Bungee_Level4_7, XmlReader.Bungee_Level4_8, XmlReader.Bungee_Level4_9, XmlReader.Bungee_Level4_10,
+                    XmlReader.Bungee_Level5_1, XmlReader.Bungee_Level5_2, XmlReader.Bungee_Level5_3, XmlReader.Bungee_Level5_4, 1, XmlReader.Bungee_Level5_6, XmlReader.Bungee_Level5_7, XmlReader.Bungee_Level5_8, XmlReader.Bungee_Level5_9, 0,                }),
                 new ZombieAllowedLevels(ZombieType.Ladder, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 1, 1, 1, 0, 1, 0, 1, 1,
+                    0, 0, 0, XmlReader.Ladder_Level1_4, XmlReader.Ladder_Level1_5, XmlReader.Ladder_Level1_6, XmlReader.Ladder_Level1_7, XmlReader.Ladder_Level1_8, XmlReader.Ladder_Level1_9, XmlReader.Ladder_Level1_10,
+                    XmlReader.Ladder_Level2_1, XmlReader.Ladder_Level2_2, XmlReader.Ladder_Level2_3, XmlReader.Ladder_Level2_4, XmlReader.Ladder_Level2_5, XmlReader.Ladder_Level2_6, XmlReader.Ladder_Level2_7, XmlReader.Ladder_Level2_8, XmlReader.Ladder_Level2_9, XmlReader.Ladder_Level2_10,
+                    XmlReader.Ladder_Level3_1, XmlReader.Ladder_Level3_2, XmlReader.Ladder_Level3_3, XmlReader.Ladder_Level3_4, XmlReader.Ladder_Level3_5, XmlReader.Ladder_Level3_6, XmlReader.Ladder_Level3_7, XmlReader.Ladder_Level3_8, XmlReader.Ladder_Level3_9, XmlReader.Ladder_Level3_10,
+                    XmlReader.Ladder_Level4_1, XmlReader.Ladder_Level4_2, XmlReader.Ladder_Level4_3, XmlReader.Ladder_Level4_4, 0, XmlReader.Ladder_Level4_6, XmlReader.Ladder_Level4_7, XmlReader.Ladder_Level4_8, XmlReader.Ladder_Level4_9, XmlReader.Ladder_Level4_10,
+                    XmlReader.Ladder_Level5_1, XmlReader.Ladder_Level5_2, XmlReader.Ladder_Level5_3, XmlReader.Ladder_Level5_4, XmlReader.Ladder_Level5_5, XmlReader.Ladder_Level5_6, XmlReader.Ladder_Level5_7, XmlReader.Ladder_Level5_8, XmlReader.Ladder_Level5_9, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.Catapult, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 1, 1, 0, 1, 1,
+                    0, 0, 0, XmlReader.Catapult_Level1_4, XmlReader.Catapult_Level1_5, XmlReader.Catapult_Level1_6, XmlReader.Catapult_Level1_7, XmlReader.Catapult_Level1_8, XmlReader.Catapult_Level1_9, XmlReader.Catapult_Level1_10,
+                    XmlReader.Catapult_Level2_1, XmlReader.Catapult_Level2_2, XmlReader.Catapult_Level2_3, XmlReader.Catapult_Level2_4, XmlReader.Catapult_Level2_5, XmlReader.Catapult_Level2_6, XmlReader.Catapult_Level2_7, XmlReader.Catapult_Level2_8, XmlReader.Catapult_Level2_9, XmlReader.Catapult_Level2_10,
+                    XmlReader.Catapult_Level3_1, XmlReader.Catapult_Level3_2, XmlReader.Catapult_Level3_3, XmlReader.Catapult_Level3_4, XmlReader.Catapult_Level3_5, XmlReader.Catapult_Level3_6, XmlReader.Catapult_Level3_7, XmlReader.Catapult_Level3_8, XmlReader.Catapult_Level3_9, XmlReader.Catapult_Level3_10,
+                    XmlReader.Catapult_Level4_1, XmlReader.Catapult_Level4_2, XmlReader.Catapult_Level4_3, XmlReader.Catapult_Level4_4, 0, XmlReader.Catapult_Level4_6, XmlReader.Catapult_Level4_7, XmlReader.Catapult_Level4_8, XmlReader.Catapult_Level4_9, XmlReader.Catapult_Level4_10,
+                    XmlReader.Catapult_Level5_1, XmlReader.Catapult_Level5_2, XmlReader.Catapult_Level5_3, XmlReader.Catapult_Level5_4, XmlReader.Catapult_Level5_5, XmlReader.Catapult_Level5_6, XmlReader.Catapult_Level5_7, XmlReader.Catapult_Level5_8, XmlReader.Catapult_Level5_9, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.Gargantuar, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+                    0, 0, 0, XmlReader.Gargantuar_Level1_4, XmlReader.Gargantuar_Level1_5, XmlReader.Gargantuar_Level1_6, XmlReader.Gargantuar_Level1_7, XmlReader.Gargantuar_Level1_8, XmlReader.Gargantuar_Level1_9, XmlReader.Gargantuar_Level1_10,
+                    XmlReader.Gargantuar_Level2_1, XmlReader.Gargantuar_Level2_2, XmlReader.Gargantuar_Level2_3, XmlReader.Gargantuar_Level2_4, XmlReader.Gargantuar_Level2_5, XmlReader.Gargantuar_Level2_6, XmlReader.Gargantuar_Level2_7, XmlReader.Gargantuar_Level2_8, XmlReader.Gargantuar_Level2_9, XmlReader.Gargantuar_Level2_10,
+                    XmlReader.Gargantuar_Level3_1, XmlReader.Gargantuar_Level3_2, XmlReader.Gargantuar_Level3_3, XmlReader.Gargantuar_Level3_4, XmlReader.Gargantuar_Level3_5, XmlReader.Gargantuar_Level3_6, XmlReader.Gargantuar_Level3_7, XmlReader.Gargantuar_Level3_8, XmlReader.Gargantuar_Level3_9, XmlReader.Gargantuar_Level3_10,
+                    XmlReader.Gargantuar_Level4_1, XmlReader.Gargantuar_Level4_2, XmlReader.Gargantuar_Level4_3, XmlReader.Gargantuar_Level4_4, 0, XmlReader.Gargantuar_Level4_6, XmlReader.Gargantuar_Level4_7, XmlReader.Gargantuar_Level4_8, XmlReader.Gargantuar_Level4_9, XmlReader.Gargantuar_Level4_10,
+                    XmlReader.Gargantuar_Level5_1, XmlReader.Gargantuar_Level5_2, XmlReader.Gargantuar_Level5_3, XmlReader.Gargantuar_Level5_4, 0, XmlReader.Gargantuar_Level5_6, XmlReader.Gargantuar_Level5_7, XmlReader.Gargantuar_Level5_8, XmlReader.Gargantuar_Level5_9, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.Imp, new int[NUM_LEVELS]
                 {
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+                      0, 0, 0, XmlReader.Imp_Level1_4, XmlReader.Imp_Level1_5, XmlReader.Imp_Level1_6, XmlReader.Imp_Level1_7, XmlReader.Imp_Level1_8, XmlReader.Imp_Level1_9, XmlReader.Imp_Level1_10,
+                    XmlReader.Imp_Level2_1, XmlReader.Imp_Level2_2, XmlReader.Imp_Level2_3, XmlReader.Imp_Level2_4, XmlReader.Imp_Level2_5, XmlReader.Imp_Level2_6, XmlReader.Imp_Level2_7, XmlReader.Imp_Level2_8, XmlReader.Imp_Level2_9, XmlReader.Imp_Level2_10,
+                    XmlReader.Imp_Level3_1, XmlReader.Imp_Level3_2, XmlReader.Imp_Level3_3, XmlReader.Imp_Level3_4, XmlReader.Imp_Level3_5, XmlReader.Imp_Level3_6, XmlReader.Imp_Level3_7, XmlReader.Imp_Level3_8, XmlReader.Imp_Level3_9, XmlReader.Imp_Level3_10,
+                    XmlReader.Imp_Level4_1, XmlReader.Imp_Level4_2, XmlReader.Imp_Level4_3, XmlReader.Imp_Level4_4, 0, XmlReader.Imp_Level4_6, XmlReader.Imp_Level4_7, XmlReader.Imp_Level4_8, XmlReader.Imp_Level4_9, XmlReader.Imp_Level4_10,
+                    XmlReader.Imp_Level5_1, XmlReader.Imp_Level5_2, XmlReader.Imp_Level5_3, XmlReader.Imp_Level5_4, XmlReader.Imp_Level5_5, XmlReader.Imp_Level5_6, XmlReader.Imp_Level5_7, XmlReader.Imp_Level5_8, XmlReader.Imp_Level5_9, 0,
                 }),
                 new ZombieAllowedLevels(ZombieType.Boss, new int[NUM_LEVELS]),
-                new ZombieAllowedLevels(ZombieType.PeaHead, new int[NUM_LEVELS]),
-                new ZombieAllowedLevels(ZombieType.WallnutHead, new int[NUM_LEVELS]),
-                new ZombieAllowedLevels(ZombieType.JalapenoHead, new int[NUM_LEVELS]),
-                new ZombieAllowedLevels(ZombieType.GatlingHead, new int[NUM_LEVELS]),
-                new ZombieAllowedLevels(ZombieType.SquashHead, new int[NUM_LEVELS]),
-                new ZombieAllowedLevels(ZombieType.TallnutHead, new int[NUM_LEVELS]),
-                new ZombieAllowedLevels(ZombieType.RedeyeGargantuar, new int[NUM_LEVELS]),
+                new ZombieAllowedLevels(ZombieType.PeaHead, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, XmlReader.PeaHead_Level1_4, XmlReader.PeaHead_Level1_5, XmlReader.PeaHead_Level1_6, XmlReader.PeaHead_Level1_7, XmlReader.PeaHead_Level1_8, XmlReader.PeaHead_Level1_9, XmlReader.PeaHead_Level1_10,
+                    XmlReader.PeaHead_Level2_1, XmlReader.PeaHead_Level2_2, XmlReader.PeaHead_Level2_3, XmlReader.PeaHead_Level2_4, XmlReader.PeaHead_Level2_5, XmlReader.PeaHead_Level2_6, XmlReader.PeaHead_Level2_7, XmlReader.PeaHead_Level2_8, XmlReader.PeaHead_Level2_9, XmlReader.PeaHead_Level2_10,
+                    XmlReader.PeaHead_Level3_1, XmlReader.PeaHead_Level3_2, XmlReader.PeaHead_Level3_3, XmlReader.PeaHead_Level3_4, XmlReader.PeaHead_Level3_5, XmlReader.PeaHead_Level3_6, XmlReader.PeaHead_Level3_7, XmlReader.PeaHead_Level3_8, XmlReader.PeaHead_Level3_9, XmlReader.PeaHead_Level3_10,
+                    XmlReader.PeaHead_Level4_1, XmlReader.PeaHead_Level4_2, XmlReader.PeaHead_Level4_3, XmlReader.PeaHead_Level4_4, 0, XmlReader.PeaHead_Level4_6, XmlReader.PeaHead_Level4_7, XmlReader.PeaHead_Level4_8, XmlReader.PeaHead_Level4_9, XmlReader.PeaHead_Level4_10,
+                    XmlReader.PeaHead_Level5_1, XmlReader.PeaHead_Level5_2, XmlReader.PeaHead_Level5_3, XmlReader.PeaHead_Level5_4, XmlReader.PeaHead_Level5_5, XmlReader.PeaHead_Level5_6, XmlReader.PeaHead_Level5_7, XmlReader.PeaHead_Level5_8, XmlReader.PeaHead_Level5_9, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.WallnutHead, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, XmlReader.WallnutHead_Level1_4, XmlReader.WallnutHead_Level1_5, XmlReader.WallnutHead_Level1_6, XmlReader.WallnutHead_Level1_7, XmlReader.WallnutHead_Level1_8, XmlReader.WallnutHead_Level1_9, XmlReader.WallnutHead_Level1_10,
+                    XmlReader.WallnutHead_Level2_1, XmlReader.WallnutHead_Level2_2, XmlReader.WallnutHead_Level2_3, XmlReader.WallnutHead_Level2_4, XmlReader.WallnutHead_Level2_5, XmlReader.WallnutHead_Level2_6, XmlReader.WallnutHead_Level2_7, XmlReader.WallnutHead_Level2_8, XmlReader.WallnutHead_Level2_9, XmlReader.WallnutHead_Level2_10,
+                    XmlReader.WallnutHead_Level3_1, XmlReader.WallnutHead_Level3_2, XmlReader.WallnutHead_Level3_3, XmlReader.WallnutHead_Level3_4, XmlReader.WallnutHead_Level3_5, XmlReader.WallnutHead_Level3_6, XmlReader.WallnutHead_Level3_7, XmlReader.WallnutHead_Level3_8, XmlReader.WallnutHead_Level3_9, XmlReader.WallnutHead_Level3_10,
+                    XmlReader.WallnutHead_Level4_1, XmlReader.WallnutHead_Level4_2, XmlReader.WallnutHead_Level4_3, XmlReader.WallnutHead_Level4_4, 0, XmlReader.WallnutHead_Level4_6, XmlReader.WallnutHead_Level4_7, XmlReader.WallnutHead_Level4_8, XmlReader.WallnutHead_Level4_9, XmlReader.WallnutHead_Level4_10,
+                    XmlReader.WallnutHead_Level5_1, XmlReader.WallnutHead_Level5_2, XmlReader.WallnutHead_Level5_3, XmlReader.WallnutHead_Level5_4, XmlReader.WallnutHead_Level5_5, XmlReader.WallnutHead_Level5_6, XmlReader.WallnutHead_Level5_7, XmlReader.WallnutHead_Level5_8, XmlReader.WallnutHead_Level5_9, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.JalapenoHead, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, XmlReader.JalapenoHead_Level1_4, XmlReader.JalapenoHead_Level1_5, XmlReader.JalapenoHead_Level1_6, XmlReader.JalapenoHead_Level1_7, XmlReader.JalapenoHead_Level1_8, XmlReader.JalapenoHead_Level1_9, XmlReader.JalapenoHead_Level1_10,
+                    XmlReader.JalapenoHead_Level2_1, XmlReader.JalapenoHead_Level2_2, XmlReader.JalapenoHead_Level2_3, XmlReader.JalapenoHead_Level2_4, XmlReader.JalapenoHead_Level2_5, XmlReader.JalapenoHead_Level2_6, XmlReader.JalapenoHead_Level2_7, XmlReader.JalapenoHead_Level2_8, XmlReader.JalapenoHead_Level2_9, XmlReader.JalapenoHead_Level2_10,
+                    XmlReader.JalapenoHead_Level3_1, XmlReader.JalapenoHead_Level3_2, XmlReader.JalapenoHead_Level3_3, XmlReader.JalapenoHead_Level3_4, XmlReader.JalapenoHead_Level3_5, XmlReader.JalapenoHead_Level3_6, XmlReader.JalapenoHead_Level3_7, XmlReader.JalapenoHead_Level3_8, XmlReader.JalapenoHead_Level3_9, XmlReader.JalapenoHead_Level3_10,
+                    XmlReader.JalapenoHead_Level4_1, XmlReader.JalapenoHead_Level4_2, XmlReader.JalapenoHead_Level4_3, XmlReader.JalapenoHead_Level4_4, 0, XmlReader.JalapenoHead_Level4_6, XmlReader.JalapenoHead_Level4_7, XmlReader.JalapenoHead_Level4_8, XmlReader.JalapenoHead_Level4_9, XmlReader.JalapenoHead_Level4_10,
+                    XmlReader.JalapenoHead_Level5_1, XmlReader.JalapenoHead_Level5_2, XmlReader.JalapenoHead_Level5_3, XmlReader.JalapenoHead_Level5_4, XmlReader.JalapenoHead_Level5_5, XmlReader.JalapenoHead_Level5_6, XmlReader.JalapenoHead_Level5_7, XmlReader.JalapenoHead_Level5_8, XmlReader.JalapenoHead_Level5_9, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.GatlingHead, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, XmlReader.GatlingHead_Level1_4, XmlReader.GatlingHead_Level1_5, XmlReader.GatlingHead_Level1_6, XmlReader.GatlingHead_Level1_7, XmlReader.GatlingHead_Level1_8, XmlReader.GatlingHead_Level1_9, XmlReader.GatlingHead_Level1_10,
+                    XmlReader.GatlingHead_Level2_1, XmlReader.GatlingHead_Level2_2, XmlReader.GatlingHead_Level2_3, XmlReader.GatlingHead_Level2_4, XmlReader.GatlingHead_Level2_5, XmlReader.GatlingHead_Level2_6, XmlReader.GatlingHead_Level2_7, XmlReader.GatlingHead_Level2_8, XmlReader.GatlingHead_Level2_9, XmlReader.GatlingHead_Level2_10,
+                    XmlReader.GatlingHead_Level3_1, XmlReader.GatlingHead_Level3_2, XmlReader.GatlingHead_Level3_3, XmlReader.GatlingHead_Level3_4, XmlReader.GatlingHead_Level3_5, XmlReader.GatlingHead_Level3_6, XmlReader.GatlingHead_Level3_7, XmlReader.GatlingHead_Level3_8, XmlReader.GatlingHead_Level3_9, XmlReader.GatlingHead_Level3_10,
+                    XmlReader.GatlingHead_Level4_1, XmlReader.GatlingHead_Level4_2, XmlReader.GatlingHead_Level4_3, XmlReader.GatlingHead_Level4_4, 0, XmlReader.GatlingHead_Level4_6, XmlReader.GatlingHead_Level4_7, XmlReader.GatlingHead_Level4_8, XmlReader.GatlingHead_Level4_9, XmlReader.GatlingHead_Level4_10,
+                    XmlReader.GatlingHead_Level5_1, XmlReader.GatlingHead_Level5_2, XmlReader.GatlingHead_Level5_3, XmlReader.GatlingHead_Level5_4, XmlReader.GatlingHead_Level5_5, XmlReader.GatlingHead_Level5_6, XmlReader.GatlingHead_Level5_7, XmlReader.GatlingHead_Level5_8, XmlReader.GatlingHead_Level5_9, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.SquashHead, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, XmlReader.SquashHead_Level1_4, XmlReader.SquashHead_Level1_5, XmlReader.SquashHead_Level1_6, XmlReader.SquashHead_Level1_7, XmlReader.SquashHead_Level1_8, XmlReader.SquashHead_Level1_9, XmlReader.SquashHead_Level1_10,
+                    XmlReader.SquashHead_Level2_1, XmlReader.SquashHead_Level2_2, XmlReader.SquashHead_Level2_3, XmlReader.SquashHead_Level2_4, XmlReader.SquashHead_Level2_5, XmlReader.SquashHead_Level2_6, XmlReader.SquashHead_Level2_7, XmlReader.SquashHead_Level2_8, XmlReader.SquashHead_Level2_9, XmlReader.SquashHead_Level2_10,
+                    XmlReader.SquashHead_Level3_1, XmlReader.SquashHead_Level3_2, XmlReader.SquashHead_Level3_3, XmlReader.SquashHead_Level3_4, XmlReader.SquashHead_Level3_5, XmlReader.SquashHead_Level3_6, XmlReader.SquashHead_Level3_7, XmlReader.SquashHead_Level3_8, XmlReader.SquashHead_Level3_9, XmlReader.SquashHead_Level3_10,
+                    XmlReader.SquashHead_Level4_1, XmlReader.SquashHead_Level4_2, XmlReader.SquashHead_Level4_3, XmlReader.SquashHead_Level4_4, 0, XmlReader.SquashHead_Level4_6, XmlReader.SquashHead_Level4_7, XmlReader.SquashHead_Level4_8, XmlReader.SquashHead_Level4_9, XmlReader.SquashHead_Level4_10,
+                    XmlReader.SquashHead_Level5_1, XmlReader.SquashHead_Level5_2, XmlReader.SquashHead_Level5_3, XmlReader.SquashHead_Level5_4, XmlReader.SquashHead_Level5_5, XmlReader.SquashHead_Level5_6, XmlReader.SquashHead_Level5_7, XmlReader.SquashHead_Level5_8, XmlReader.SquashHead_Level5_9, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.TallnutHead, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, XmlReader.TallnutHead_Level1_4, XmlReader.TallnutHead_Level1_5, XmlReader.TallnutHead_Level1_6, XmlReader.TallnutHead_Level1_7, XmlReader.TallnutHead_Level1_8, XmlReader.TallnutHead_Level1_9, XmlReader.TallnutHead_Level1_10,
+                    XmlReader.TallnutHead_Level2_1, XmlReader.TallnutHead_Level2_2, XmlReader.TallnutHead_Level2_3, XmlReader.TallnutHead_Level2_4, XmlReader.TallnutHead_Level2_5, XmlReader.TallnutHead_Level2_6, XmlReader.TallnutHead_Level2_7, XmlReader.TallnutHead_Level2_8, XmlReader.TallnutHead_Level2_9, XmlReader.TallnutHead_Level2_10,
+                    XmlReader.TallnutHead_Level3_1, XmlReader.TallnutHead_Level3_2, XmlReader.TallnutHead_Level3_3, XmlReader.TallnutHead_Level3_4, XmlReader.TallnutHead_Level3_5, XmlReader.TallnutHead_Level3_6, XmlReader.TallnutHead_Level3_7, XmlReader.TallnutHead_Level3_8, XmlReader.TallnutHead_Level3_9, XmlReader.TallnutHead_Level3_10,
+                    XmlReader.TallnutHead_Level4_1, XmlReader.TallnutHead_Level4_2, XmlReader.TallnutHead_Level4_3, XmlReader.TallnutHead_Level4_4, 0, XmlReader.TallnutHead_Level4_6, XmlReader.TallnutHead_Level4_7, XmlReader.TallnutHead_Level4_8, XmlReader.TallnutHead_Level4_9, XmlReader.TallnutHead_Level4_10,
+                    XmlReader.TallnutHead_Level5_1, XmlReader.TallnutHead_Level5_2, XmlReader.TallnutHead_Level5_3, XmlReader.TallnutHead_Level5_4, XmlReader.TallnutHead_Level5_5, XmlReader.TallnutHead_Level5_6, XmlReader.TallnutHead_Level5_7, XmlReader.TallnutHead_Level5_8, XmlReader.TallnutHead_Level5_9, 0,
+                }),
+                new ZombieAllowedLevels(ZombieType.RedeyeGargantuar, new int[NUM_LEVELS]
+                {
+                    0, 0, 0, XmlReader.RedeyeGargantuar_Level1_4, XmlReader.RedeyeGargantuar_Level1_5, XmlReader.RedeyeGargantuar_Level1_6, XmlReader.RedeyeGargantuar_Level1_7, XmlReader.RedeyeGargantuar_Level1_8, XmlReader.RedeyeGargantuar_Level1_9, XmlReader.RedeyeGargantuar_Level1_10,
+                    XmlReader.RedeyeGargantuar_Level2_1, XmlReader.RedeyeGargantuar_Level2_2, XmlReader.RedeyeGargantuar_Level2_3, XmlReader.RedeyeGargantuar_Level2_4, XmlReader.RedeyeGargantuar_Level2_5, XmlReader.RedeyeGargantuar_Level2_6, XmlReader.RedeyeGargantuar_Level2_7, XmlReader.RedeyeGargantuar_Level2_8, XmlReader.RedeyeGargantuar_Level2_9, XmlReader.RedeyeGargantuar_Level2_10,
+                    XmlReader.RedeyeGargantuar_Level3_1, XmlReader.RedeyeGargantuar_Level3_2, XmlReader.RedeyeGargantuar_Level3_3, XmlReader.RedeyeGargantuar_Level3_4, XmlReader.RedeyeGargantuar_Level3_5, XmlReader.RedeyeGargantuar_Level3_6, XmlReader.RedeyeGargantuar_Level3_7, XmlReader.RedeyeGargantuar_Level3_8, XmlReader.RedeyeGargantuar_Level3_9, XmlReader.RedeyeGargantuar_Level3_10,
+                    XmlReader.RedeyeGargantuar_Level4_1, XmlReader.RedeyeGargantuar_Level4_2, XmlReader.RedeyeGargantuar_Level4_3, XmlReader.RedeyeGargantuar_Level4_4, 0, XmlReader.RedeyeGargantuar_Level4_6, XmlReader.RedeyeGargantuar_Level4_7, XmlReader.RedeyeGargantuar_Level4_8, XmlReader.RedeyeGargantuar_Level4_9, XmlReader.RedeyeGargantuar_Level4_10,
+                    XmlReader.RedeyeGargantuar_Level5_1, XmlReader.RedeyeGargantuar_Level5_2, XmlReader.RedeyeGargantuar_Level5_3, XmlReader.RedeyeGargantuar_Level5_4, 0, XmlReader.RedeyeGargantuar_Level5_6, XmlReader.RedeyeGargantuar_Level5_7, XmlReader.RedeyeGargantuar_Level5_8, XmlReader.RedeyeGargantuar_Level5_9, 0,
+                }),
             };
             // 植物常量定义
-            GameConstants.gPlantDefs = new PlantDefinition[(int)SeedType.SeedTypeCount]
+            GameConstants.gPlantDefs = new PlantDefinition[2]
             {
                 /*                | SeedType 枚举值   | 植物图像 |动画轨道类型           |选卡序号|价格|冷却|子类                  |发射速率|名称| */
-                new PlantDefinition(SeedType.Peashooter,    null, ReanimationType.Peashooter,   0,  100,750, PlantSubClass.Shooter, 150, "PEASHOOTER"),
-                new PlantDefinition(SeedType.Sunflower,     null, ReanimationType.Sunflower,    1,  50, 750, PlantSubClass.Normal,  2500, "SUNFLOWER"),
-                new PlantDefinition(SeedType.Cherrybomb,    null, ReanimationType.Cherrybomb,   3,  150,5000,PlantSubClass.Normal,  0, "CHERRY_BOMB"),
-                new PlantDefinition(SeedType.Wallnut,       null, ReanimationType.Wallnut,      2,  50, 3000,PlantSubClass.Normal,  0, "WALL_NUT"),
-                new PlantDefinition(SeedType.Potatomine,    null, ReanimationType.Potatomine,   37, 25, 3000,PlantSubClass.Normal,  0, "POTATO_MINE"),
-                new PlantDefinition(SeedType.Snowpea,       null, ReanimationType.Snowpea,      4,  175,750, PlantSubClass.Shooter, 150, "SNOW_PEA"),
-                new PlantDefinition(SeedType.Chomper,       null, ReanimationType.Chomper,      31, 150,750, PlantSubClass.Normal,  0, "CHOMPER"),
-                new PlantDefinition(SeedType.Repeater,      null, ReanimationType.Repeater,     5,  200,750, PlantSubClass.Shooter, 150, "REPEATER"),
-                new PlantDefinition(SeedType.Puffshroom,    null, ReanimationType.Puffshroom,   6,  0,  750, PlantSubClass.Shooter, 150, "PUFF_SHROOM"),
-                new PlantDefinition(SeedType.Sunshroom,     null, ReanimationType.Sunshroom,    7,  25, 750, PlantSubClass.Normal,  2500, "SUN_SHROOM"),
-                new PlantDefinition(SeedType.Fumeshroom,    null, ReanimationType.Fumeshroom,   9,  75, 750, PlantSubClass.Shooter, 150, "FUME_SHROOM"),
-                new PlantDefinition(SeedType.Gravebuster,   null, ReanimationType.GraveBuster,  40, 75, 750, PlantSubClass.Normal,  0, "GRAVE_BUSTER"),
-                new PlantDefinition(SeedType.Hypnoshroom,   null, ReanimationType.Hypnoshroom,  10, 75, 3000,PlantSubClass.Normal,  0, "HYPNO_SHROOM"),
-                new PlantDefinition(SeedType.Scaredyshroom, null, ReanimationType.Scrareyshroom,33, 25, 750, PlantSubClass.Shooter, 150, "SCAREDY_SHROOM"),
-                new PlantDefinition(SeedType.Iceshroom,     null, ReanimationType.Iceshroom,    36, 75, 5000,PlantSubClass.Normal,  0, "ICE_SHROOM"),
-                new PlantDefinition(SeedType.Doomshroom,    null, ReanimationType.Doomshroom,   20, 125,5000,PlantSubClass.Normal,  0, "DOOM_SHROOM"),
-                new PlantDefinition(SeedType.Lilypad,       null, ReanimationType.Lilypad,      19, 25, 750, PlantSubClass.Normal,  0, "LILY_PAD"),
-                new PlantDefinition(SeedType.Squash,        null, ReanimationType.Squash,       21, 50, 3000,PlantSubClass.Normal,  0, "SQUASH"),
-                new PlantDefinition(SeedType.Threepeater,   null, ReanimationType.Threepeater,  12, 325,750, PlantSubClass.Shooter, 150, "THREEPEATER"),
-                new PlantDefinition(SeedType.Tanglekelp,    null, ReanimationType.Tanglekelp,   17, 25, 3000,PlantSubClass.Normal,  0, "TANGLE_KELP"),
-                new PlantDefinition(SeedType.Jalapeno,      null, ReanimationType.Jalapeno,     11, 125,5000,PlantSubClass.Normal,  0, "JALAPENO"),
-                new PlantDefinition(SeedType.Spikeweed,     null, ReanimationType.Spikeweed,    22, 100,750, PlantSubClass.Normal,  0, "SPIKEWEED"),
-                new PlantDefinition(SeedType.Torchwood,     null, ReanimationType.Torchwood,    29, 175,750, PlantSubClass.Normal,  0, "TORCHWOOD"),
-                new PlantDefinition(SeedType.Tallnut,       null, ReanimationType.Tallnut,      28, 125,3000,PlantSubClass.Normal,  0, "TALL_NUT"),
-                new PlantDefinition(SeedType.Seashroom,     null, ReanimationType.Seashroom,    39, 0,  3000,PlantSubClass.Shooter, 150, "SEA_SHROOM"),
-                new PlantDefinition(SeedType.Plantern,      null, ReanimationType.Plantern,     38, 25, 3000,PlantSubClass.Normal,  2500, "PLANTERN"),
-                new PlantDefinition(SeedType.Cactus,        null, ReanimationType.Cactus,       15, 125,750, PlantSubClass.Shooter, 150, "CACTUS"),
-                new PlantDefinition(SeedType.Blover,        null, ReanimationType.Blover,       18, 100,750, PlantSubClass.Normal,  0, "BLOVER"),
-                new PlantDefinition(SeedType.Splitpea,      null, ReanimationType.Splitpea,     32, 125,750, PlantSubClass.Shooter, 150, "SPLIT_PEA"),
-                new PlantDefinition(SeedType.Starfruit,     null, ReanimationType.Starfruit,    30, 125,750, PlantSubClass.Shooter, 150, "STARFRUIT"),
-                new PlantDefinition(SeedType.Pumpkinshell,  null, ReanimationType.Pumpkin,      25, 125,3000,PlantSubClass.Normal,  0, "PUMPKIN"),
-                new PlantDefinition(SeedType.Magnetshroom,  null, ReanimationType.Magnetshroom, 35, 100,750, PlantSubClass.Normal,  0, "MAGNET_SHROOM"),
-                new PlantDefinition(SeedType.Cabbagepult,   null, ReanimationType.Cabbagepult,  13, 100,750, PlantSubClass.Shooter, 300, "CABBAGE_PULT"),
-                new PlantDefinition(SeedType.Flowerpot,     null, ReanimationType.FlowerPot,    33, 25, 750, PlantSubClass.Normal,  0, "FLOWER_POT"),
-                new PlantDefinition(SeedType.Kernelpult,    null, ReanimationType.Kernelpult,   13, 100,750, PlantSubClass.Shooter, 300, "KERNEL_PULT"),
-                new PlantDefinition(SeedType.InstantCoffee, null, ReanimationType.Coffeebean,   33, 75, 750, PlantSubClass.Normal,  0, "COFFEE_BEAN"),
-                new PlantDefinition(SeedType.Garlic,        null, ReanimationType.Garlic,       8,  50, 750, PlantSubClass.Normal,  0, "GARLIC"),
-                new PlantDefinition(SeedType.Umbrella,      null, ReanimationType.Umbrellaleaf, 23, 100,750, PlantSubClass.Normal,  0, "UMBRELLA_LEAF"),
-                new PlantDefinition(SeedType.Marigold,      null, ReanimationType.Marigold,     24, 50, 6000,PlantSubClass.Normal,  2500, "MARIGOLD"),
-                new PlantDefinition(SeedType.Melonpult,     null, ReanimationType.Melonpult,    14, 300,750, PlantSubClass.Shooter, 300, "MELON_PULT"),
-                new PlantDefinition(SeedType.Gatlingpea,    null, ReanimationType.Gatlingpea,   5,  GatlingpeaSuncost,5000,PlantSubClass.Shooter, 150, "GATLING_PEA"),
-                new PlantDefinition(SeedType.Twinsunflower, null, ReanimationType.TwinSunflower,1,  TwinSunflowerSuncost,5000,PlantSubClass.Normal,  2500, "TWIN_SUNFLOWER"),
-                new PlantDefinition(SeedType.Gloomshroom,   null, ReanimationType.Gloomshroom,  27, GloomshroomSuncost,5000,PlantSubClass.Shooter, 200, "GLOOM_SHROOM"),
-                new PlantDefinition(SeedType.Cattail,       null, ReanimationType.Cattail,      27, 225,5000,PlantSubClass.Shooter, 150, "CATTAIL"),
-                new PlantDefinition(SeedType.Wintermelon,   null, ReanimationType.WinterMelon,  27, WinterMelonSuncost,5000,PlantSubClass.Shooter, 300, "WINTER_MELON"),
-                new PlantDefinition(SeedType.GoldMagnet,    null, ReanimationType.GoldMagnet,   27, GoldMagnetSuncost, 5000,PlantSubClass.Normal,  0, "GOLD_MAGNET"),
-                new PlantDefinition(SeedType.Spikerock,     null, ReanimationType.Spikerock,    27, SpikerockSuncost,5000,PlantSubClass.Normal,  0, "SPIKEROCK"),
-                new PlantDefinition(SeedType.Cobcannon,     null, ReanimationType.Cobcannon,    16, CobcannonSuncost,5000,PlantSubClass.Normal,  600, "COB_CANNON"),
-                new PlantDefinition(SeedType.Imitater,      null, ReanimationType.Imitater,     33, 0,  750, PlantSubClass.Normal,  0, "IMITATER"),
-                new PlantDefinition(SeedType.ExplodeONut,   null, ReanimationType.Wallnut,      2,  0,  3000,PlantSubClass.Normal,  0, "EXPLODE_O_NUT"),
-                new PlantDefinition(SeedType.GiantWallnut,  null, ReanimationType.Wallnut,      2,  0,  3000,PlantSubClass.Normal,  0, "GIANT_WALLNUT"),
-                new PlantDefinition(SeedType.Sprout,        null, ReanimationType.None,         33, 0,  3000,PlantSubClass.Normal,  0, "SPROUT"),
-                new PlantDefinition(SeedType.Leftpeater,    null, ReanimationType.Repeater,     5,  200,750, PlantSubClass.Shooter, 150, "REPEATER")
+new PlantDefinition(SeedType.Peashooter,    null, ReanimationType.Peashooter,   0,  100,750, PlantSubClass.Shooter, 150, "PEASHOOTER"),
+new PlantDefinition(SeedType.Sunflower,     null, ReanimationType.Sunflower,    1,  50, 750, PlantSubClass.Normal,  2500, "SUNFLOWER"),
+};
+            for (int i = 2; i < 53; i = i + 1)
+            {
+                Array.Resize(ref gPlantDefs, gPlantDefs.Length + 1);
+                if (i == (int)SeedType.Cherrybomb)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Cherrybomb, null, ReanimationType.Cherrybomb, 3, 150, 5000, PlantSubClass.Normal, 0, "CHERRY_BOMB");
+
+                };
+                if (i == (int)SeedType.Wallnut)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Wallnut, null, ReanimationType.Wallnut, 2, XmlReader.WallnutSuncost, 3000, PlantSubClass.Normal, 0, "WALL_NUT");
+                };
+                if (i == (int)SeedType.Potatomine)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Potatomine, null, ReanimationType.Potatomine, 37, XmlReader.PotatoMineSuncost, 3000, PlantSubClass.Normal, 0, "POTATO_MINE");
+                };
+                if (i == (int)SeedType.Snowpea)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Snowpea, null, ReanimationType.Snowpea, 4, XmlReader.SnowpeaSuncost, 750, PlantSubClass.Shooter, XmlReader.SnowpeaFiringSpeed, "SNOW_PEA");
+                };
+                if (i == (int)SeedType.Chomper)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Chomper, null, ReanimationType.Chomper, 31, XmlReader.ChomperSuncost, 750, PlantSubClass.Normal, 0, "CHOMPER");
+                };
+                if (i == (int)SeedType.Repeater)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Repeater, null, ReanimationType.Repeater, 5, XmlReader.RepeaterSuncost, 750, PlantSubClass.Shooter, XmlReader.RepeaterFiringSpeed, "REPEATER");
+                };
+                if (i == (int)SeedType.Puffshroom)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Puffshroom, null, ReanimationType.Puffshroom, 6, 0, 750, PlantSubClass.Shooter, 150, "PUFF_SHROOM");
+                };
+                if (i == (int)SeedType.Sunshroom)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Sunshroom, null, ReanimationType.Sunshroom, 7, 25, 750, PlantSubClass.Normal, 2500, "SUN_SHROOM");
+                };
+                if (i == (int)SeedType.Fumeshroom)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Fumeshroom, null, ReanimationType.Fumeshroom, 9, XmlReader.FumeShroomSuncost, 750, PlantSubClass.Shooter, XmlReader.FumeShroomFiringSpeed, "FUME_SHROOM");
+                };
+                if (i == (int)SeedType.Gravebuster)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Gravebuster, null, ReanimationType.GraveBuster, 40, XmlReader.GraveBusterSuncost, 750, PlantSubClass.Normal, 0, "GRAVE_BUSTER");
+                };
+                if (i == (int)SeedType.Hypnoshroom)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Hypnoshroom, null, ReanimationType.Hypnoshroom, 10, 75, 3000, PlantSubClass.Normal, 0, "HYPNO_SHROOM");
+                };
+                if (i == (int)SeedType.Scaredyshroom)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Scaredyshroom, null, ReanimationType.Scrareyshroom, 33, XmlReader.ScaredyShroomSuncost, 750, PlantSubClass.Shooter, XmlReader.ScaredyShroomFiringSpeed, "SCAREDY_SHROOM");
+                };
+                if (i == (int)SeedType.Iceshroom)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Iceshroom, null, ReanimationType.Iceshroom, 36, XmlReader.IceShroomSuncost, 5000, PlantSubClass.Normal, 0, "ICE_SHROOM");
+                };
+                if (i == (int)SeedType.Doomshroom)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Doomshroom, null, ReanimationType.Doomshroom, 20, XmlReader.DoomshroomSuncost, 5000, PlantSubClass.Normal, 0, "DOOM_SHROOM");
+                };
+                if (i == (int)SeedType.Lilypad)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Lilypad, null, ReanimationType.Lilypad, 19, 25, 750, PlantSubClass.Normal, 0, "LILY_PAD");
+                };
+                if (i == (int)SeedType.Squash)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Squash, null, ReanimationType.Squash, 21, XmlReader.SquashSuncost, 3000, PlantSubClass.Normal, 0, "SQUASH");
+                };
+                if (i == (int)SeedType.Threepeater)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Threepeater, null, ReanimationType.Threepeater, 12, XmlReader.ThreepeaterSuncost, 750, PlantSubClass.Shooter, XmlReader.ThreepeaterFiringSpeed, "THREEPEATER");
+                };
+                if (i == (int)SeedType.Tanglekelp)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Tanglekelp, null, ReanimationType.Tanglekelp, 17, 25, 3000, PlantSubClass.Normal, 0, "TANGLE_KELP");
+                };
+                if (i == (int)SeedType.Jalapeno)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Jalapeno, null, ReanimationType.Jalapeno, 11, 125, 5000, PlantSubClass.Normal, 0, "JALAPENO");
+                };
+                if (i == (int)SeedType.Spikeweed)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Spikeweed, null, ReanimationType.Spikeweed, 22, XmlReader.SpikeweedSuncost, 750, PlantSubClass.Normal, 0, "SPIKEWEED");
+                };
+                if (i == (int)SeedType.Torchwood)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Torchwood, null, ReanimationType.Torchwood, 29, 175, 750, PlantSubClass.Normal, 0, "TORCHWOOD");
+                };
+                if (i == (int)SeedType.Tallnut)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Tallnut, null, ReanimationType.Tallnut, 28, XmlReader.TallnutSuncost, 3000, PlantSubClass.Normal, 0, "TALL_NUT");
+                };
+                if (i == (int)SeedType.Seashroom)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Seashroom, null, ReanimationType.Seashroom, 39, 0, 3000, PlantSubClass.Shooter, 150, "SEA_SHROOM");
+                };
+                if (i == (int)SeedType.Plantern)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Plantern, null, ReanimationType.Plantern, 38, 25, 3000, PlantSubClass.Normal, 2500, "PLANTERN");
+                };
+                if (i == (int)SeedType.Cactus)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Cactus, null, ReanimationType.Cactus, 15, XmlReader.CactusSuncost, 750, PlantSubClass.Shooter, XmlReader.CactusFiringSpeed, "CACTUS");
+                };
+                if (i == (int)SeedType.Blover)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Blover, null, ReanimationType.Blover, 18, XmlReader.BloverSuncost, 750, PlantSubClass.Normal, 0, "BLOVER");
+                };
+                if (i == (int)SeedType.Splitpea)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Splitpea, null, ReanimationType.Splitpea, 32, XmlReader.SplitpeaSuncost, 750, PlantSubClass.Shooter, XmlReader.SplitpeaFiringSpeed, "SPLIT_PEA");
+                };
+                if (i == (int)SeedType.Starfruit)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Starfruit, null, ReanimationType.Starfruit, 30, XmlReader.StarfuitSuncost, 750, PlantSubClass.Shooter, XmlReader.StarfruitFiringSpeed, "STARFRUIT");
+                };
+                if (i == (int)SeedType.Pumpkinshell)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Pumpkinshell, null, ReanimationType.Pumpkin, 25, XmlReader.PumpkinSuncost, 3000, PlantSubClass.Normal, 0, "PUMPKIN");
+                };
+                if (i == (int)SeedType.Magnetshroom)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Magnetshroom, null, ReanimationType.Magnetshroom, 35, XmlReader.MagnetShroomSuncost, 750, PlantSubClass.Normal, 0, "MAGNET_SHROOM");
+                };
+                if (i == (int)SeedType.Cabbagepult)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Cabbagepult, null, ReanimationType.Cabbagepult, 13, XmlReader.CabbagepultSuncost, 750, PlantSubClass.Shooter, XmlReader.CabbagepultFiringSpeed, "CABBAGE_PULT");
+                };
+                if (i == (int)SeedType.Flowerpot)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Flowerpot, null, ReanimationType.FlowerPot, 33, 25, 750, PlantSubClass.Normal, 0, "FLOWER_POT");
+                };
+                if (i == (int)SeedType.Kernelpult)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Kernelpult, null, ReanimationType.Kernelpult, 13, XmlReader.KernelpultSuncost, 750, PlantSubClass.Shooter, XmlReader.KernelpultFiringSpeed, "KERNEL_PULT");
+                };
+                if (i == (int)SeedType.InstantCoffee)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.InstantCoffee, null, ReanimationType.Coffeebean, 33, 75, 750, PlantSubClass.Normal, 0, "COFFEE_BEAN");
+                };
+                if (i == (int)SeedType.Garlic)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Garlic, null, ReanimationType.Garlic, 8, XmlReader.GarlicSuncost, 750, PlantSubClass.Normal, 0, "GARLIC");
+                };
+                if (i == (int)SeedType.Umbrella)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Umbrella, null, ReanimationType.Umbrellaleaf, 23, 100, 750, PlantSubClass.Normal, 0, "UMBRELLA_LEAF");
+                };
+                if (i == (int)SeedType.Marigold)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Marigold, null, ReanimationType.Marigold, 24, 50, 6000, PlantSubClass.Normal, 2500, "MARIGOLD");
+                };
+                if (i == (int)SeedType.Melonpult)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Melonpult, null, ReanimationType.Melonpult, 14, XmlReader.MelonpultSuncost, 750, PlantSubClass.Shooter, XmlReader.MelonpultFiringSpeed, "MELON_PULT");
+                };
+                if (i == (int)SeedType.Gatlingpea)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Gatlingpea, null, ReanimationType.Gatlingpea, 5, XmlReader.GatlingPeasuncost, 5000, PlantSubClass.Shooter, XmlReader.GatlingPeaFiringSpeed, "GATLING_PEA");
+                };
+                if (i == (int)SeedType.Twinsunflower)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Twinsunflower, null, ReanimationType.TwinSunflower, 1, XmlReader.TwinSunflowersuncost, 5000, PlantSubClass.Normal, 2500, "TWIN_SUNFLOWER");
+                };
+                if (i == (int)SeedType.Gloomshroom)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Gloomshroom, null, ReanimationType.Gloomshroom, 27, XmlReader.Gloomshroomsuncost, 5000, PlantSubClass.Shooter, XmlReader.GloomshroomFiringSpeed, "GLOOM_SHROOM");
+                };
+                if (i == (int)SeedType.Cattail)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Cattail, null, ReanimationType.Cattail, 27, XmlReader.CattailSuncost, 5000, PlantSubClass.Shooter, XmlReader.CattailFiringSpeed, "CATTAIL");
+                };
+                if (i == (int)SeedType.Wintermelon)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Wintermelon, null, ReanimationType.WinterMelon, 27, XmlReader.WinterMelonsuncost, 5000, PlantSubClass.Shooter, XmlReader.WintermelonFiringSpeed, "WINTER_MELON");
+                };
+                if (i == (int)SeedType.GoldMagnet)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.GoldMagnet, null, ReanimationType.GoldMagnet, 27, XmlReader.GoldMagnetsuncost, 5000, PlantSubClass.Normal, 0, "GOLD_MAGNET");
+                };
+                if (i == (int)SeedType.Spikerock)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Spikerock, null, ReanimationType.Spikerock, 27, XmlReader.Spikerocksuncost, 5000, PlantSubClass.Normal, 0, "SPIKEROCK");
+                };
+                if (i == (int)SeedType.Cobcannon)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Cobcannon, null, ReanimationType.Cobcannon, 16, XmlReader.Cobcannonsuncost, 5000, PlantSubClass.Normal, 600, "COB_CANNON");
+                };
+                if (i == (int)SeedType.Imitater)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Imitater, null, ReanimationType.Imitater, 33, 0, 750, PlantSubClass.Normal, 0, "IMITATER");
+                };
+                if (i == (int)SeedType.ExplodeONut)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.ExplodeONut, null, ReanimationType.Wallnut, 2, 0, 3000, PlantSubClass.Normal, 0, "EXPLODE_O_NUT");
+                };
+                if (i == (int)SeedType.GiantWallnut)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.GiantWallnut, null, ReanimationType.Wallnut, 2, 0, 3000, PlantSubClass.Normal, 0, "GIANT_WALLNUT");
+                };
+                if (i == (int)SeedType.Sprout)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Sprout, null, ReanimationType.None, 33, 0, 3000, PlantSubClass.Normal, 0, "SPROUT");
+                };
+                if (i == (int)SeedType.Leftpeater)
+                {
+                    gPlantDefs[gPlantDefs.Length - 1] = new PlantDefinition(SeedType.Leftpeater, null, ReanimationType.Repeater, 5, 200, 750, PlantSubClass.Shooter, 150, "REPEATER");
+                };
             };
             GameConstants.NUM_BACKUP_DANCERS = 4;
             GameConstants.MAX_ZOMBIE_FOLLOWERS = 4;
@@ -655,41 +862,42 @@ namespace Lawn
                 /*                 | ZombieType 枚举值        | 动画轨道类型               |价值|首现关|首现波|权重|名称| */
                 new ZombieDefinition(ZombieType.Normal,         ReanimationType.Zombie,         1,  1,  1,  4000, "ZOMBIE"),
                 new ZombieDefinition(ZombieType.Flag,           ReanimationType.Zombie,         1,  1,  1,  0, "FLAG_ZOMBIE"),
-                new ZombieDefinition(ZombieType.TrafficCone,    ReanimationType.Zombie,         2,  3,  1,  4000, "CONEHEAD_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Polevaulter,    ReanimationType.Polevaulter,    2,  6,  5,  2000, "POLE_VAULTING_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Pail,           ReanimationType.Zombie,         4,  8,  1,  3000, "BUCKETHEAD_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Newspaper,      ReanimationType.ZombieNewspaper,2,  11, 1,  1000, "NEWSPAPER_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Door,           ReanimationType.Zombie,         4,  13, 5,  3500, "SCREEN_DOOR_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Football,       ReanimationType.ZombieFootball, 7,  16, 5,  2000, "FOOTBALL_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Dancer,         ReanimationType.Disco,          5,  18, 5,  1000, "DANCING_ZOMBIE"),
-                new ZombieDefinition(ZombieType.BackupDancer,   ReanimationType.BackupDancer,   1,  18, 1,  0, "BACKUP_DANCER"),
-                new ZombieDefinition(ZombieType.DuckyTube,      ReanimationType.Zombie,         1,  21, 5,  0, "DUCKY_TUBE_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Snorkel,        ReanimationType.Snorkel,        3,  23, 10, 2000, "SNORKEL_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Zamboni,        ReanimationType.ZombieZamboni,  7,  26, 10, 2000, "ZOMBONI"),
-                new ZombieDefinition(ZombieType.Bobsled,        ReanimationType.Bobsled,        3,  26, 10, 2000, "ZOMBIE_BOBSLED_TEAM"),
-                new ZombieDefinition(ZombieType.DolphinRider, ReanimationType.ZombieDolphinrider,3, 28, 10, 1500, "DOLPHIN_RIDER_ZOMBIE"),
-                new ZombieDefinition(ZombieType.JackInTheBox,   ReanimationType.Jackinthebox,   3,  31, 10, 1000, "JACK_IN_THE_BOX_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Balloon,        ReanimationType.Balloon,        2,  33, 10, 2000, "BALLOON_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Digger,         ReanimationType.Digger,         4,  36, 10, 1000, "DIGGER_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Pogo,           ReanimationType.Pogo,           4,  38, 10, 1000, "POGO_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Yeti,           ReanimationType.Yeti,           4,  40, 1,  1, "ZOMBIE_YETI"),
-                new ZombieDefinition(ZombieType.Bungee,         ReanimationType.Bungee,         3,  41, 10, 1000, "BUNGEE_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Ladder,         ReanimationType.Ladder,         4,  43, 10, 1000, "LADDER_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Catapult,       ReanimationType.Catapult,       5,  46, 10, 1500, "CATAPULT_ZOMBIE"),
-                new ZombieDefinition(ZombieType.Gargantuar,     ReanimationType.Gargantuar,     10, 48, 15, 1500, "GARGANTUAR"),
-                new ZombieDefinition(ZombieType.Imp,            ReanimationType.Imp,            10, 48, 1,  0, "IMP"),
-                new ZombieDefinition(ZombieType.Boss,           ReanimationType.Boss,           10, 50, 1,  0, "BOSS"),
-                new ZombieDefinition(ZombieType.PeaHead,        ReanimationType.Zombie,         1,  99, 1,  4000, "ZOMBIE"),
-                new ZombieDefinition(ZombieType.WallnutHead,    ReanimationType.Zombie,         4,  99, 1,  3000, "ZOMBIE"),
-                new ZombieDefinition(ZombieType.JalapenoHead,   ReanimationType.Zombie,         3,  99, 10, 1000, "ZOMBIE"),
-                new ZombieDefinition(ZombieType.GatlingHead,    ReanimationType.Zombie,         3,  99, 10, 2000, "ZOMBIE"),
-                new ZombieDefinition(ZombieType.SquashHead,     ReanimationType.Zombie,         3,  99, 10, 2000, "ZOMBIE"),
-                new ZombieDefinition(ZombieType.TallnutHead,    ReanimationType.Zombie,         4,  99, 10, 2000, "ZOMBIE"),
-                new ZombieDefinition(ZombieType.RedeyeGargantuar,ReanimationType.Gargantuar,    10, 48, 15, 6000, "REDEYED_GARGANTUAR")
+                new ZombieDefinition(ZombieType.TrafficCone,    ReanimationType.Zombie,         2,  1,  1,  4000, "CONEHEAD_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Polevaulter,    ReanimationType.Polevaulter,    2,  1,  5,  2000, "POLE_VAULTING_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Pail,           ReanimationType.Zombie,         4,  1,  1,  3000, "BUCKETHEAD_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Newspaper,      ReanimationType.ZombieNewspaper,2,  1, 1,  1000, "NEWSPAPER_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Door,           ReanimationType.Zombie,         4,  1, 5,  3500, "SCREEN_DOOR_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Football,       ReanimationType.ZombieFootball, 7,  1, 5,  2000, "FOOTBALL_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Dancer,         ReanimationType.Disco,          5,  1, 5,  1000, "DANCING_ZOMBIE"),
+                new ZombieDefinition(ZombieType.BackupDancer,   ReanimationType.BackupDancer,   1,  1, 1,  XmlReader.BackupDancerWeight, "BACKUP_DANCER"),
+                new ZombieDefinition(ZombieType.DuckyTube,      ReanimationType.Zombie,         1,  1, 5,  0, "DUCKY_TUBE_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Snorkel,        ReanimationType.Snorkel,        3,  1, 10, 2000, "SNORKEL_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Zamboni,        ReanimationType.ZombieZamboni,  7,  1, 10, 2000, "ZOMBONI"),
+                new ZombieDefinition(ZombieType.Bobsled,        ReanimationType.Bobsled,        3,  1, 10, 2000, "ZOMBIE_BOBSLED_TEAM"),
+                new ZombieDefinition(ZombieType.DolphinRider, ReanimationType.ZombieDolphinrider,3, 1, 10, 1500, "DOLPHIN_RIDER_ZOMBIE"),
+                new ZombieDefinition(ZombieType.JackInTheBox,   ReanimationType.Jackinthebox,   3,  1, 10, 1000, "JACK_IN_THE_BOX_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Balloon,        ReanimationType.Balloon,        2,  1, 10, 2000, "BALLOON_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Digger,         ReanimationType.Digger,         4,  1, 10, 1000, "DIGGER_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Pogo,           ReanimationType.Pogo,           4,  1, 10, 1000, "POGO_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Yeti,           ReanimationType.Yeti,           4,  1, 1,  1, "ZOMBIE_YETI"),
+                new ZombieDefinition(ZombieType.Bungee,         ReanimationType.Bungee,         3,  1, 10, 1000, "BUNGEE_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Ladder,         ReanimationType.Ladder,         4,  1, 10, 1000, "LADDER_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Catapult,       ReanimationType.Catapult,       5,  1, 10, 1500, "CATAPULT_ZOMBIE"),
+                new ZombieDefinition(ZombieType.Gargantuar,     ReanimationType.Gargantuar,     10, 1, 15, 1500, "GARGANTUAR"),
+                new ZombieDefinition(ZombieType.Imp,            ReanimationType.Imp,            10, 1, 1,  XmlReader.ImpWeight, "IMP"),
+                new ZombieDefinition(ZombieType.Boss,           ReanimationType.Boss,           10, 1, 1,  0, "BOSS"),
+                new ZombieDefinition(ZombieType.PeaHead,        ReanimationType.Zombie,         1,  1, 1,  4000, "ZOMBIE"),
+                new ZombieDefinition(ZombieType.WallnutHead,    ReanimationType.Zombie,         4,  1, 1,  3000, "ZOMBIE"),
+                new ZombieDefinition(ZombieType.JalapenoHead,   ReanimationType.Zombie,         3,  1, 10, 1000, "ZOMBIE"),
+                new ZombieDefinition(ZombieType.GatlingHead,    ReanimationType.Zombie,         3,  1, 10, 2000, "ZOMBIE"),
+                new ZombieDefinition(ZombieType.SquashHead,     ReanimationType.Zombie,         3,  1, 10, 2000, "ZOMBIE"),
+                new ZombieDefinition(ZombieType.TallnutHead,    ReanimationType.Zombie,         4,  1, 10, 2000, "ZOMBIE"),
+                new ZombieDefinition(ZombieType.RedeyeGargantuar,ReanimationType.Gargantuar,    10, 1, 15, 6000, "REDEYED_GARGANTUAR")
             };
             // 僵王召唤的僵尸类型
             GameConstants.gBossZombieList = new ZombieType[]
             {
+                /*                 | ZombieType 枚举值        | 动画轨道类型               |价值|首现关|首现波|权重|名称| */
                 ZombieType.TrafficCone,
                 ZombieType.Pail,
                 ZombieType.Football,
@@ -732,18 +940,18 @@ namespace Lawn
             {
                 /*                     | ProjectileType 枚举值 | ImageRow | 伤害值 |*/
                 new ProjectileDefinition(ProjectileType.Pea,            0,  20  ),
-                new ProjectileDefinition(ProjectileType.Snowpea,        0,  20  ),
-                new ProjectileDefinition(ProjectileType.Cabbage,        0,  40  ),
-                new ProjectileDefinition(ProjectileType.Melon,          0,  80  ),
+                new ProjectileDefinition(ProjectileType.Snowpea,        0,  XmlReader.SnowpeaDamage  ),
+                new ProjectileDefinition(ProjectileType.Cabbage,        0,  XmlReader.CabbagepultDamage  ),
+                new ProjectileDefinition(ProjectileType.Melon,          0,  XmlReader.Melonpultdamage  ),
                 new ProjectileDefinition(ProjectileType.Puff,           0,  20  ),
-                new ProjectileDefinition(ProjectileType.Wintermelon,    0,  80  ),
+                new ProjectileDefinition(ProjectileType.Wintermelon,    0,  XmlReader.Wintermelondamage  ),
                 new ProjectileDefinition(ProjectileType.Fireball,       0,  40  ),
-                new ProjectileDefinition(ProjectileType.Star,           0,  20  ),
-                new ProjectileDefinition(ProjectileType.Spike,          0,  20  ),
+                new ProjectileDefinition(ProjectileType.Star,           0,  XmlReader.StarfruitDamage  ),
+                new ProjectileDefinition(ProjectileType.Spike,          0,  XmlReader.CactusDamage  ),
                 new ProjectileDefinition(ProjectileType.Basketball,     0,  75  ),
-                new ProjectileDefinition(ProjectileType.Kernel,         0,  20  ),
+                new ProjectileDefinition(ProjectileType.Kernel,         0,  XmlReader.KernelpultKerneldamage  ),
                 new ProjectileDefinition(ProjectileType.Cobbig,         0,  300 ),
-                new ProjectileDefinition(ProjectileType.Butter,         0,  40  ),
+                new ProjectileDefinition(ProjectileType.Butter,         0,  XmlReader.KernelpultButterdamage  ),
                 new ProjectileDefinition(ProjectileType.ZombiePea,      0,  20  ),
                 new ProjectileDefinition(ProjectileType.ZombiePeaMindControl, 0, 20),
             };
@@ -845,9 +1053,9 @@ namespace Lawn
 
         public const int BLINK_RATE_WALLNUT = 1000;
 
-        public const int GRAVE_BUSTER_EAT_TIME = 400;
+        public const int GRAVE_BUSTER_EAT_TIME = XmlReader.GraveBusterEatingtime;
 
-        public const int CRATER_TIME = 18000;
+        public const int CRATER_TIME = XmlReader.DoomshroomCratertime;
 
         public const int MAX_MAGNET_ITEMS = 5;
 
@@ -1012,11 +1220,11 @@ namespace Lawn
         // 冒险模式中每关的僵尸波数
         public static int[] gZombieWaves = new int[]
         {
-            4,  6,  8,  randomwavenum, 8,  randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum,
-            randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum,
-            randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum,
-            randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum,
-            randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum, randomwavenum,
+                        4,  6,  8,  XmlReader.Level1_4_wavenum, 8,  XmlReader.Level1_6_wavenum, XmlReader.Level1_7_wavenum, XmlReader.Level1_8_wavenum, XmlReader.Level1_9_wavenum, XmlReader.Level1_10_wavenum,
+            XmlReader.Level2_1_wavenum, XmlReader.Level2_2_wavenum, XmlReader.Level2_3_wavenum, XmlReader.Level2_4_wavenum, XmlReader.Level2_5_wavenum, XmlReader.Level2_6_wavenum, XmlReader.Level2_7_wavenum, XmlReader.Level2_8_wavenum, XmlReader.Level2_9_wavenum, XmlReader.Level2_10_wavenum,
+            XmlReader.Level3_1_wavenum, XmlReader.Level3_2_wavenum, XmlReader.Level3_3_wavenum, XmlReader.Level3_4_wavenum, XmlReader.Level3_5_wavenum, XmlReader.Level3_6_wavenum, XmlReader.Level3_7_wavenum, XmlReader.Level3_8_wavenum, XmlReader.Level3_9_wavenum, XmlReader.Level3_10_wavenum,
+            XmlReader.Level4_1_wavenum, XmlReader.Level4_2_wavenum, XmlReader.Level4_3_wavenum, XmlReader.Level4_4_wavenum, 1, XmlReader.Level4_6_wavenum, XmlReader.Level4_7_wavenum, XmlReader.Level4_8_wavenum, XmlReader.Level4_9_wavenum, XmlReader.Level4_10_wavenum,
+            XmlReader.Level5_1_wavenum, XmlReader.Level5_2_wavenum, XmlReader.Level5_3_wavenum, XmlReader.Level5_4_wavenum, XmlReader.Level5_5_wavenum, XmlReader.Level5_6_wavenum, XmlReader.Level5_7_wavenum, XmlReader.Level5_8_wavenum, XmlReader.Level5_9_wavenum, 1,
         };
 
         public static ZombieAllowedLevels[] gZombieAllowedLevels;

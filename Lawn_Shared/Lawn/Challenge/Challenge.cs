@@ -536,27 +536,27 @@ namespace Lawn
                 SeedType seedType = SeedType.Peashooter;
                 switch (i)
                 {
-                case 0:
-                    seedType = SeedType.Puffshroom;
-                    break;
-                case 1:
-                    seedType = SeedType.Starfruit;
-                    break;
-                case 2:
-                    seedType = SeedType.Magnetshroom;
-                    break;
-                case 3:
-                    seedType = SeedType.Snowpea;
-                    break;
-                case 4:
-                    seedType = SeedType.Wallnut;
-                    break;
-                case 5:
-                    seedType = SeedType.Peashooter;
-                    break;
-                default:
-                    Debug.ASSERT(false);
-                    break;
+                    case 0:
+                        seedType = SeedType.Puffshroom;
+                        break;
+                    case 1:
+                        seedType = SeedType.Starfruit;
+                        break;
+                    case 2:
+                        seedType = SeedType.Magnetshroom;
+                        break;
+                    case 3:
+                        seedType = SeedType.Snowpea;
+                        break;
+                    case 4:
+                        seedType = SeedType.Wallnut;
+                        break;
+                    case 5:
+                        seedType = SeedType.Peashooter;
+                        break;
+                    default:
+                        Debug.ASSERT(false);
+                        break;
                 }
                 if (mBeghouledPurcasedUpgrade[0] && seedType == SeedType.Peashooter)
                 {
@@ -1759,6 +1759,9 @@ namespace Lawn
                     ZombieType.TrafficCone,
                     ZombieType.Pail,
                     ZombieType.Polevaulter,
+                    ZombieType.Newspaper,
+                    ZombieType.Door,
+                    ZombieType.Dancer,
                     ZombieType.Newspaper
                 };
                 InitZombieWavesFromList(array22, array22.Length);
@@ -2214,9 +2217,9 @@ namespace Lawn
             }
             mChallengeStateCounter--;
             if (
-                (mChallengeStateCounter == GameConstants.STORM_FLASH_TIME * 2 && mChallengeState == ChallengeState.StormFlash1) 
-             || (mChallengeStateCounter == GameConstants.STORM_FLASH_TIME && mChallengeState == ChallengeState.StormFlash1) 
-             || (mChallengeStateCounter == GameConstants.STORM_FLASH_TIME * 2 && mChallengeState == ChallengeState.StormFlash2) 
+                (mChallengeStateCounter == GameConstants.STORM_FLASH_TIME * 2 && mChallengeState == ChallengeState.StormFlash1)
+             || (mChallengeStateCounter == GameConstants.STORM_FLASH_TIME && mChallengeState == ChallengeState.StormFlash1)
+             || (mChallengeStateCounter == GameConstants.STORM_FLASH_TIME * 2 && mChallengeState == ChallengeState.StormFlash2)
              || (mChallengeStateCounter == GameConstants.STORM_FLASH_TIME && mChallengeState == ChallengeState.StormFlash3)
             )
             {
@@ -2276,10 +2279,13 @@ namespace Lawn
             }
             if (mApp.IsFinalBossLevel())
             {
-                mBoard.mSeedBank.AddSeed(SeedType.Cabbagepult);
-                mBoard.mSeedBank.AddSeed(SeedType.Jalapeno);
-                mBoard.mSeedBank.AddSeed(SeedType.Cabbagepult);
-                mBoard.mSeedBank.AddSeed(SeedType.Iceshroom);
+                if (XmlReader.CompletelyRandomizedSeedPacketsInConveyorBeltLevels == "False")
+                {
+                    mBoard.mSeedBank.AddSeed(SeedType.Cabbagepult);
+                    mBoard.mSeedBank.AddSeed(SeedType.Jalapeno);
+                    mBoard.mSeedBank.AddSeed(SeedType.Cabbagepult);
+                    mBoard.mSeedBank.AddSeed(SeedType.Iceshroom);
+                };
                 mConveyorBeltCounter = 1000;
             }
             if (mApp.mGameMode == GameMode.ChallengeZenGarden)
@@ -2310,6 +2316,10 @@ namespace Lawn
             if (mApp.IsScaryPotterLevel())
             {
                 ScaryPotterPopulate();
+            }
+            if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel == 3)
+            {
+                mBoard.DisplayAdvice("[ADVICE_SUBURBAN_ALMANAC_FOUND]", MessageStyle.HintFast, AdviceType.None);
             }
             if (mApp.IsFirstTimeAdventureMode() && mBoard.mLevel == 5)
             {
@@ -2623,22 +2633,31 @@ namespace Lawn
             {
                 num = 3f;
             }
-            if (mBoard.mSeedBank.GetNumSeedsOnConveyorBelt() > 8)
+            if (XmlReader.CompletelyRandomizedSeedPacketsInConveyorBeltLevels == "True")
             {
-                mConveyorBeltCounter = 1000 * (int)num;
-            }
-            else if (mBoard.mSeedBank.GetNumSeedsOnConveyorBelt() > 6)
-            {
-                mConveyorBeltCounter = 500 * (int)num;
-            }
-            else if (mBoard.mSeedBank.GetNumSeedsOnConveyorBelt() > 4)
-            {
-                mConveyorBeltCounter = 425 * (int)num;
+                mConveyorBeltCounter = 350 * (int)num;
             }
             else
             {
-                mConveyorBeltCounter = 400 * (int)num;
+                if (mBoard.mSeedBank.GetNumSeedsOnConveyorBelt() > 8)
+                {
+                    mConveyorBeltCounter = 1000 * (int)num;
+                }
+                else if (mBoard.mSeedBank.GetNumSeedsOnConveyorBelt() > 6)
+                {
+                    mConveyorBeltCounter = 500 * (int)num;
+                }
+                else if (mBoard.mSeedBank.GetNumSeedsOnConveyorBelt() > 4)
+                {
+                    mConveyorBeltCounter = 425 * (int)num;
+                }
+                else
+                {
+                    mConveyorBeltCounter = 400 * (int)num;
+                }
             }
+
+
             for (int i = 0; i < 20; i++)
             {
                 Challenge.aSeedPickArray[i].Reset();
@@ -2680,126 +2699,324 @@ namespace Lawn
             int melonpult_num = (int)SeedType.Melonpult;
             if (mBoard.mLevel == 10)
             {
-                Challenge.aSeedPickArray[num2].mItem = 0;
-                Challenge.aSeedPickArray[num2].mWeight = 20;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = cherrybomb_num;
-                Challenge.aSeedPickArray[num2].mWeight = 20;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = wallnut_num;
-                Challenge.aSeedPickArray[num2].mWeight = 15;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = repeater_num;
-                Challenge.aSeedPickArray[num2].mWeight = 20;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = snowpea_num;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = chomper_num;
-                Challenge.aSeedPickArray[num2].mWeight = 5;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = potatomine_num;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
+                if (XmlReader.CompletelyRandomizedSeedPacketsInConveyorBeltLevels == "True")
+                {
+                    for (int i = 0; i < 8; i++)
+                    {
+                        Challenge.aSeedPickArray[num2].mItem = i;
+                        if (i == flowerpot_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 55;
+                        }
+                        else if (i == 16)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else if (i == seashroom_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else if (i == seashroom_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 10;
+                        }
+                        num2++;
+                    }
+                }
+                else
+                {
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.DayFinallevelSeed1;
+                    Challenge.aSeedPickArray[num2].mWeight = 20;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.DayFinallevelSeed2;
+                    Challenge.aSeedPickArray[num2].mWeight = 20;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.DayFinallevelSeed3;
+                    Challenge.aSeedPickArray[num2].mWeight = 15;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.DayFinallevelSeed7;
+                    Challenge.aSeedPickArray[num2].mWeight = 20;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.DayFinallevelSeed5;
+                    Challenge.aSeedPickArray[num2].mWeight = 10;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.DayFinallevelSeed6;
+                    Challenge.aSeedPickArray[num2].mWeight = 5;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.DayFinallevelSeed4;
+                    Challenge.aSeedPickArray[num2].mWeight = 10;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = blover_num;
+                    Challenge.aSeedPickArray[num2].mWeight = 5;
+                    num2++;
+                    if (mBoard.mBackground == BackgroundType.Num7GreatWall)
+                    {
+                        Challenge.aSeedPickArray[num2].mItem = flowerpot_num;
+                        Challenge.aSeedPickArray[num2].mWeight = 55;
+                        num2++;
+                    }
+                }
             }
             else if (mBoard.mLevel == 20)
             {
-                Challenge.aSeedPickArray[num2].mItem = gravebuster_num;
-                Challenge.aSeedPickArray[num2].mWeight = 20;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = iceshroom_num;
-                Challenge.aSeedPickArray[num2].mWeight = 15;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = doomshroom_num;
-                Challenge.aSeedPickArray[num2].mWeight = 15;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = hypnoshroom_num;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = scaredyshroom_num;
-                Challenge.aSeedPickArray[num2].mWeight = 15;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = fumeshroom_num;
-                Challenge.aSeedPickArray[num2].mWeight = 15;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = puffshroom_num;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
+                if (XmlReader.CompletelyRandomizedSeedPacketsInConveyorBeltLevels == "True")
+                {
+                    for (int i = 0; i < 16; i++)
+                    {
+                        Challenge.aSeedPickArray[num2].mItem = i;
+                        if (i == flowerpot_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 55;
+                        }
+                        else if (i == coffeebean_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else if (i == 16)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else if (i == seashroom_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else if (i == seashroom_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 10;
+                        }
+                        num2++;
+                    }
+                }
+                else
+                {
+                    Challenge.aSeedPickArray[num2].mItem = gravebuster_num;
+                    Challenge.aSeedPickArray[num2].mWeight = 20;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.NightFinallevelSeed5;
+                    Challenge.aSeedPickArray[num2].mWeight = 15;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.NightFinallevelSeed6;
+                    Challenge.aSeedPickArray[num2].mWeight = 15;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.NightFinallevelSeed3;
+                    Challenge.aSeedPickArray[num2].mWeight = 10;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.NightFinallevelSeed4;
+                    Challenge.aSeedPickArray[num2].mWeight = 15;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.NightFinallevelSeed2;
+                    Challenge.aSeedPickArray[num2].mWeight = 15;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.NightFinallevelSeed1;
+                    Challenge.aSeedPickArray[num2].mWeight = 10;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = blover_num;
+                    Challenge.aSeedPickArray[num2].mWeight = 5;
+                    num2++;
+                    if (mBoard.mBackground == BackgroundType.Num9JTTW2)
+                    {
+                        Challenge.aSeedPickArray[num2].mItem = flowerpot_num;
+                        Challenge.aSeedPickArray[num2].mWeight = 55;
+                        num2++;
+                    }
+                }
             }
+
             else if (mBoard.mLevel == 30)
             {
-                Challenge.aSeedPickArray[num2].mItem = 16;
-                Challenge.aSeedPickArray[num2].mWeight = 25;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = squash_num;
-                Challenge.aSeedPickArray[num2].mWeight = 5;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = threepeater_num;
-                Challenge.aSeedPickArray[num2].mWeight = 25;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = tanglekelp_num;
-                Challenge.aSeedPickArray[num2].mWeight = 5;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = jalapeno_num;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = spikeweed_num;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = torchwood_num;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = tallnut_num;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
+                if (XmlReader.CompletelyRandomizedSeedPacketsInConveyorBeltLevels == "True")
+                {
+                    for (int i = 0; i < 24; i++)
+                    {
+                        Challenge.aSeedPickArray[num2].mItem = i;
+                        if (i == 16)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 55;
+                        }
+                        else if (i == tanglekelp_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else if (i == seashroom_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else if (i == flowerpot_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 10;
+                        }
+                        num2++;
+                    }
+                }
+                else
+                {
+                    if (mBoard.mBackground == BackgroundType.Num15CustomFlood)
+                    {
+                        Challenge.aSeedPickArray[num2].mItem = 16;
+                        Challenge.aSeedPickArray[num2].mWeight = 25;
+                        num2++;
+                    }
+                    else
+                    {
+                        Challenge.aSeedPickArray[num2].mItem = 16;
+                        Challenge.aSeedPickArray[num2].mWeight = 25;
+                        num2++;
+                    }
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.PoolFinallevelSeed1;
+                    Challenge.aSeedPickArray[num2].mWeight = 5;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.PoolFinallevelSeed2;
+                    Challenge.aSeedPickArray[num2].mWeight = 25;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.PoolFinallevelSeed3;
+                    Challenge.aSeedPickArray[num2].mWeight = 5;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.PoolFinallevelSeed4;
+                    Challenge.aSeedPickArray[num2].mWeight = 10;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.PoolFinallevelSeed5;
+                    Challenge.aSeedPickArray[num2].mWeight = 10;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.PoolFinallevelSeed6;
+                    Challenge.aSeedPickArray[num2].mWeight = 10;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.PoolFinallevelSeed7;
+                    Challenge.aSeedPickArray[num2].mWeight = 10;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = blover_num;
+                    Challenge.aSeedPickArray[num2].mWeight = 5;
+                    num2++;
+                }
             }
             else if (mBoard.mLevel == 40)
             {
-                Challenge.aSeedPickArray[num2].mItem = 16;
-                Challenge.aSeedPickArray[num2].mWeight = 25;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = seashroom_num;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = magnetshroom_num;
-                Challenge.aSeedPickArray[num2].mWeight = 5;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = blover_num;
-                Challenge.aSeedPickArray[num2].mWeight = 5;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = cactus_num;
-                Challenge.aSeedPickArray[num2].mWeight = 15;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = starfruit_num;
-                Challenge.aSeedPickArray[num2].mWeight = 25;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = splitpea_num;
-                Challenge.aSeedPickArray[num2].mWeight = 5;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = pumpkin_num;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
+                if (XmlReader.CompletelyRandomizedSeedPacketsInConveyorBeltLevels == "True")
+                {
+                    for (int i = 0; i < 32; i++)
+                    {
+                        Challenge.aSeedPickArray[num2].mItem = i;
+                        if (i == 16)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 55;
+                        }
+                        else if (i == tanglekelp_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else if (i == seashroom_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else if (i == coffeebean_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else if (i == flowerpot_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 10;
+                        }
+                        num2++;
+                    }
+                }
+                else
+                {
+                    Challenge.aSeedPickArray[num2].mItem = 16;
+                    Challenge.aSeedPickArray[num2].mWeight = 25;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.FogFinallevelSeed1;
+                    Challenge.aSeedPickArray[num2].mWeight = 10;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.FogFinallevelSeed7;
+                    Challenge.aSeedPickArray[num2].mWeight = 5;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.FogFinallevelSeed2;
+                    Challenge.aSeedPickArray[num2].mWeight = 15;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.FogFinallevelSeed5;
+                    Challenge.aSeedPickArray[num2].mWeight = 25;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.FogFinallevelSeed4;
+                    Challenge.aSeedPickArray[num2].mWeight = 5;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.FogFinallevelSeed6;
+                    Challenge.aSeedPickArray[num2].mWeight = 10;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = blover_num;
+                    Challenge.aSeedPickArray[num2].mWeight = 5;
+                    num2++;
+                }
             }
             else if (mApp.IsFinalBossLevel())
             {
-                Challenge.aSeedPickArray[num2].mItem = flowerpot_num;
-                Challenge.aSeedPickArray[num2].mWeight = 55;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = melonpult_num;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = jalapeno_num;
-                Challenge.aSeedPickArray[num2].mWeight = 12;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = cabbagepult_num;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = kernelpult_num;
-                Challenge.aSeedPickArray[num2].mWeight = 5;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = iceshroom_num;
-                Challenge.aSeedPickArray[num2].mWeight = 8;
-                num2++;
+                if (XmlReader.CompletelyRandomizedSeedPacketsInConveyorBeltLevels == "True")
+                {
+                    for (int i = 0; i < 48; i++)
+                    {
+                        Challenge.aSeedPickArray[num2].mItem = i;
+                        if (i == flowerpot_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 55;
+                        }
+                        else if (i == 16)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else if (i == coffeebean_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else if (i == tanglekelp_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else if (i == seashroom_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 0;
+                        }
+                        else
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 10;
+                        }
+                        num2++;
+                    }
+                }
+                else
+                {
+                    Challenge.aSeedPickArray[num2].mItem = flowerpot_num;
+                    Challenge.aSeedPickArray[num2].mWeight = 55;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.RoofFinallevelSeed3;
+                    Challenge.aSeedPickArray[num2].mWeight = 10;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = jalapeno_num;
+                    Challenge.aSeedPickArray[num2].mWeight = 12;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.RoofFinallevelSeed1;
+                    Challenge.aSeedPickArray[num2].mWeight = 10;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.RoofFinallevelSeed2;
+                    Challenge.aSeedPickArray[num2].mWeight = 5;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = iceshroom_num;
+                    Challenge.aSeedPickArray[num2].mWeight = 8;
+                    num2++;
+                }
             }
             else if (mApp.IsShovelLevel())
             {
@@ -2830,114 +3047,134 @@ namespace Lawn
             }
             else if (mApp.IsLittleTroubleLevel())
             {
-                Challenge.aSeedPickArray[num2].mItem = 16;
-                Challenge.aSeedPickArray[num2].mWeight = 25;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = wallnut_num;
-                Challenge.aSeedPickArray[num2].mWeight = 15;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = 0;
-                Challenge.aSeedPickArray[num2].mWeight = 25;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = cherrybomb_num;
-                Challenge.aSeedPickArray[num2].mWeight = 35;
-                num2++;
+                if (XmlReader.CompletelyRandomizedSeedPacketsInConveyorBeltLevels == "True")
+                {
+                    for (int i = 0; i < 41; i++)
+                    {
+                        Challenge.aSeedPickArray[num2].mItem = i;
+                        if (i == 16)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 55;
+                        }
+                        else
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 10;
+                        }
+                        num2++;
+                    }
+                }
+                else
+                {
+                    Challenge.aSeedPickArray[num2].mItem = 16;
+                    Challenge.aSeedPickArray[num2].mWeight = 25;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.PoolMinigamelevelSeed3;
+                    Challenge.aSeedPickArray[num2].mWeight = 15;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.PoolMinigamelevelSeed1;
+                    Challenge.aSeedPickArray[num2].mWeight = 25;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.PoolMinigamelevelSeed2;
+                    Challenge.aSeedPickArray[num2].mWeight = 35;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = blover_num;
+                    Challenge.aSeedPickArray[num2].mWeight = 5;
+                    num2++;
+                }
             }
             else if (mApp.IsStormyNightLevel())
             {
-                Challenge.aSeedPickArray[num2].mItem = 16;
-                Challenge.aSeedPickArray[num2].mWeight = 30;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = 26;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = 0;
-                Challenge.aSeedPickArray[num2].mWeight = 20;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = 8;
-                Challenge.aSeedPickArray[num2].mWeight = 15;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = 2;
-                Challenge.aSeedPickArray[num2].mWeight = 25;
-                num2++;
+                for (int i = 0; i < 41; i++)
+                {
+                    Challenge.aSeedPickArray[num2].mItem = i;
+                    if (i == 16)
+                    {
+                        Challenge.aSeedPickArray[num2].mWeight = 55;
+                    }
+                    else
+                    {
+                        Challenge.aSeedPickArray[num2].mWeight = 10;
+                    }
+                    num2++;
+                }
             }
             else if (mApp.IsBungeeBlitzLevel())
             {
-                Challenge.aSeedPickArray[num2].mItem = flowerpot_num;
-                Challenge.aSeedPickArray[num2].mWeight = 50;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = chomper_num;
-                Challenge.aSeedPickArray[num2].mWeight = 25;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = pumpkin_num;
-                Challenge.aSeedPickArray[num2].mWeight = 15;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = cherrybomb_num;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
+                if (XmlReader.CompletelyRandomizedSeedPacketsInConveyorBeltLevels == "True")
+                {
+                    for (int i = 0; i < 41; i++)
+                    {
+                        Challenge.aSeedPickArray[num2].mItem = i;
+                        if (i == flowerpot_num)
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 55;
+                        }
+                        else
+                        {
+                            Challenge.aSeedPickArray[num2].mWeight = 10;
+                        }
+                        num2++;
+                    }
+                }
+                else
+                {
+                    Challenge.aSeedPickArray[num2].mItem = flowerpot_num;
+                    Challenge.aSeedPickArray[num2].mWeight = 50;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.RoofMinigamelevelSeed1;
+                    Challenge.aSeedPickArray[num2].mWeight = 25;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.RoofMinigamelevelSeed2;
+                    Challenge.aSeedPickArray[num2].mWeight = 15;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = ConveyorBeltseedpackets.RoofMinigamelevelSeed3;
+                    Challenge.aSeedPickArray[num2].mWeight = 10;
+                    num2++;
+                    Challenge.aSeedPickArray[num2].mItem = blover_num;
+                    Challenge.aSeedPickArray[num2].mWeight = 5;
+                    num2++;
+                }
             }
             else if (mApp.mGameMode == GameMode.ChallengePortalCombat)
             {
-                Challenge.aSeedPickArray[num2].mItem = 0;
-                Challenge.aSeedPickArray[num2].mWeight = 25;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = repeater_num;
-                Challenge.aSeedPickArray[num2].mWeight = 20;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = torchwood_num;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = cactus_num;
-                Challenge.aSeedPickArray[num2].mWeight = 15;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = wallnut_num;
-                Challenge.aSeedPickArray[num2].mWeight = 15;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = cherrybomb_num;
-                Challenge.aSeedPickArray[num2].mWeight = 15;
-                num2++;
+                for (int i = 0; i < 41; i++)
+                {
+                    Challenge.aSeedPickArray[num2].mItem = i;
+                    Challenge.aSeedPickArray[num2].mWeight = 10;
+                    num2++;
+                }
             }
             else if (mApp.mGameMode == GameMode.ChallengeColumn)
             {
-                Challenge.aSeedPickArray[num2].mItem = flowerpot_num;
-                Challenge.aSeedPickArray[num2].mWeight = 155;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = melonpult_num;
-                Challenge.aSeedPickArray[num2].mWeight = 5;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = chomper_num;
-                Challenge.aSeedPickArray[num2].mWeight = 5;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = pumpkin_num;
-                Challenge.aSeedPickArray[num2].mWeight = 15;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = jalapeno_num;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = squash_num;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
+                for (int i = 0; i < 41; i++)
+                {
+                    Challenge.aSeedPickArray[num2].mItem = i;
+                    if (i == flowerpot_num)
+                    {
+                        Challenge.aSeedPickArray[num2].mWeight = 55;
+                    }
+                    else
+                    {
+                        Challenge.aSeedPickArray[num2].mWeight = 10;
+                    }
+                    num2++;
+                }
             }
             else if (mApp.mGameMode == GameMode.ChallengeInvisighoul)
             {
-                Challenge.aSeedPickArray[num2].mItem = 0;
-                Challenge.aSeedPickArray[num2].mWeight = 25;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = wallnut_num;
-                Challenge.aSeedPickArray[num2].mWeight = 15;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = kernelpult_num;
-                Challenge.aSeedPickArray[num2].mWeight = 5;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = squash_num;
-                Challenge.aSeedPickArray[num2].mWeight = 15;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = 16;
-                Challenge.aSeedPickArray[num2].mWeight = 30;
-                num2++;
-                Challenge.aSeedPickArray[num2].mItem = iceshroom_num;
-                Challenge.aSeedPickArray[num2].mWeight = 10;
-                num2++;
+                for (int i = 0; i < 41; i++)
+                {
+                    Challenge.aSeedPickArray[num2].mItem = i;
+                    if (i == 16)
+                    {
+                        Challenge.aSeedPickArray[num2].mWeight = 55;
+                    }
+                    else
+                    {
+                        Challenge.aSeedPickArray[num2].mWeight = 10;
+                    }
+                    num2++;
+                }
             }
             else
             {
@@ -2962,14 +3199,18 @@ namespace Lawn
                     goto IL_D4E;
                 }
                 todWeightedArray.mWeight = 0;
-                IL_E81:
+            IL_E81:
                 j++;
                 continue;
-                IL_D4E:
+            IL_D4E:
                 if (seedType == SeedType.Lilypad)
                 {
                     int num5 = mBoard.CountPlantByType(seedType);
                     int theTimeEnd = 18;
+                    if (mBoard.mBackground == BackgroundType.Num15CustomFlood)
+                    {
+                        theTimeEnd = 35;
+                    }
                     todWeightedArray.mWeight = TodCommon.TodAnimateCurve(0, theTimeEnd, num5 + num3, todWeightedArray.mWeight, 1, TodCurves.Linear);
                 }
                 if (seedType == SeedType.Flowerpot)
@@ -3718,31 +3959,31 @@ namespace Lawn
             int num2 = mBoard.GridToPixelY(theScaryPot.mGridX, theScaryPot.mGridY);
             switch (theScaryPot.mScaryPotType)
             {
-            case ScaryPotType.Seed:
-            {
-                Coin coin = mBoard.AddCoin(num + 20, num2, CoinType.UsableSeedPacket, CoinMotion.FromPlant);
-                coin.mUsableSeedType = theScaryPot.mSeedType;
-                break;
-            }
-            case ScaryPotType.Zombie:
-            {
-                Zombie zombie = mBoard.AddZombieInRow(theScaryPot.mZombieType, theScaryPot.mGridY, 0);
-                zombie.mPosX = num;
-                break;
-            }
-            case ScaryPotType.Sun:
-            {
-                int num3 = ScaryPotterCountSunInPot(theScaryPot);
-                for (int i = 0; i < num3; i++)
-                {
-                    mBoard.AddCoin(num, num2, CoinType.Sun, CoinMotion.FromPlant);
-                    num += 15;
-                }
-                break;
-            }
-            default:
-                Debug.ASSERT(false);
-                break;
+                case ScaryPotType.Seed:
+                    {
+                        Coin coin = mBoard.AddCoin(num + 20, num2, CoinType.UsableSeedPacket, CoinMotion.FromPlant);
+                        coin.mUsableSeedType = theScaryPot.mSeedType;
+                        break;
+                    }
+                case ScaryPotType.Zombie:
+                    {
+                        Zombie zombie = mBoard.AddZombieInRow(theScaryPot.mZombieType, theScaryPot.mGridY, 0);
+                        zombie.mPosX = num;
+                        break;
+                    }
+                case ScaryPotType.Sun:
+                    {
+                        int num3 = ScaryPotterCountSunInPot(theScaryPot);
+                        for (int i = 0; i < num3; i++)
+                        {
+                            mBoard.AddCoin(num, num2, CoinType.Sun, CoinMotion.FromPlant);
+                            num += 15;
+                        }
+                        break;
+                    }
+                default:
+                    Debug.ASSERT(false);
+                    break;
             }
             theScaryPot.GridItemDie();
             if (mBoard.mHelpIndex == AdviceType.UseShovelOnPots)
@@ -4830,18 +5071,18 @@ namespace Lawn
                 int num3 = theSquirrel.mGridY;
                 switch (i)
                 {
-                case 0:
-                    num2--;
-                    break;
-                case 1:
-                    num2++;
-                    break;
-                case 2:
-                    num3--;
-                    break;
-                case 3:
-                    num3++;
-                    break;
+                    case 0:
+                        num2--;
+                        break;
+                    case 1:
+                        num2++;
+                        break;
+                    case 2:
+                        num3--;
+                        break;
+                    case 3:
+                        num3++;
+                        break;
                 }
                 if (mBoard.GetSquirrelAt(num2, num3) == null)
                 {

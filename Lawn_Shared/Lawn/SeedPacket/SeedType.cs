@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Xml.Linq;
 
 namespace Lawn
 {
-    public enum SeedType
+    public enum SeedTypeOG
     {
         Peashooter,
         Sunflower,
@@ -82,4 +83,5 @@ namespace Lawn
         SeedsInChooserCount = 49,
         None = -1
     }
+
 }

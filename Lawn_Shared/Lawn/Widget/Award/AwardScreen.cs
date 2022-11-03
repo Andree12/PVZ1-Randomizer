@@ -407,8 +407,8 @@ namespace Lawn
                 }
                 else if (level == 45)
                 {
-                    DrawBottom(g, "[FOUND_WATERING_CAN]", "[WATERING_CAN]", "[WATERING_CAN_DESCRIPTION_NEW]");
-                    g.DrawImage(AtlasResources.IMAGE_REANIM_ZENGARDEN_WATERINGCAN1, Constants.AwardScreen_WateringCan.X - AtlasResources.IMAGE_REANIM_ZENGARDEN_WATERINGCAN1.mWidth / 2, Constants.AwardScreen_WateringCan.Y);
+                    DrawBottom(g, "[FOUND_BACON]", "[BACON]", "[BACON_DESCRIPTION]");
+                    g.DrawImage(AtlasResources.IMAGE_BACON, Constants.AwardScreen_Bacon.X - AtlasResources.IMAGE_BACON.mWidth / 2, Constants.AwardScreen_Bacon.Y);
                 }
                 else if (level == 50)
                 {
@@ -641,12 +641,18 @@ namespace Lawn
             }
             if (level == 45)
             {
-                mApp.KillAwardScreen();
-                mApp.WriteCurrentUserConfig();
-                mApp.PreNewGame(GameMode.ChallengeZenGarden, false);
-                mApp.mZenGarden.SetupForZenTutorial();
+                StoreScreen storeScreen4 = mApp.ShowStoreScreen(this);
+                storeScreen4.SetupForIntro(2100);
                 return;
             }
+            //if (level == 45)
+            //{
+            //    mApp.KillAwardScreen();
+            //    mApp.WriteCurrentUserConfig();
+            //    mApp.PreNewGame(GameMode.ChallengeZenGarden, false);
+            //    mApp.mZenGarden.SetupForZenTutorial();
+            //    return;
+            //}
             mApp.KillAwardScreen();
             mApp.PreNewGame(GameMode.Adventure, false);
         }

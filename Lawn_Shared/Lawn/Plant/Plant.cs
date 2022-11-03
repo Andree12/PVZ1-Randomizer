@@ -287,7 +287,7 @@ namespace Lawn
             }
             else if (theSeedType == SeedType.Wallnut)
             {
-                mPlantHealth = 4000;
+                mPlantHealth = XmlReader.WallnutHealth;
                 mBlinkCountdown = 1000 + RandomNumbers.NextNumber(1000);
             }
             else if (theSeedType == SeedType.ExplodeONut)
@@ -303,14 +303,14 @@ namespace Lawn
             }
             else if (theSeedType == SeedType.Tallnut)
             {
-                mPlantHealth = 8000;
+                mPlantHealth = XmlReader.TallnutHealth;
                 mHeight = 80;
                 mBlinkCountdown = 1000 + RandomNumbers.NextNumber(1000);
             }
             else if (theSeedType == SeedType.Garlic)
             {
                 Debug.ASSERT(reanimation != null);
-                mPlantHealth = 400;
+                mPlantHealth = XmlReader.GarlicHealth;
                 reanimation.SetTruncateDisappearingFrames(empty, false);
             }
             else if (theSeedType == SeedType.GoldMagnet)
@@ -353,7 +353,7 @@ namespace Lawn
                 if (IsInPlay())
                 {
                     reanimation.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_anim_glow, -1);
-                    mStateCountdown = 1500;
+                    mStateCountdown = XmlReader.PotatoMineSurfacingtime;
                 }
                 else
                 {
@@ -403,7 +403,7 @@ namespace Lawn
             }
             else if (theSeedType == SeedType.Pumpkinshell)
             {
-                mPlantHealth = 4000;
+                mPlantHealth = XmlReader.PumpkinHealth;
                 mWidth = 120;
                 Debug.ASSERT(reanimation != null);
                 reanimation.AssignRenderGroupToTrack(GlobalMembersReanimIds.ReanimTrackId_pumpkin_back, 1);
@@ -542,7 +542,7 @@ namespace Lawn
 
         public void Update()//3update
         {
-            if ((!IsOnBoard() || mApp.mGameScene != GameScenes.LevelIntro || !mApp.IsWallnutBowlingLevel()) && (!IsOnBoard() || mApp.mGameMode != GameMode.ChallengeZenGarden) && (!IsOnBoard() || !mBoard.mCutScene.ShouldRunUpsellBoard()) && IsOnBoard() && mApp.mGameScene != GameScenes.Playing)
+            if ((!IsOnBoard() || mApp.mGameScene != GameScenes.LevelIntro || (!mApp.IsWallnutBowlingLevel() && mSeedType == SeedType.Flowerpot)) && (!IsOnBoard() || mApp.mGameMode != GameMode.ChallengeZenGarden) && (!IsOnBoard() || !mBoard.mCutScene.ShouldRunUpsellBoard()) && IsOnBoard() && mApp.mGameScene != GameScenes.Playing)
             {
                 return;
             }
@@ -637,7 +637,9 @@ namespace Lawn
                 num2 += 30f;
             }
             int theCelCol = mFrame;
-            Image image = Plant.GetImage(mSeedType);
+
+			Image image = Plant.GetImage(mSeedType);
+
             if (mSquished)
             {
                 if (mSeedType == SeedType.Flowerpot)
@@ -858,7 +860,7 @@ namespace Lawn
                 {
                     mApp.PlayFoley(FoleyType.Cherrybomb);
                     mApp.PlayFoley(FoleyType.Juicy);
-                    int num3 = mBoard.KillAllZombiesInRadius(mRow, num, num2, 115, 1, true, damageRangeFlags);
+                    int num3 = mBoard.KillAllZombiesInRadius(mRow, num, num2, 115, 1, true, damageRangeFlags, XmlReader.CherryBombDamage);
                     if (num3 >= 10 && !mApp.IsLittleTroubleLevel())
                     {
                         mBoard.GrantAchievement(AchievementId.ACHIEVEMENT_EXPLODONATOR, true);
@@ -872,7 +874,7 @@ namespace Lawn
                 if (mSeedType == SeedType.Doomshroom)
                 {
                     mApp.PlaySample(Resources.SOUND_DOOMSHROOM);
-                    mBoard.KillAllZombiesInRadius(mRow, num, num2, 250, 3, true, damageRangeFlags);
+                    mBoard.KillAllZombiesInRadius(mRow, num, num2, 250, 3, true, damageRangeFlags, XmlReader.DoomshroomDamage);
                     KillAllPlantsNearDoom();
                     mApp.AddTodParticle(num, num2, 400000, ParticleEffect.Doom);
                     GridItem gridItem = mBoard.AddACrater(mPlantCol, mRow);
@@ -924,7 +926,7 @@ namespace Lawn
                         num = mX + mWidth / 2 - 20;
                         num2 = mY + mHeight / 2;
                         mApp.PlaySample(Resources.SOUND_POTATO_MINE);
-                        mBoard.KillAllZombiesInRadius(mRow, num, num2, 60, 0, false, damageRangeFlags);
+                        mBoard.KillAllZombiesInRadius(mRow, num, num2, 60, 0, false, damageRangeFlags, XmlReader.PotatoMineDamage);
                         int aRenderOrder = Board.MakeRenderOrder(RenderLayer.Particle, mRow, 0);
                         mApp.AddTodParticle(num + 20f, num2, aRenderOrder, ParticleEffect.PotatoMine);
                         mBoard.ShakeBoard(3, -4);
@@ -952,13 +954,13 @@ namespace Lawn
         {
             if (mSeedType == SeedType.Fumeshroom)
             {
-                DoRowAreaDamage(20, 2U);
+                DoRowAreaDamage(XmlReader.FumeShroomDamage, 2U);
                 mApp.PlayFoley(FoleyType.Fume);
                 return;
             }
             if (mSeedType == SeedType.Gloomshroom)
             {
-                DoRowAreaDamage(20, 2U);
+                DoRowAreaDamage(XmlReader.GloomShroomDamage, 2U);
                 return;
             }
             if (mSeedType == SeedType.Starfruit)
@@ -1987,7 +1989,7 @@ namespace Lawn
                 //mStateCountdown -= 3;
                 mStateCountdown--;
             }
-            if (mApp.IsWallnutBowlingLevel())
+            if (mApp.IsWallnutBowlingLevel() && mSeedType != SeedType.Flowerpot)
             {
                 //UpdateBowling();
                 //UpdateBowling();
@@ -2273,7 +2275,7 @@ namespace Lawn
         public TRect GetPlantAttackRect(PlantWeapon thePlantWeapon)
         {
             TRect result = default(TRect);
-            if (mApp.IsWallnutBowlingLevel())
+            if (mApp.IsWallnutBowlingLevel() && mSeedType != SeedType.Flowerpot)
             {
                 result = new TRect(mX, mY, mWidth - 20, mHeight);
             }
@@ -2613,7 +2615,7 @@ namespace Lawn
                         }
                         if (rectOverlap > num3)
                         {
-                            zombie.TakeDamage(1800, 18U);
+                            zombie.TakeDamage(XmlReader.SquashDamage, 18U);
                             num++;
                         }
                     }
@@ -2699,7 +2701,7 @@ namespace Lawn
                 }
             }
             mApp.PlaySample(Resources.SOUND_BLOVER);
-            mBoard.mFogBlownCountDown = 4000;
+            mBoard.mFogBlownCountDown = XmlReader.Bloverfogawaytime;
         }
 
         public void UpdateGraveBuster()//3update
@@ -2992,7 +2994,7 @@ namespace Lawn
                         reanimation.mAnimRate = 0f;
                     }
                     mState = PlantState.ChomperDigesting;
-                    mStateCountdown = 4000;
+                    mStateCountdown = XmlReader.ChomperChewingTime;
                     return;
                 }
             }
@@ -3219,7 +3221,7 @@ namespace Lawn
             if (gridItem != null)
             {
                 mState = PlantState.MagnetshroomSucking;
-                mStateCountdown = 1500;
+                mStateCountdown = XmlReader.MagnetShroomcooldown;
                 PlayBodyReanim(GlobalMembersReanimIds.ReanimTrackId_anim_shooting, ReanimLoopType.PlayOnceAndHold, 20, 12f);
                 mApp.PlayFoley(FoleyType.Magnetshroom);
                 gridItem.GridItemDie();
@@ -3463,7 +3465,7 @@ namespace Lawn
             {
                 seedType = mImitaterType;
             }
-            if (mApp.IsWallnutBowlingLevel())
+            if (mApp.IsWallnutBowlingLevel() && mSeedType != SeedType.Flowerpot)
             {
                 theRenderLayer = RenderLayer.Projectile;
             }
@@ -4085,14 +4087,14 @@ namespace Lawn
                 }
                 else if (mSeedType == SeedType.Spikerock)
                 {
-                    if (mStateCountdown == 69 || mStateCountdown == 33)
+                    if (mStateCountdown == XmlReader.SpikerockFiringSpeedA || mStateCountdown == XmlReader.SpikerockFiringSpeedB)
                     {
-                        DoRowAreaDamage(20, 33U);
+                        DoRowAreaDamage(XmlReader.SpikerockDamage, 33U);
                     }
                 }
-                else if (mStateCountdown == 75)
+                else if (mStateCountdown == XmlReader.SpikeweedFiringSpeed)
                 {
-                    DoRowAreaDamage(20, 33U);
+                    DoRowAreaDamage(XmlReader.SpikeweedDamage, 33U);
                 }
                 if (reanimation.mLoopCount > 0)
                 {
@@ -4114,7 +4116,7 @@ namespace Lawn
         public void MagnetShroomAttactItem(Zombie theZombie)
         {
             mState = PlantState.MagnetshroomSucking;
-            mStateCountdown = 1500;
+            mStateCountdown = XmlReader.MagnetShroomcooldown;
             PlayBodyReanim(GlobalMembersReanimIds.ReanimTrackId_anim_shooting, ReanimLoopType.PlayOnceAndHold, 20, 12f);
             mApp.PlayFoley(FoleyType.Magnetshroom);
             MagnetItem freeMagnetItem = GetFreeMagnetItem();
@@ -4304,7 +4306,7 @@ namespace Lawn
                     mApp.PlayFoley(FoleyType.Cherrybomb);
                     mApp.PlaySample(Resources.SOUND_BOWLINGIMPACT2);
                     int theDamageRangeFlags = GetDamageRangeFlags(PlantWeapon.Primary) | 32;
-                    mBoard.KillAllZombiesInRadius(mRow, num4, num5, 90, 1, true, theDamageRangeFlags);
+                    mBoard.KillAllZombiesInRadius(mRow, num4, num5, 90, 1, true, theDamageRangeFlags, 1800);
                     mApp.AddTodParticle(num4, num5, 400000, ParticleEffect.Powie);
                     mBoard.ShakeBoard(3, -4);
                     Die();
@@ -4749,7 +4751,7 @@ namespace Lawn
                     reanimation.mColorOverride = flashingColor;
                 }
             }
-            else if (seedTypeInCursor == SeedType.Cobcannon && mSeedType == SeedType.CobcannonDowngradePlant && mBoard.CanPlantAt(mPlantCol - 1, mRow, seedTypeInCursor) == PlantingReason.Ok)
+            else if (seedTypeInCursor == SeedType.Cobcannon && mSeedType == (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Cobcannondowngradeplant) && mBoard.CanPlantAt(mPlantCol - 1, mRow, seedTypeInCursor) == PlantingReason.Ok)
             {
                 SexyColor flashingColor2 = TodCommon.GetFlashingColor(mBoard.mMainCounter, 90);
                 if (flashingColor2 != reanimation.mColorOverride)
@@ -4767,6 +4769,7 @@ namespace Lawn
                     reanimation.mColorOverride = sexyColor;
                 }
             }
+            
             else
             {
                 SexyColor white = SexyColor.White;
@@ -4867,23 +4870,23 @@ namespace Lawn
 
         public bool IsUpgradableTo(SeedType aUpdatedType)
         {
-            if (aUpdatedType == SeedType.Gatlingpea && mSeedType == SeedType.GatlingpeaDowngradePlant)
+            if (aUpdatedType == SeedType.Gatlingpea && mSeedType == (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Gatlingpeadowngradeplant))
             {
                 return true;
             }
-            if (aUpdatedType == SeedType.Wintermelon && mSeedType == SeedType.WintermelonDowngradePlant)
+            if (aUpdatedType == SeedType.Wintermelon && mSeedType == (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Wintermelondowngradeplant))
             {
                 return true;
             }
-            if (aUpdatedType == SeedType.Twinsunflower && mSeedType == SeedType.TwinsunflowerDowngradePlant)
+            if (aUpdatedType == SeedType.Twinsunflower && mSeedType == (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Twinsunflowerdowngradeplant))
             {
                 return true;
             }
-            if (aUpdatedType == SeedType.Spikerock && mSeedType == SeedType.SpikerockDowngradePlant)
+            if (aUpdatedType == SeedType.Spikerock && mSeedType == (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Spikerockdowngradeplant))
             {
                 return true;
             }
-            if (aUpdatedType == SeedType.Cobcannon && mSeedType == SeedType.CobcannonDowngradePlant)
+            if (aUpdatedType == SeedType.Cobcannon && mSeedType == (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Cobcannondowngradeplant))
             {
                 if (mBoard.IsValidCobCannonSpot(mPlantCol, mRow))
                 {
@@ -4892,11 +4895,11 @@ namespace Lawn
             }
             else
             {
-                if (aUpdatedType == SeedType.GoldMagnet && mSeedType == SeedType.GoldMagnetDowngradePlant)
+                if (aUpdatedType == SeedType.GoldMagnet && mSeedType == (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Goldmagnetdowngradeplant))
                 {
                     return true;
                 }
-                if (aUpdatedType == SeedType.Gloomshroom && mSeedType == SeedType.GloomshroomDowngradePlant)
+                if (aUpdatedType == SeedType.Gloomshroom && mSeedType == (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Gloomshroomdowngradeplant))
                 {
                     return true;
                 }
@@ -4914,7 +4917,7 @@ namespace Lawn
 
         public bool IsPartOfUpgradableTo(SeedType aUpdatedType)
         {
-            if (aUpdatedType == SeedType.Cobcannon && mSeedType == SeedType.CobcannonDowngradePlant)
+            if (aUpdatedType == SeedType.Cobcannon && mSeedType == (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Cobcannondowngradeplant))
             {
                 return mBoard.IsValidCobCannonSpot(mPlantCol, mRow) || mBoard.IsValidCobCannonSpot(mPlantCol - 1, mRow);
             }

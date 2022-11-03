@@ -891,7 +891,7 @@ namespace Lawn
             if (mProjectileType == ProjectileType.Cobbig)
             {
                 int liveGargantuarCount = mBoard.GetLiveGargantuarCount();
-                mBoard.KillAllZombiesInRadius(mRow, (int)mPosX + 80, (int)mPosY + 40, 115, 1, true, mDamageRangeFlags);
+                mBoard.KillAllZombiesInRadius(mRow, (int)mPosX + 80, (int)mPosY + 40, 115, 1, true, mDamageRangeFlags, 1800);
                 int liveGargantuarCount2 = mBoard.GetLiveGargantuarCount();
                 mBoard.mGargantuarsKillsByCornCob += liveGargantuarCount - liveGargantuarCount2;
                 if (mBoard.mGargantuarsKillsByCornCob >= 2)

@@ -16,6 +16,12 @@
     <AssemblyName>Lawn</AssemblyName>
     <PackageIcon>Icon.png</PackageIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <TransformOnBuild>true</TransformOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="XMLFile1.xml" />
+  </ItemGroup>
   <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
   </ItemGroup>
@@ -34,10 +40,38 @@
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
   <Import Project="..\Lawn_Shared\Lawn_Shared.projitems" Label="Shared" />
   <Import Project="..\MonoGame.Framework.Net\MonoGame.Framework.Net.projitems" Label="Shared" />
   <Import Project="..\IronPyInteractiveDef_Shared\IronPyInteractiveDef_Shared.projitems" Label="Shared" />
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="XCOPY &quot;$(SolutionDir)Content&quot; &quot;$(TargetDir)Content\&quot; /E /I /Y" />
+  </Target>
+  <ItemGroup>
+    <Compile Update="TextTemplate2.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TextTemplate2.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="TextTemplate1.tt">
+      <LastGenOutput>TextTemplate1.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <CustomToolNamespace></CustomToolNamespace>
+    </None>
+    <None Update="TextTemplate2.tt">
+      <LastGenOutput>TextTemplate2.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="TextTemplate3.tt">
+      <LastGenOutput>TextTemplate3.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+  </ItemGroup>
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="&quot;$(DevEnvDir)TextTransform.exe&quot; &quot;TextTemplate1.tt&quot;&#xD;&#xA;&quot;$(DevEnvDir)TextTransform.exe&quot; &quot;TextTemplate2.tt&quot;&#xD;&#xA;&quot;$(DevEnvDir)TextTransform.exe&quot; &quot;TextTemplate3.tt&quot;" />
   </Target>
 </Project>

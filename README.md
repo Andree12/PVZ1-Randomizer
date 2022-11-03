@@ -1,14 +1,33 @@
 ![logo](images/Logo.png)
 
-To start installing this randomizer, run RandomizerInstaller.py with python (3.9 and above is recommended).
+To start installing this randomizer, run RandomizerInstaller.py or GUI.py with python (3.9 and above is recommended).
 
-Instructions are in RandomizerInstaller.py.
+Instructions are in RandomizerInstaller.py and GUI.py.
 
 ## What can you currently do in this randomizer:
-* Randomize the plants obtained in adventure mode.
-* Randomize downgrade plants of upgrade plants.
-* Select between three Zombie wave modes for Adventure Mode: Hard, Vanilla, and Randomized.
-
+* Randomize the seedpacket awards of the plants obtained in adventure mode:
+ * Prevent puff-shroom's award seedpacket from being randomized
+ * Don't change the seed packet icons
+* Randomize Plant Stats:
+  * Randomize downgrade plants of upgrade plants.
+  * Randomize the action rates (chomper's chewing time, the time before doom shroom's crater disappears, the time for the shooting plant to fire, and etc.)
+  * Randomize defensive plant health
+  * Randomize plant attack damage
+* Select between Five Zombie wave modes for Adventure Mode: 
+  * Hard: The amount of waves in each adventure mode level are all 30
+  * Vanilla: retain the amount of waves in each adventure mode level the same
+  * Randomized: The amount of waves in each adventure mode level are all randomized
+  * Randomized+: Set the min amount and max amount of waves for each randomized level in adventure mode
+  * Fixed: Set a fixed amount of waves for every level in adventure mode
+* Randomize Backgrounds (BETA):
+  * Include custom backgrounds
+* Randomize Zombie appearances in Adventure Mode:
+  * Allow Summoned Zombies, Zombotany Zombies, and Giga Gargauntar to spawn by themselves in Adventure Mode
+  * Allow Balloon Zombie to appear after his selected counter plant is unlocked
+* Randomize plants in conveyorbelt levels:
+  * Allow almost every plant to appear in every conveyorbelt level
+* Enable 50 Sun meta mode
+* Shuffle the order of store plants
 ## Changes in this randomizer:
 * New dialogue made for this randomizer.
 * Removed the intro you see before the first adventure mode level
@@ -28,21 +47,19 @@ Instructions are in RandomizerInstaller.py.
   * Store plant 8 (Imitater): $15000
 * Marigold's recharge speed is now 2X slower.
 * Gravebuster no longer gives out a coin after eating a grave.
-
+* Blover appears in every conveyor belt level.
+* The ability to auto collect coins and sun is added in as a optional feature
+* Removed Zen Garden and replaced the Watering Can with Bacon
+* A harder new game+
 ## Bugs:
-* When you randomized the plants in adventure mode, the seedpackets don't match with the randomized plants you obtained within the game, once this is fixed in a future version, there will be two options on how would the seedpackets will appear in the randomizer
-* If you get the Watering Can for the first time in Adventure Mode, do not continue until you complete these following steps
-  1. Go into the main menu.
-  2. Click on the Zen Garden button.
-  3. Complete the Zen Garden tutorial.
-  4. You will be able to access Adventure Mode's 5-5 without crashing.
+* The award seedpacket icon doesn't match the randomized obtained plant
 * The range of Sea-shroom and Puff-shroom are bugged.
 * Very rarely, when a zombie switches lanes on the grass after eating a Garlic, it sometimes flies off into a different lane, it is unknown if this happens in the original version of PlantsvsZombies.NET or in the windows phone version.
-
-
 ## Credits:
 
 Programmer/Creator: Andree
+
+Programmer: Boxxed
 
 Special Thanks:
 Mewnojs and everyone who contributed to the orignal version of [PlantsvsZombies.NET](https://github.com/Mewnojs/PlantsVsZombies.NET)

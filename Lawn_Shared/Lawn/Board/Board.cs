@@ -1516,41 +1516,69 @@ namespace Lawn
                 TodCommon.TodUpdateSmoothArrayPick(mRowPickingArray, Constants.MAX_GRIDSIZEY, rake.mGridY);
                 return rake.mGridY;
             }
-            for (int i = 0; i < Constants.MAX_GRIDSIZEY; i++)
+            if (mBackground == BackgroundType.Num15CustomFlood)
             {
-                if (!RowCanHaveZombieType(i, theZombieType))
+                for (int i = 0; i < 5; i++)
                 {
-                    mRowPickingArray[i].mWeight = 0f;
-                }
-                else if (mApp.mGameMode == GameMode.ChallengePortalCombat)
-                {
-                    mRowPickingArray[i].mWeight = mChallenge.PortalCombatRowSpawnWeight(i);
-                }
-                else if (mApp.mGameMode == GameMode.ChallengeInvisighoul && mCurrentWave <= 3 && i == 5)
-                {
-                    mRowPickingArray[i].mWeight = 0f;
-                }
-                else
-                {
-                    int num = mCurrentWave - mWaveRowGotLawnMowered[i];
-                    if (mApp.IsContinuousChallenge() && mCurrentWave == mNumWaves - 1)
-                    {
-                        num = 100;
+                        int num = mCurrentWave - mWaveRowGotLawnMowered[i];
+                        if (mApp.IsContinuousChallenge() && mCurrentWave == mNumWaves - 1)
+                        {
+                            num = 100;
+                        }
+                        if (num <= 1)
+                        {
+                            mRowPickingArray[i].mWeight = 0.01f;
+                        }
+                        else if (num <= 2)
+                        {
+                            mRowPickingArray[i].mWeight = 0.5f;
+                        }
+                        else
+                        {
+                            mRowPickingArray[i].mWeight = 1f;
+                        }
                     }
-                    if (num <= 1)
+                
+            }
+            else
+            {
+                for (int i = 0; i < Constants.MAX_GRIDSIZEY; i++)
+                {
+                    if ((!RowCanHaveZombieType(i, theZombieType)))
                     {
-                        mRowPickingArray[i].mWeight = 0.01f;
+                        mRowPickingArray[i].mWeight = 0f;
                     }
-                    else if (num <= 2)
+                    else if (mApp.mGameMode == GameMode.ChallengePortalCombat)
                     {
-                        mRowPickingArray[i].mWeight = 0.5f;
+                        mRowPickingArray[i].mWeight = mChallenge.PortalCombatRowSpawnWeight(i);
+                    }
+                    else if (mApp.mGameMode == GameMode.ChallengeInvisighoul && mCurrentWave <= 3 && i == 5)
+                    {
+                        mRowPickingArray[i].mWeight = 0f;
                     }
                     else
                     {
-                        mRowPickingArray[i].mWeight = 1f;
+                        int num = mCurrentWave - mWaveRowGotLawnMowered[i];
+                        if (mApp.IsContinuousChallenge() && mCurrentWave == mNumWaves - 1)
+                        {
+                            num = 100;
+                        }
+                        if (num <= 1)
+                        {
+                            mRowPickingArray[i].mWeight = 0.01f;
+                        }
+                        else if (num <= 2)
+                        {
+                            mRowPickingArray[i].mWeight = 0.5f;
+                        }
+                        else
+                        {
+                            mRowPickingArray[i].mWeight = 1f;
+                        }
                     }
                 }
             }
+            
             return TodCommon.TodPickFromSmoothArray(mRowPickingArray, Constants.MAX_GRIDSIZEY);
         }
 
@@ -1799,6 +1827,10 @@ namespace Lawn
                             {
                                 return PlantingReason.NotOnWater;
                             }
+							if (theGridX >= 5 && mBackground == BackgroundType.Num9JTTW2)
+							{
+								return PlantingReason.NotHere;
+							}
                             if (theType == SeedType.Flowerpot)
                             {
                                 if (plantsOnLawn.mNormalPlant != null || plantsOnLawn.mUnderPlant != null || plantsOnLawn.mPumpkinPlant != null)
@@ -1809,7 +1841,7 @@ namespace Lawn
                             }
                             else
                             {
-                                if (StageHasRoof() && !flag3)
+                                if ((StageHasRoof() || (mBackground == BackgroundType.Num7GreatWall) || (mBackground == BackgroundType.Num9JTTW2 && theGridY == 2)) && !flag3)
                                 {
                                     return PlantingReason.NeedsPot;
                                 }
@@ -3232,6 +3264,24 @@ namespace Lawn
             case BackgroundType.Num6Boss:
                 image = Resources.IMAGE_BACKGROUND6BOSS;
                 break;
+            case BackgroundType.Num7GreatWall:
+                image = Resources.IMAGE_GWE_BACKGROUND1;
+                break;
+            case BackgroundType.Num9JTTW2:
+                image = Resources.IMAGE_JTTW_BACKGROUND2;
+                break;
+            case BackgroundType.Num15CustomFlood:
+                image = Resources.IMAGE_CUSTOM_BACKGROUNDFLOOD;
+                break;
+            case BackgroundType.Num16CustomWaterFallNight:
+                image = Resources.IMAGE_CUSTOM_BACKGROUNDWATERFALLNIGHT;
+                break;
+            case BackgroundType.Num17CustomEveningRoof:
+                image = Resources.IMAGE_CUSTOM_BACKGROUNDEVENINGROOF;
+                break;
+            case BackgroundType.Num18CustomMars:
+                image = Resources.IMAGE_CUSTOM_BACKGROUNDMARS;
+                break;
             case BackgroundType.MushroomGarden:
                 image = Resources.IMAGE_BACKGROUND_MUSHROOMGARDEN;
                 break;
@@ -3264,14 +3314,14 @@ namespace Lawn
                 TRect theSrcRect2 = new TRect(0, 0, theWidth2, AtlasResources.IMAGE_SOD3ROW.GetHeight());
                 g.DrawImage(AtlasResources.IMAGE_SOD3ROW, (int)((float)(-(float)Constants.BOARD_OFFSET + 235) * Constants.S), (int)(149f * Constants.S), theSrcRect2);
             }
-            else if (mLevel == 4 && mApp.IsFirstTimeAdventureMode())
-            {
-                g.DrawImage(Resources.IMAGE_BACKGROUND1UNSODDED, (float)(-Constants.BOARD_OFFSET) * Constants.S, 0f);
-                g.DrawImage(AtlasResources.IMAGE_SOD3ROW, (float)(-(float)Constants.BOARD_OFFSET + 235) * Constants.S, 149f * Constants.S);
-                int num = TodCommon.TodAnimateCurve(0, 950, mSodPosition, 0, 773, TodCurves.Linear);
-                TRect theSrcRect3 = new TRect((int)(232f * Constants.S), 0, (int)(num * Constants.S), Resources.IMAGE_BACKGROUND1.GetHeight());
-                g.DrawImage(Resources.IMAGE_BACKGROUND1, (int)((float)(-(float)Constants.BOARD_OFFSET + 232) * Constants.S), 0, theSrcRect3);
-            }
+            //else if (mLevel == 4 && mApp.IsFirstTimeAdventureMode())
+            //{
+            //    g.DrawImage(Resources.IMAGE_BACKGROUND1UNSODDED, (float)(-Constants.BOARD_OFFSET) * Constants.S, 0f);
+            //    g.DrawImage(AtlasResources.IMAGE_SOD3ROW, (float)(-(float)Constants.BOARD_OFFSET + 235) * Constants.S, 149f * Constants.S);
+            //    int num = TodCommon.TodAnimateCurve(0, 950, mSodPosition, 0, 773, TodCurves.Linear);
+            //    TRect theSrcRect3 = new TRect((int)(232f * Constants.S), 0, (int)(num * Constants.S), Resources.IMAGE_BACKGROUND1.GetHeight());
+            //    g.DrawImage(Resources.IMAGE_BACKGROUND1, (int)((float)(-(float)Constants.BOARD_OFFSET + 232) * Constants.S), 0, theSrcRect3);
+            //}
             else if (image != null)
             {
                 if (image == Resources.IMAGE_BACKGROUND_MUSHROOMGARDEN || image == Resources.IMAGE_BACKGROUND_GREENHOUSE || image == Resources.IMAGE_AQUARIUM1)
@@ -3556,27 +3606,27 @@ namespace Lawn
 
         public bool StageIsNight()
         {
-            return mBackground == BackgroundType.Num2Night || mBackground == BackgroundType.Num4Fog || mBackground == BackgroundType.MushroomGarden || mBackground == BackgroundType.Num6Boss;
+            return mBackground == BackgroundType.Num2Night || mBackground == BackgroundType.Num4Fog || mBackground == BackgroundType.MushroomGarden || mBackground == BackgroundType.Num6Boss || mBackground == BackgroundType.Num16CustomWaterFallNight || mBackground == BackgroundType.Num9JTTW2;
         }
 
         public bool StageHasPool()
         {
-            return mBackground == BackgroundType.Num3Pool || mBackground == BackgroundType.Num4Fog;
+            return mBackground == BackgroundType.Num3Pool || mBackground == BackgroundType.Num4Fog || mBackground == BackgroundType.Num15CustomFlood || mBackground == BackgroundType.Num16CustomWaterFallNight;
         }
 
         public bool StageHas6Rows()
         {
-            return mBackground == BackgroundType.Num3Pool || mBackground == BackgroundType.Num4Fog;
+            return mBackground == BackgroundType.Num3Pool || mBackground == BackgroundType.Num4Fog || mBackground == BackgroundType.Num16CustomWaterFallNight;
         }
 
         public bool StageHasFog()
         {
-            return !mApp.IsStormyNightLevel() && mApp.mGameMode != GameMode.ChallengeInvisighoul && mBackground == BackgroundType.Num4Fog;
+            return !mApp.IsStormyNightLevel() && mApp.mGameMode != GameMode.ChallengeInvisighoul && (mBackground == BackgroundType.Num4Fog);
         }
 
         public bool StageHasGraveStones()
         {
-            return !mApp.IsWallnutBowlingLevel() && mApp.mGameMode != GameMode.ChallengePogoParty && mApp.mGameMode != GameMode.ChallengeBeghouled && mApp.mGameMode != GameMode.ChallengeBeghouledTwist && mApp.mGameMode != GameMode.ChallengePortalCombat && mApp.mGameMode != GameMode.ChallengeLastStand && !mApp.IsIZombieLevel() && !mApp.IsScaryPotterLevel() && mBackground == BackgroundType.Num2Night;
+            return !mApp.IsWallnutBowlingLevel() && mApp.mGameMode != GameMode.ChallengePogoParty && mApp.mGameMode != GameMode.ChallengeBeghouled && mApp.mGameMode != GameMode.ChallengeBeghouledTwist && mApp.mGameMode != GameMode.ChallengePortalCombat && mApp.mGameMode != GameMode.ChallengeLastStand && !mApp.IsIZombieLevel() && !mApp.IsScaryPotterLevel() && (mBackground == BackgroundType.Num2Night || mBackground == BackgroundType.Num9JTTW2);
         }
 
         public int PixelToGridX(int theX, int theY)
@@ -4413,12 +4463,12 @@ namespace Lawn
             {
                 return null;
             }
-            if (mApp.IsWallnutBowlingLevel() && !mCutScene.IsInShovelTutorial())
-            {
-                return null;
-            }
             PlantsOnLawn plantsOnLawn = default(PlantsOnLawn);
             GetPlantsOnLawn(theGridX, theGridY, ref plantsOnLawn);
+            if (mApp.IsWallnutBowlingLevel() && !mCutScene.IsInShovelTutorial())
+            {
+                return plantsOnLawn.mUnderPlant;
+            }
             if (thePriority == TopPlant.OnlyFlying)
             {
                 return plantsOnLawn.mFlyingPlant;
@@ -4540,10 +4590,6 @@ namespace Lawn
             {
                 return;
             }
-            if (mApp.IsWallnutBowlingLevel() && !mCutScene.IsInShovelTutorial())
-            {
-                return;
-            }
             int count = mPlants.Count;
             for (int i = 0; i < count; i++)
             {
@@ -4551,6 +4597,10 @@ namespace Lawn
                 if (!plant.mDead)
                 {
                     SeedType seedType = plant.mSeedType;
+                    if (mApp.IsWallnutBowlingLevel() && !mCutScene.IsInShovelTutorial() && plant.mSeedType != SeedType.Flowerpot)
+                    {
+                        return;
+                    }
                     if (plant.mSeedType == SeedType.Imitater && plant.mImitaterType != SeedType.None)
                     {
                         seedType = plant.mImitaterType;
@@ -5047,6 +5097,10 @@ namespace Lawn
             {
                 theCoinType = CoinType.Largesun;
             }
+            if (mBackground == BackgroundType.Num17CustomEveningRoof)
+            {
+                theCoinType = CoinType.Smallsun;
+            }
             AddCoin(theX, 60, theCoinType, CoinMotion.FromSky);
         }
 
@@ -5062,6 +5116,8 @@ namespace Lawn
 
         public bool RowCanHaveZombieType(int theRow, ZombieType theZombieType)
         {
+            int num = mCurrentWave;
+            
             if (!RowCanHaveZombies(theRow))
             {
                 return false;
@@ -5078,11 +5134,11 @@ namespace Lawn
             {
                 return false;
             }
-            int num = mCurrentWave;
-            if (mApp.mGameMode == GameMode.ChallengeLastStand)
+                if (mApp.mGameMode == GameMode.ChallengeLastStand)
             {
                 num += mChallenge.mSurvivalStage * GetNumWavesPerSurvivalStage();
             }
+            
             return (mPlantRow[theRow] != PlantRowType.Pool || num >= 5 || Board.IsZombieTypePoolOnly(theZombieType)) && (mPlantRow[theRow] == PlantRowType.Pool || !Board.IsZombieTypePoolOnly(theZombieType)) && (theZombieType != ZombieType.Bobsled || mIceTimer[theRow] > 0) && (theRow != 0 || mApp.IsSurvivalEndless(mApp.mGameMode) || (theZombieType != ZombieType.Gargantuar && theZombieType != ZombieType.RedeyeGargantuar)) && (theZombieType != ZombieType.Dancer || StageHasPool() || (RowCanHaveZombies(theRow - 1) && RowCanHaveZombies(theRow + 1)));
         }
 
@@ -6368,17 +6424,29 @@ namespace Lawn
             case GameMode.Quickplay48:
             case GameMode.Quickplay49:
             case GameMode.Quickplay50:
-                if (mLevel <= 1 * GameConstants.LEVELS_PER_AREA)
+                if (mLevel <= 3)
                 {
                     mBackground = BackgroundType.Num1Day;
                 }
-                else if (mLevel <= 2 * GameConstants.LEVELS_PER_AREA)
+                else if (mApp.IsWallnutBowlingLevel())
+                {
+                    mBackground = BackgroundType.Num1Day;
+                }          
+                else if (mLevel > 3 && mLevel <= 1 * GameConstants.LEVELS_PER_AREA)
+                {
+                    mBackground = (BackgroundType)Enum.Parse(typeof(BackgroundType), XmlReader.Background1);
+                }
+                else if (mApp.IsWhackAZombieLevel())
                 {
                     mBackground = BackgroundType.Num2Night;
                 }
+                else if (mLevel <= 2 * GameConstants.LEVELS_PER_AREA)
+                {
+                    mBackground = (BackgroundType)Enum.Parse(typeof(BackgroundType), XmlReader.Background2);
+                }
                 else if (mLevel <= 3 * GameConstants.LEVELS_PER_AREA)
                 {
-                    mBackground = BackgroundType.Num3Pool;
+                    mBackground = (BackgroundType)Enum.Parse(typeof(BackgroundType), XmlReader.Background3);
                 }
                 else if (mApp.IsScaryPotterLevel())
                 {
@@ -6386,11 +6454,15 @@ namespace Lawn
                 }
                 else if (mLevel <= 4 * GameConstants.LEVELS_PER_AREA)
                 {
-                    mBackground = BackgroundType.Num4Fog;
+                    mBackground = (BackgroundType)Enum.Parse(typeof(BackgroundType), XmlReader.Background4);
+                }
+                else if (mApp.IsBungeeBlitzLevel())
+                {
+                    mBackground = BackgroundType.Num5Roof;
                 }
                 else if (mLevel < GameConstants.FINAL_LEVEL)
                 {
-                    mBackground = BackgroundType.Num5Roof;
+                    mBackground = (BackgroundType)Enum.Parse(typeof(BackgroundType), XmlReader.Background5);
                 }
                 else if (mLevel == GameConstants.FINAL_LEVEL)
                 {
@@ -6496,7 +6568,7 @@ namespace Lawn
                 break;
             }
             LoadBackgroundImages();
-            if (mBackground == BackgroundType.Num1Day || mBackground == BackgroundType.Greenhouse || mBackground == BackgroundType.TreeOfWisdom)
+            if (mBackground == BackgroundType.Num1Day || mBackground == BackgroundType.Greenhouse || mBackground == BackgroundType.TreeOfWisdom || mBackground == BackgroundType.Num7GreatWall)
             {
                 mPlantRow[0] = PlantRowType.Normal;
                 mPlantRow[1] = PlantRowType.Normal;
@@ -6525,7 +6597,7 @@ namespace Lawn
                     mPlantRow[4] = PlantRowType.Dirt;
                 }
             }
-            else if (mBackground == BackgroundType.Num2Night)
+            else if (mBackground == BackgroundType.Num2Night || mBackground == BackgroundType.Num9JTTW2)
             {
                 mPlantRow[0] = PlantRowType.Normal;
                 mPlantRow[1] = PlantRowType.Normal;
@@ -6543,7 +6615,7 @@ namespace Lawn
                 mPlantRow[4] = PlantRowType.Normal;
                 mPlantRow[5] = PlantRowType.Normal;
             }
-            else if (mBackground == BackgroundType.Num4Fog)
+            else if (mBackground == BackgroundType.Num4Fog || mBackground == BackgroundType.Num16CustomWaterFallNight)
             {
                 mPlantRow[0] = PlantRowType.Normal;
                 mPlantRow[1] = PlantRowType.Normal;
@@ -6552,13 +6624,22 @@ namespace Lawn
                 mPlantRow[4] = PlantRowType.Normal;
                 mPlantRow[5] = PlantRowType.Normal;
             }
-            else if (mBackground == BackgroundType.Num5Roof || mBackground == BackgroundType.Num6Boss)
+            else if (mBackground == BackgroundType.Num5Roof || mBackground == BackgroundType.Num6Boss || mBackground == BackgroundType.Num18CustomMars || mBackground == BackgroundType.Num17CustomEveningRoof)
             {
                 mPlantRow[0] = PlantRowType.Normal;
                 mPlantRow[1] = PlantRowType.Normal;
                 mPlantRow[2] = PlantRowType.Normal;
                 mPlantRow[3] = PlantRowType.Normal;
                 mPlantRow[4] = PlantRowType.Normal;
+                mPlantRow[5] = PlantRowType.Dirt;
+            }
+            else if (mBackground == BackgroundType.Num15CustomFlood || mBackground == BackgroundType.Zombiquarium)
+            {
+                mPlantRow[0] = PlantRowType.Pool;
+                mPlantRow[1] = PlantRowType.Pool;
+                mPlantRow[2] = PlantRowType.Pool;
+                mPlantRow[3] = PlantRowType.Pool;
+                mPlantRow[4] = PlantRowType.Pool;
                 mPlantRow[5] = PlantRowType.Dirt;
             }
             else
@@ -6572,6 +6653,10 @@ namespace Lawn
                     if (mPlantRow[j] == PlantRowType.Dirt)
                     {
                         mGridSquareType[i, j] = GridSquareType.Dirt;
+                    }
+                    else if (i >= 3 && i <= 5 && j <= 3 && mBackground == BackgroundType.Num16CustomWaterFallNight)
+                    {
+                        mGridSquareType[i, j] = GridSquareType.Pool;
                     }
                     else if (mPlantRow[j] == PlantRowType.Pool && i >= 0 && i <= 8)
                     {
@@ -6597,7 +6682,7 @@ namespace Lawn
                 {
                     mChallenge.WhackAZombiePlaceGraves(9);
                 }
-                else if (mBackground == BackgroundType.Num2Night)
+                else if (mBackground == BackgroundType.Num2Night || mBackground == BackgroundType.Num9JTTW2)
                 {
                     if (mApp.IsSurvivalNormal(mApp.mGameMode))
                     {
@@ -6822,10 +6907,6 @@ namespace Lawn
             if (theSeedType == SeedType.Plantern && !StageHasFog())
             {
                 TodCommon.SetBit(ref result, 3, 1);
-            }
-            if (theSeedType == SeedType.Flowerpot && !StageHasRoof())
-            {
-                TodCommon.SetBit(ref result, 4, 1);
             }
             if (StageHasRoof() && (theSeedType == SeedType.Spikeweed || theSeedType == SeedType.Spikerock))
             {
@@ -7862,7 +7943,7 @@ namespace Lawn
             for (int i = 0; i < count; i++)
             {
                 Plant plant = mPlants[i];
-                if (!plant.mDead && plant.mSeedType == SeedType.CobcannonDowngradePlant && IsValidCobCannonSpot(plant.mPlantCol, plant.mRow))
+                if (!plant.mDead && plant.mSeedType == (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Cobcannondowngradeplant) && IsValidCobCannonSpot(plant.mPlantCol, plant.mRow))
                 {
                     return true;
                 }
@@ -7891,9 +7972,9 @@ namespace Lawn
             }
             if (!mApp.mEasyPlantingCheat)
             {
-                return plantsOnLawn.mNormalPlant != null && plantsOnLawn.mNormalPlant.mSeedType == SeedType.CobcannonDowngradePlant;
+                return plantsOnLawn.mNormalPlant != null && plantsOnLawn.mNormalPlant.mSeedType == (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Cobcannondowngradeplant);
             }
-            return (plantsOnLawn.mNormalPlant != null && plantsOnLawn.mNormalPlant.mSeedType == SeedType.CobcannonDowngradePlant) || CanPlantAt(theGridX, theGridY, SeedType.CobcannonDowngradePlant) == PlantingReason.Ok;
+            return (plantsOnLawn.mNormalPlant != null && plantsOnLawn.mNormalPlant.mSeedType == (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Cobcannondowngradeplant) || CanPlantAt(theGridX, theGridY, (SeedType)Enum.Parse(typeof(SeedType), XmlReader.Cobcannondowngradeplant)) == PlantingReason.Ok);
         }
 
         public void MouseDownCobcannonFire(int x, int y, int theClickCount)
@@ -7934,7 +8015,7 @@ namespace Lawn
             ClearCursor();
         }
 
-        public int KillAllZombiesInRadius(int theRow, int theX, int theY, int theRadius, int theRowRange, bool theBurn, int theDamageRangeFlags)
+        public int KillAllZombiesInRadius(int theRow, int theX, int theY, int theRadius, int theRowRange, bool theBurn, int theDamageRangeFlags, int DamageValue)
         {
             int num = 0;
             int count = mZombies.Count;
@@ -7958,7 +8039,7 @@ namespace Lawn
                         }
                         else
                         {
-                            zombie.TakeDamage(1800, 18U);
+                            zombie.TakeDamage(DamageValue, 18U);
                         }
                         if (!flag && zombie.IsDeadOrDying())
                         {
@@ -7998,17 +8079,17 @@ namespace Lawn
 
         public void DrawHouseDoorTop(Graphics g)
         {
-            if (mBackground == BackgroundType.Num1Day)
+            if (mBackground == BackgroundType.Num1Day || mBackground == BackgroundType.Num7GreatWall)
             {
                 g.DrawImage(Resources.IMAGE_BACKGROUND1_GAMEOVER_MASK, Constants.Board_GameOver_Exterior_Overlay_1.X, Constants.Board_GameOver_Exterior_Overlay_1.Y);
                 return;
             }
-            if (mBackground == BackgroundType.Num2Night)
+            if (mBackground == BackgroundType.Num2Night || mBackground == BackgroundType.Num9JTTW2)
             {
                 g.DrawImage(Resources.IMAGE_BACKGROUND2_GAMEOVER_MASK, Constants.Board_GameOver_Exterior_Overlay_2.X, Constants.Board_GameOver_Exterior_Overlay_2.Y);
                 return;
             }
-            if (mBackground == BackgroundType.Num3Pool)
+            if (mBackground == BackgroundType.Num3Pool || mBackground == BackgroundType.Num15CustomFlood)
             {
                 if (Zombie.WinningZombieReachedDesiredY)
                 {
@@ -8018,12 +8099,12 @@ namespace Lawn
             }
             else
             {
-                if (mBackground == BackgroundType.Num4Fog)
+                if (mBackground == BackgroundType.Num4Fog || mBackground == BackgroundType.Num16CustomWaterFallNight)
                 {
                     g.DrawImage(Resources.IMAGE_BACKGROUND4_GAMEOVER_MASK, Constants.Board_GameOver_Exterior_Overlay_4.X, Constants.Board_GameOver_Exterior_Overlay_4.Y);
                     return;
                 }
-                if (mBackground == BackgroundType.Num5Roof)
+                if (mBackground == BackgroundType.Num5Roof || mBackground == BackgroundType.Num17CustomEveningRoof)
                 {
                     if (Zombie.WinningZombieReachedDesiredY)
                     {
@@ -8040,22 +8121,22 @@ namespace Lawn
 
         public void DrawHouseDoorBottom(Graphics g)
         {
-            if (mBackground == BackgroundType.Num1Day)
+            if (mBackground == BackgroundType.Num1Day || mBackground == BackgroundType.Num7GreatWall)
             {
                 g.DrawImage(Resources.IMAGE_BACKGROUND1_GAMEOVER_INTERIOR_OVERLAY, Constants.Board_GameOver_Interior_Overlay_1.X, Constants.Board_GameOver_Interior_Overlay_1.Y);
                 return;
             }
-            if (mBackground == BackgroundType.Num2Night)
+            if (mBackground == BackgroundType.Num2Night || mBackground == BackgroundType.Num9JTTW2)
             {
                 g.DrawImage(Resources.IMAGE_BACKGROUND2_GAMEOVER_INTERIOR_OVERLAY, Constants.Board_GameOver_Interior_Overlay_2.X, Constants.Board_GameOver_Interior_Overlay_2.Y);
                 return;
             }
-            if (mBackground == BackgroundType.Num3Pool)
+            if (mBackground == BackgroundType.Num3Pool || mBackground == BackgroundType.Num15CustomFlood)
             {
                 g.DrawImage(Resources.IMAGE_BACKGROUND3_GAMEOVER_INTERIOR_OVERLAY, Constants.Board_GameOver_Interior_Overlay_3.X, Constants.Board_GameOver_Interior_Overlay_3.Y);
                 return;
             }
-            if (mBackground == BackgroundType.Num4Fog)
+            if (mBackground == BackgroundType.Num4Fog || mBackground == BackgroundType.Num16CustomWaterFallNight)
             {
                 g.DrawImage(Resources.IMAGE_BACKGROUND4_GAMEOVER_INTERIOR_OVERLAY, Constants.Board_GameOver_Interior_Overlay_4.X, Constants.Board_GameOver_Interior_Overlay_4.Y);
             }
@@ -8082,7 +8163,7 @@ namespace Lawn
 
         public bool StageHasRoof()
         {
-            return mBackground == BackgroundType.Num5Roof || mBackground == BackgroundType.Num6Boss;
+            return mBackground == BackgroundType.Num5Roof || mBackground == BackgroundType.Num17CustomEveningRoof || mBackground == BackgroundType.Num6Boss;
         }
 
         public void SpawnZombiesFromPool()
@@ -8814,6 +8895,7 @@ namespace Lawn
             {
                 return;
             }
+
             int num;
             if (mApp.IsScaryPotterLevel())
             {
@@ -8868,6 +8950,7 @@ namespace Lawn
             newGridItem.mGridItemReanimID = mApp.ReanimationGetID(theReanimation);
             newGridItem.mGridItemState = GridItemState.RakeAttracting;
         }
+    
 
         public Reanimation CreateRakeReanim(float rakeX, float rakeY, int renderOrder)
         {
@@ -9022,7 +9105,7 @@ namespace Lawn
             if (mBackground == BackgroundType.Num1Day)
             {
                 mApp.DelayLoadBackgroundResource("DelayLoad_Background1");
-                if (mLevel <= 4 && mApp.IsFirstTimeAdventureMode())
+                if (mLevel < 4 && mApp.IsFirstTimeAdventureMode())
                 {
                     TodCommon.TodLoadResources("DelayLoad_BackgroundUnsodded");
                     return;
@@ -9058,6 +9141,60 @@ namespace Lawn
                 if (mBackground == BackgroundType.Num6Boss)
                 {
                     mApp.DelayLoadBackgroundResource("DelayLoad_Background6");
+                    return;
+                }
+                if (mBackground == BackgroundType.Num7GreatWall)
+                {
+                    mApp.DelayLoadBackgroundResource("DelayLoad_GWE_Background1");
+                    return;
+                }
+                if (mBackground == BackgroundType.Num8JTTW1)
+                {
+                    return;
+                }
+                if (mBackground == BackgroundType.Num9JTTW2)
+                {
+                    mApp.DelayLoadBackgroundResource("DelayLoad_JTTW_Background2");
+                    return;
+                }
+                if (mBackground == BackgroundType.Num10JTTW3)
+                {
+                    return;
+                }
+                if (mBackground == BackgroundType.Num11JTTW4)
+                {
+                    return;
+                }
+                if (mBackground == BackgroundType.Num12JTTW5)
+                {
+                    return;
+                }
+                if (mBackground == BackgroundType.Num13JTTW6)
+                {
+                    return;
+                }
+                if (mBackground == BackgroundType.Num14JTTW7)
+                {
+                    return;
+                }
+                if (mBackground == BackgroundType.Num15CustomFlood)
+                {
+                    mApp.DelayLoadBackgroundResource("DelayLoad_Custom_BackgroundFlood");
+                    return;
+                }
+                if (mBackground == BackgroundType.Num16CustomWaterFallNight)
+                {
+                    mApp.DelayLoadBackgroundResource("DelayLoad_Custom_BackgroundWaterFallNight");
+                    return;
+                }
+                if (mBackground == BackgroundType.Num17CustomEveningRoof)
+                {
+                    mApp.DelayLoadBackgroundResource("DelayLoad_Custom_BackgroundEveningRoof");
+                    return;
+                }
+                if (mBackground == BackgroundType.Num18CustomMars)
+                {
+                    mApp.DelayLoadBackgroundResource("DelayLoad_Custom_BackgroundMars");
                     return;
                 }
                 if (mBackground == BackgroundType.Greenhouse)

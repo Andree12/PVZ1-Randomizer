@@ -111,7 +111,7 @@ namespace Lawn
             AddWidget(mOptionsButton);
             AddWidget(mStoreButton);
             AddWidget(mAlmanacButton);
-            AddWidget(mZenGardenButton);
+            //AddWidget(mZenGardenButton);
             AddWidget(mAchievementsButton);
 
             if (mApp.mPlayerInfo != null && mApp.mDebugKeysEnabled)
@@ -885,12 +885,19 @@ namespace Lawn
                 mDoNewGameAfterStore = true;
                 return;
             }
-            if (ShouldDoZenTuturialBeforeAdventure())
+            if (mApp.mPlayerInfo.mNeedsMagicBaconReward && mLevel == 45)
             {
-                mApp.PreNewGame(GameMode.ChallengeZenGarden, false);
-                mApp.mZenGarden.SetupForZenTutorial();
+                StoreScreen storeScreen = mApp.ShowStoreScreen(this);
+                storeScreen.SetupForIntro(2100);
+                mDoNewGameAfterStore = true;
                 return;
             }
+            //if (ShouldDoZenTuturialBeforeAdventure())
+            //{
+            //    mApp.PreNewGame(GameMode.ChallengeZenGarden, false);
+            //    mApp.mZenGarden.SetupForZenTutorial();
+            //    return;
+            //}
             mApp.PreNewGame(GameMode.Adventure, true);
         }
 

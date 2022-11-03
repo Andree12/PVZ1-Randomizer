@@ -76,6 +76,11 @@ namespace Lawn
                 MakeSureMusicIsPlaying(MusicTune.Conveyer);
                 return;
             }
+            if ((mApp.IsAdventureMode() || mApp.IsQuickPlayMode()) && (mApp.mPlayerInfo.mLevel == 40) && (mApp.mBoard.mBackground != BackgroundType.Num4Fog))
+            {
+                MakeSureMusicIsPlaying(MusicTune.Conveyer);
+                return;
+            }
             if (mApp.mGameMode == GameMode.ChallengeColumn)
             {
                 MakeSureMusicIsPlaying(MusicTune.Conveyer);

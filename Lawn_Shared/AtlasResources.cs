@@ -10588,7 +10588,7 @@ public/*internal*/ class AtlasResources
             return 10002;
         }
         int idByImage = (int)Resources.GetIdByImage(theImage);
-        if (idByImage == 249)
+        if (idByImage == 261)
         {
             return -1;
         }

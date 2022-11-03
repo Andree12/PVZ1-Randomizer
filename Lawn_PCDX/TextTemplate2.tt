@@ -1,0 +1,93 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Xml" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ output extension=".cs" #>
+<# string appPath = Environment.CurrentDirectory;#>
+<# String Filepath = Host.ResolvePath("RandomizerSettings.xml");
+ XDocument Name = XDocument.Load(Filepath);#>
+<#@ output extension=".cs" #>
+<# string DayFinallevelSeed1ID = Name.Element("RandomizerSettings").Element("DayFinallevelSeed1").Value;#>
+<# string DayFinallevelSeed2ID = Name.Element("RandomizerSettings").Element("DayFinallevelSeed2").Value;#>
+<# string DayFinallevelSeed3ID = Name.Element("RandomizerSettings").Element("DayFinallevelSeed3").Value;#>
+<# string DayFinallevelSeed4ID = Name.Element("RandomizerSettings").Element("DayFinallevelSeed4").Value;#>
+<# string DayFinallevelSeed5ID = Name.Element("RandomizerSettings").Element("DayFinallevelSeed5").Value;#>
+<# string DayFinallevelSeed6ID = Name.Element("RandomizerSettings").Element("DayFinallevelSeed6").Value;#>
+<# string DayFinallevelSeed7ID = Name.Element("RandomizerSettings").Element("DayFinallevelSeed7").Value;#>
+<# string NightFinallevelSeed1ID = Name.Element("RandomizerSettings").Element("NightFinallevelSeed1").Value;#>
+<# string NightFinallevelSeed2ID = Name.Element("RandomizerSettings").Element("NightFinallevelSeed2").Value;#>
+<# string NightFinallevelSeed3ID = Name.Element("RandomizerSettings").Element("NightFinallevelSeed3").Value;#>
+<# string NightFinallevelSeed4ID = Name.Element("RandomizerSettings").Element("NightFinallevelSeed4").Value;#>
+<# string NightFinallevelSeed5ID = Name.Element("RandomizerSettings").Element("NightFinallevelSeed5").Value;#>
+<# string NightFinallevelSeed6ID = Name.Element("RandomizerSettings").Element("NightFinallevelSeed6").Value;#>
+<# string PoolMinigamelevelSeed1ID = Name.Element("RandomizerSettings").Element("PoolMinigamelevelSeed1").Value;#>
+        <# string PoolMinigamelevelSeed2ID = Name.Element("RandomizerSettings").Element("PoolMinigamelevelSeed2").Value;#>
+        <# string PoolMinigamelevelSeed3ID = Name.Element("RandomizerSettings").Element("PoolMinigamelevelSeed3").Value;#>
+        <# string PoolFinallevelSeed1ID = Name.Element("RandomizerSettings").Element("PoolFinallevelSeed1").Value;#>
+        <# string PoolFinallevelSeed2ID = Name.Element("RandomizerSettings").Element("PoolFinallevelSeed2").Value;#>
+        <# string PoolFinallevelSeed3ID = Name.Element("RandomizerSettings").Element("PoolFinallevelSeed3").Value;#>
+        <# string PoolFinallevelSeed4ID = Name.Element("RandomizerSettings").Element("PoolFinallevelSeed4").Value;#>
+        <# string PoolFinallevelSeed5ID = Name.Element("RandomizerSettings").Element("PoolFinallevelSeed5").Value;#>
+        <# string PoolFinallevelSeed6ID = Name.Element("RandomizerSettings").Element("PoolFinallevelSeed6").Value;#>
+        <# string PoolFinallevelSeed7ID = Name.Element("RandomizerSettings").Element("PoolFinallevelSeed7").Value;#>
+        <# string FogFinallevelSeed1ID = Name.Element("RandomizerSettings").Element("FogFinallevelSeed1").Value;#>
+        <# string FogFinallevelSeed2ID = Name.Element("RandomizerSettings").Element("FogFinallevelSeed2").Value;#>
+        <# string FogFinallevelSeed3ID = Name.Element("RandomizerSettings").Element("FogFinallevelSeed3").Value;#>
+        <# string FogFinallevelSeed4ID = Name.Element("RandomizerSettings").Element("FogFinallevelSeed4").Value;#>
+        <# string FogFinallevelSeed5ID = Name.Element("RandomizerSettings").Element("FogFinallevelSeed5").Value;#>
+        <# string FogFinallevelSeed6ID = Name.Element("RandomizerSettings").Element("FogFinallevelSeed6").Value;#>
+        <# string FogFinallevelSeed7ID = Name.Element("RandomizerSettings").Element("FogFinallevelSeed7").Value;#>
+        <# string RoofMinigamelevelSeed1ID = Name.Element("RandomizerSettings").Element("RoofMinigamelevelSeed1").Value;#>
+        <# string RoofMinigamelevelSeed2ID = Name.Element("RandomizerSettings").Element("RoofMinigamelevelSeed2").Value;#>
+        <# string RoofMinigamelevelSeed3ID = Name.Element("RandomizerSettings").Element("RoofMinigamelevelSeed3").Value;#>
+        <# string RoofFinallevelSeed1ID = Name.Element("RandomizerSettings").Element("RoofFinallevelSeed1").Value;#>
+        <# string RoofFinallevelSeed2ID = Name.Element("RandomizerSettings").Element("RoofFinallevelSeed2").Value;#>
+        <# string RoofFinallevelSeed3ID = Name.Element("RandomizerSettings").Element("RoofFinallevelSeed3").Value;#>
+using System;
+namespace Lawn
+{
+   public class ConveyorBeltseedpackets
+   {
+        public static int DayFinallevelSeed1 = (int)SeedType.<#= DayFinallevelSeed1ID#>;
+        public static int DayFinallevelSeed2 = (int)SeedType.<#= DayFinallevelSeed2ID#>;
+        public static int DayFinallevelSeed3 = (int)SeedType.<#= DayFinallevelSeed3ID#>;
+        public static int DayFinallevelSeed4 = (int)SeedType.<#= DayFinallevelSeed4ID#>;
+        public static int DayFinallevelSeed5 = (int)SeedType.<#= DayFinallevelSeed5ID#>;
+        public static int DayFinallevelSeed6 = (int)SeedType.<#= DayFinallevelSeed6ID#>;
+        public static int DayFinallevelSeed7 = (int)SeedType.<#= DayFinallevelSeed7ID#>;
+        public static int NightFinallevelSeed1 = (int)SeedType.<#= NightFinallevelSeed1ID#>;
+        public static int NightFinallevelSeed2 = (int)SeedType.<#= NightFinallevelSeed2ID#>;
+        public static int NightFinallevelSeed3 = (int)SeedType.<#= NightFinallevelSeed3ID#>;
+        public static int NightFinallevelSeed4 = (int)SeedType.<#= NightFinallevelSeed4ID#>;
+        public static int NightFinallevelSeed5 = (int)SeedType.<#= NightFinallevelSeed5ID#>;
+        public static int NightFinallevelSeed6 = (int)SeedType.<#= NightFinallevelSeed6ID#>;
+        public static int PoolMinigamelevelSeed1 = (int)SeedType.<#= PoolMinigamelevelSeed1ID#>;
+        public static int PoolMinigamelevelSeed2 = (int)SeedType.<#= PoolMinigamelevelSeed2ID#>;
+        public static int PoolMinigamelevelSeed3 = (int)SeedType.<#= PoolMinigamelevelSeed3ID#>;
+        public static int PoolFinallevelSeed1 = (int)SeedType.<#= PoolFinallevelSeed1ID#>;
+        public static int PoolFinallevelSeed2 = (int)SeedType.<#= PoolFinallevelSeed2ID#>;
+        public static int PoolFinallevelSeed3 = (int)SeedType.<#= PoolFinallevelSeed3ID#>;
+        public static int PoolFinallevelSeed4 = (int)SeedType.<#= PoolFinallevelSeed4ID#>;
+        public static int PoolFinallevelSeed5 = (int)SeedType.<#= PoolFinallevelSeed5ID#>;
+        public static int PoolFinallevelSeed6 = (int)SeedType.<#= PoolFinallevelSeed6ID#>;
+        public static int PoolFinallevelSeed7 = (int)SeedType.<#= PoolFinallevelSeed7ID#>;
+        public static int FogFinallevelSeed1 = (int)SeedType.<#= FogFinallevelSeed1ID#>;
+        public static int FogFinallevelSeed2 = (int)SeedType.<#= FogFinallevelSeed2ID#>;
+        public static int FogFinallevelSeed3 = (int)SeedType.<#= FogFinallevelSeed3ID#>;
+        public static int FogFinallevelSeed4 = (int)SeedType.<#= FogFinallevelSeed4ID#>;
+        public static int FogFinallevelSeed5 = (int)SeedType.<#= FogFinallevelSeed5ID#>;
+        public static int FogFinallevelSeed6 = (int)SeedType.<#= FogFinallevelSeed6ID#>;
+        public static int FogFinallevelSeed7 = (int)SeedType.<#= FogFinallevelSeed7ID#>;
+        public static int RoofMinigamelevelSeed1 = (int)SeedType.<#= RoofMinigamelevelSeed1ID#>;
+        public static int RoofMinigamelevelSeed2 = (int)SeedType.<#= RoofMinigamelevelSeed2ID#>;
+        public static int RoofMinigamelevelSeed3 = (int)SeedType.<#= RoofMinigamelevelSeed3ID#>;
+        public static int RoofFinallevelSeed1 = (int)SeedType.<#= RoofFinallevelSeed1ID#>;
+        public static int RoofFinallevelSeed2 = (int)SeedType.<#= RoofFinallevelSeed2ID#>;
+        public static int RoofFinallevelSeed3 = (int)SeedType.<#= RoofFinallevelSeed3ID#>;
+        }
+}

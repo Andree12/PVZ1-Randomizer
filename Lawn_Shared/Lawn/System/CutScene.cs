@@ -63,7 +63,7 @@ namespace Lawn
             {
                 flag = false;
             }
-            else if (mBoard.mLevel == 1 || mBoard.mLevel == 2 || mBoard.mLevel == 4)
+            else if (mBoard.mLevel == 1 || mBoard.mLevel == 2)
             {
                 flag = true;
             }
@@ -214,7 +214,7 @@ namespace Lawn
                 }
                 else
                 {
-                    Debug.ASSERT(false);
+                    text = TodStringFile.TodStringTranslate("[PLAYERS_HOUSE]");
                 }
             }
             text = TodCommon.TodReplaceString(text, "{PLAYER}", mApp.mPlayerInfo.mName);
@@ -898,6 +898,10 @@ namespace Lawn
             {
                 num = 3;
             }
+            else if (mBoard.mLevel > 3 && mBoard.mBackground == BackgroundType.Num7GreatWall)
+            {
+                num = 5;
+            }
             else if (mApp.mGameMode == GameMode.ChallengeColumn)
             {
                 num = 8;
@@ -910,7 +914,7 @@ namespace Lawn
             {
                 for (int j = 0; j < Constants.MAX_GRIDSIZEY; j++)
                 {
-                    if (mBoard.CanPlantAt(i, j, SeedType.Flowerpot) == PlantingReason.Ok)
+                    if (mBoard.CanPlantAt(i, j, SeedType.Flowerpot) == PlantingReason.Ok && ((mBoard.mBackground == BackgroundType.Num9JTTW2 && j == 2) || mBoard.mBackground != BackgroundType.Num9JTTW2))
                     {
                         Plant newPlant = Plant.GetNewPlant();
                         newPlant.mIsOnBoard = true;
@@ -920,7 +924,38 @@ namespace Lawn
                 }
             }
         }
-
+        public void AddLilyPads()
+        {
+            int num = 0;
+            if (mBoard.mBackground == BackgroundType.Num15CustomFlood)
+            { 
+            if (mBoard.mLevel <= 22)
+            {
+                num = 4;
+            }
+            else if (mBoard.mLevel >= 23 && mBoard.mLevel <= 29)
+            {
+                num = 3;
+            }
+            else if (mBoard.mLevel == 30)
+                {
+                    num = 5;
+                }
+                for (int i = 0; i < num; i++)
+            {
+                for (int j = 0; j < Constants.MAX_GRIDSIZEY; j++)
+                {
+                    if (mBoard.CanPlantAt(i, j, SeedType.Lilypad) == PlantingReason.Ok)
+                    {
+                        Plant newPlant = Plant.GetNewPlant();
+                        newPlant.mIsOnBoard = true;
+                        newPlant.PlantInitialize(i, j, SeedType.Lilypad, SeedType.None);
+                        mBoard.mPlants.Add(newPlant);
+                    }
+                }
+            }
+            }
+        }
         public void UpdateZombiesWon()
         {
             if (mCutsceneTime > CutScene.LostTimePanRightStart && mCutsceneTime <= CutScene.LostTimePanRightEnd)
@@ -1323,6 +1358,7 @@ namespace Lawn
             {
                 mBoard.InitLawnMowers();
                 AddFlowerPots();
+                AddLilyPads();
             }
             if (!IsSurvivalRepick())
             {

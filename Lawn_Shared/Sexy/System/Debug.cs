@@ -37,7 +37,6 @@ namespace Sexy
             {
                 Log(DebugType.Error, $"Assertion Failed\n{new StackTrace()}");
 #if DEBUG
-                throw new Exception();
 #endif
             }
         }
